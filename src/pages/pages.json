@@ -1,0 +1,16 @@
+{
+    "pages" : [
+        
+        {
+            "url": "\/",
+            "content": "<Container className=\"mt-5\"><Row className=\"pt-5\"><Col xs=\"12\"><h1>Municipal Social Welfare and Development Office</h1></Col><Col xs=\"12\">San Rafael, Bulacan Office</Col></Row><Row><Col xs=\"12\"><Button className=\"mt-5\" variant=\"primary\" size=\"lg\">Services</Button></Col></Row></Container>",
+            "text": "Home"
+        },
+        {
+            "url": "\/about",
+            "content": "About page",
+            "text": "About"
+        }
+        
+    ]
+}
