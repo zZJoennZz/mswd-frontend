@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     Container,
     Row,
@@ -6,11 +6,24 @@ import {
     Button
 } from 'react-bootstrap';
 
+import api from '../api/api';
+
 //components
 import NewsBox from '../components/NewsBox';
 import ContactForm from '../components/ContactForm';
 
 const Home = () => {
+    let [ann, setAnn] = useState([]);
+
+    const getAnn = async() => {
+        let res = await api.get("announcement");
+        setAnn(res.data);
+    }
+
+    useEffect(() => {
+        getAnn();
+    }, []);
+    
     return (
         <div>
             <Container className="mt-5">
@@ -35,11 +48,16 @@ const Home = () => {
                     <Col md="6">
                         <h3 className="mb-3">Announcements</h3>
                         <div style={{ maxHeight: '500px', overflow: 'auto' }}>
-                            <NewsBox />
-                            <NewsBox />
-                            <NewsBox />
-                            <NewsBox />
-                            <NewsBox />
+                            {
+                                ann.data ?
+                                    ann.data.map(d => 
+                                            <NewsBox key={d.id} announcementData={d} />
+                                        )
+                                :
+                                    <>
+                                        Walang laman
+                                    </>    
+                            }
                         </div>
                     </Col>
                     <Col md="6">

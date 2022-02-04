@@ -17,7 +17,7 @@ const Menu = () => {
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/services">Services</Nav.Link>
                         <Nav.Link href="/about">About</Nav.Link>
-                        <Nav.Link href="#home">FAQ</Nav.Link>
+                        <Nav.Link href="/faq">FAQ</Nav.Link>
                         <Nav.Link href="#home">Contact Us</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

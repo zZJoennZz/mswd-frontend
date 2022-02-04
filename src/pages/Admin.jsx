@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import apifrm from '../api/apifrm';
+
 import './admin.css';
 import {
     Nav,
@@ -8,33 +11,19 @@ import {
 } from 'react-bootstrap';
 
 const Admin = () => {
-  return (
-    <Container fluid>
-        <Row>
-            <Col xs={2} style={{ background: 'gray', minHeight: '100vh', position: 'fixed' }}>
-            <Nav activeKey="/home" onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}>
-                <Nav.Item>
-                    <Nav.Link href="/home">Active</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="link-1">Link</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="link-2">Link</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link eventKey="disabled" disabled>
-                    Disabled
-                    </Nav.Link>
-                </Nav.Item>
-            </Nav>
-            </Col>
-            <Col xs={10}>
-                ASDASDASD
-            </Col>
-        </Row>
-    </Container>
-  );
+    
+    return (
+        <Container fluid>
+            <Row>
+                <Col md={3} style={{ minHeight: '100vh', background: 'red', minWidth: '250px' }}>
+                    ASDASDASDADASD
+                </Col>
+                <Col md={9}>
+                    Hello
+                </Col>
+            </Row>
+        </Container>
+    );
 };
 
 export default Admin;

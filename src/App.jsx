@@ -13,23 +13,15 @@ import Home from './pages/Home';
 import Services from './pages/Services';
 import About from './pages/About';
 import Admin from './pages/Admin';
+import Apply from './pages/Apply';
+import FAQ from './pages/FAQ';
 
 //other
 import { Routes, Route } from 'react-router-dom'
 
 const App = () => {
-  // let pages = [   
-  //     {
-  //         "url": "/",
-  //         "content": Home,
-  //         "text": "Home"
-  //     },
-  //     {
-  //         "url": "/about",
-  //         "content": "About page",
-  //         "text": "About"
-  //     }
-  // ];
+  let [isLoading, setIsLoading] = React.useState(false);
+  let [isAuth, setIsAuth] = React.useState(false);
   
   return (
     <div className="App">
@@ -40,8 +32,11 @@ const App = () => {
         } />
         <Route exact path="/services" element={<><Menu /><Services /><Footer /></>} />
         <Route exact path="/about" element={<><Menu /><About /><Footer /></>} />
+        <Route exact path="/apply/:serviceId" element={<><Menu /><Apply /><Footer /></>} />
+        <Route exact path="/faq" element={<><Menu /><FAQ /><Footer /></>} />
         <Route exact path="/admin" element={<Admin />} />
       </Routes>
+      
     </div>
   );
 }

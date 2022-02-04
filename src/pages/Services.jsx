@@ -78,7 +78,7 @@ const Services = () => {
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
-                            <Button size="lg" variant="primary">Apply</Button>
+                            <Button href="/apply/1" size="lg" variant="primary">Apply</Button>
                         </Card>
                     </Col>
                     <Col md="4">
@@ -133,7 +133,7 @@ const Services = () => {
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
-                            <Button size="lg" variant="primary">Apply</Button>
+                            <Button href="/apply/2" size="lg" variant="primary">Apply</Button>
                         </Card>
                     </Col>
                     <Col md="4">
@@ -165,7 +165,7 @@ const Services = () => {
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
-                            <Button size="lg" variant="primary">Apply</Button>
+                            <Button href="/apply/3" size="lg" variant="primary">Apply</Button>
                         </Card>
                     </Col>
                 </Row>
@@ -201,7 +201,7 @@ const Services = () => {
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
-                            <Button size="lg" variant="primary">Apply</Button>
+                            <Button href="/apply/4" size="lg" variant="primary">Apply</Button>
                         </Card>
                     </Col>
                     <Col md="4">
@@ -231,7 +231,7 @@ const Services = () => {
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
-                            <Button size="lg" variant="primary">Apply</Button>
+                            <Button href="/apply/5" size="lg" variant="primary">Apply</Button>
                         </Card>
                     </Col>
                     <Col md="4">
