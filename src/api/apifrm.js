@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apifrm = axios.create({
-    baseURL: "http://127.0.0.1:8000/api/",
+    baseURL: process.env.REACT_APP_API,
     headers : {
         'Authorization' : localStorage.getItem('token'),
         'Content-Type' : 'multipart/form-data',

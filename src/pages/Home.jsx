@@ -3,7 +3,8 @@ import {
     Container,
     Row,
     Col,
-    Button
+    Button,
+    Spinner
 } from 'react-bootstrap';
 
 import api from '../api/api';
@@ -39,7 +40,7 @@ const Home = () => {
                 </Row>
                 <Row>
                     <Col xs="12">
-                        <Button size="lg" variant="primary" className="mt-5">Services</Button>
+                        <Button size="lg" variant="outline-primary" href="/services" className="mt-5">Services</Button>
                     </Col>
                 </Row>
             </Container>
@@ -54,14 +55,12 @@ const Home = () => {
                                             <NewsBox key={d.id} announcementData={d} />
                                         )
                                 :
-                                    <>
-                                        Walang laman
-                                    </>    
+                                    <Spinner className="mt-5" animation="border" variant="info" />   
                             }
                         </div>
                     </Col>
                     <Col md="6">
-                        <h3 className="mb-3">Contact Us</h3>
+                        <h3 className="mb-3">Inquire</h3>
                         <ContactForm />
                     </Col>
                 </Row>
