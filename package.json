@@ -1,7 +1,7 @@
 {
   "name": "mswd-frontend",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://amazing-swartz-18cdd6.netlify.app/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
