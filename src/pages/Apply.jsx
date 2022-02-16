@@ -9,131 +9,63 @@ import {
     Alert
 } from 'react-bootstrap';
 
-import apifrm from '../api/apifrm';
+import IdAppliSoloParent from '../components/IdAppliSoloParent';
+import IdAppliPwd from '../components/IdAppliPwd';
+import IdAppliSeniorCitizen from '../components/IdAppliSeniorCitizen';
 
 const Apply = () => {
     let { serviceId } = useParams();
-    let [req, setReq] = useState(false);
-    let [frmDat, setFrmDat] = useState({});
+
+    let [selectedCt, setSelectedCt] = useState(false);
+
     let [frmResult, setFrmResult] = useState("");
 
-    const submitForm = async (e) => {
-        e.preventDefault();
-
-        const frmData = new FormData();
-
-        for (let i = 0; i < req.length; i++) {
-            frmData.append(`file[${i}]`, req[i]);
-        }
-
-        Object.keys(frmDat).map(key => 
-            frmData.append(key, frmDat[key])
-        );
-        frmData.append("service_id", serviceId);
-        
+    const submitForm = (result) => {  
         try {
-            let res = await apifrm.post("appli", frmData);
-            setFrmResult(res.data.application_id);
+            setFrmResult(result);
         } catch (e) {
             setFrmResult("failed");
         }
     } 
 
-    const fileOnChange = (e) => {
-        setReq(e.target.files);
-    }
-
-    const textOnChange = (e) => {
-        setFrmDat({...frmDat, [e.target.name] : e.target.value});
-    }
+    const appTypeOnChange = (e) => setSelectedCt(e.target.value);
 
     return (
         <Container className="mt-3 mb-3" style={{textAlign: "left"}}>
+            { selectedCt !== 0 ? <span onClick={() => setSelectedCt(0)} style={{ cursor: "pointer" }}>{"< Back"}</span> : ""}
             {
-                frmResult === "" ?  
-                    <Form onSubmit={submitForm}>
-                        <Row>
-                            <Col md={4}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>First Name</Form.Label>
-                                    <Form.Control type="text" name="first_name" id="first_name" onChange={textOnChange} />
-                                </Form.Group>
-                            </Col>
-                            <Col md={4}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Middle Name</Form.Label>
-                                    <Form.Control type="text" name="middle_name" id="middle_name" onChange={textOnChange} />
-                                </Form.Group>
-                            </Col>
-                            <Col md={4}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Last Name</Form.Label>
-                                    <Form.Control type="text" name="last_name" id="last_name" onChange={textOnChange} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Gender</Form.Label>
-                                    <Form.Select name="gender" id="gender" onChange={textOnChange}>
-                                        <option>Open to select gender</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                    </Form.Select>
-                                </Form.Group>
-                            </Col>
-                            <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Birthday</Form.Label>
-                                    <Form.Control type="date" name="birthday" id="birthday" onChange={textOnChange} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Email Address</Form.Label>
-                                    <Form.Control type="email" name="email_address" id="email_address" onChange={textOnChange} />
-                                </Form.Group>
-                            </Col>
-                            <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Contact Number</Form.Label>
-                                    <Form.Control type="text" name="contact_number" id="contact_number" onChange={textOnChange} />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={6}>
-                                <Form.Group className="mb-3">
-                                    <Form.Label>Contact Number</Form.Label>
-                                    <Form.Control type="file" name="file" accept="application/pdf" id="chooseFile" multiple onChange={fileOnChange} />
-                                </Form.Group>
-                            </Col>
-                            <Col md={6}>
-                                <Form.Text id="formNote" muted>
-                                    Please complete all the fields in this form and only upload .PDF files (You can also upload multiple files too.).
-                                </Form.Text>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col md={12}>
-                                <Button variant="primary" type="submit">
-                                    Submit Application
-                                </Button>
-                            </Col>
-                        </Row>
-                    </Form>
+                !selectedCt ?
+                    <Row>
+                        <Col md={6}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Select what kind of application</Form.Label>
+                                <Form.Select name="application_type" id="application_type" onChange={appTypeOnChange}>
+                                    <option>Select</option>
+                                    <option value={1}>Solo parent</option>
+                                    <option value={2}>PWD</option>
+                                    <option value={3}>Senior Citizen</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                    </Row>
                 :
-                    frmResult !== "failed" ?
-                        <Alert variant="success">
-                            Your application have been submitted successfully! Please save your application # here for tracking: <b>{frmResult}</b>
-                        </Alert>
+                    frmResult === "" ?  
+                        <>
+                            {selectedCt === "1" ? <IdAppliSoloParent submitApplication={submitForm} /> : ""}
+                            
+                            {selectedCt === "2" ? <IdAppliPwd submitApplication={submitForm} /> : ""}
+
+                            {selectedCt === "3" ? <IdAppliSeniorCitizen submitApplication={submitForm} /> : ""}
+                        </>
                     :
-                        <Alert variant="danger">
-                            Something went wrong and your application isn't submitted. Contact us at <Alert.Link href="/contact-us">here</Alert.Link>.
-                        </Alert>
+                        frmResult !== "failed" ?
+                            <Alert variant="success">
+                                Your application have been submitted successfully! Please save your application # here for tracking: <b>{frmResult}</b>
+                            </Alert>
+                        :
+                            <Alert variant="danger">
+                                Something went wrong and your application isn't submitted. Contact us at <Alert.Link href="/contact-us">here</Alert.Link>.
+                            </Alert>
             }
             
         </Container>

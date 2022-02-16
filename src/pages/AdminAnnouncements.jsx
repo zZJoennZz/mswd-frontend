@@ -44,6 +44,7 @@ const AdminAnnouncements = () => {
                 <Breadcrumb.Item active>Announcements</Breadcrumb.Item>
             </Breadcrumb>
             <Row>
+                
                 <Col md={12}>
                 <Form>
                     <Form.Group className="mb-3" controlId="frmSearch">
