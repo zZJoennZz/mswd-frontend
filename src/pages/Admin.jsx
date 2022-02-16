@@ -9,6 +9,7 @@ import AdminLogin from '../components/AdminLogin';
 
 import AdminDashboard from './AdminDashboard';
 import AdminApplications from './AdminApplications';
+import AdminSingleApplication from './AdminSingleApplication';
 import AdminInquiries from './AdminInquiries';
 import AdminAnnouncements from './AdminAnnouncements';
 import AdminSingleAnnouncement from './AdminSingleAnnouncement';
@@ -75,9 +76,7 @@ const Admin = () => {
             {
                 isLoading ?
                     <div className="m-5"><Spinner animation="grow" variant="info" /></div>
-                :
-                    
-                        
+                :   
                     isAuth ?
                         <>
                             <AdminNavBar logOut={logOut} />
@@ -90,6 +89,7 @@ const Admin = () => {
                                         <Routes>
                                             <Route exact path="/" element={<AdminDashboard />} />
                                             <Route exact path="/applications" element={<AdminApplications />} />
+                                            <Route exact path="/applications/:appId" element={<AdminSingleApplication />} />
                                             <Route exact path="/inquiries" element={<AdminInquiries />} />
                                             <Route exact path="/announcements" element={<AdminAnnouncements />} />
                                             <Route exact path="/announcements/:annId" element={<AdminSingleAnnouncement />} />
@@ -100,9 +100,7 @@ const Admin = () => {
                             </Container>
                         </>
                     :
-                        <AdminLogin checkAuth={checkAuth} />
-                        
-                    
+                        <AdminLogin checkAuth={checkAuth} />    
             }
             
         </div>
