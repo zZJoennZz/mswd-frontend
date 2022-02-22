@@ -10,17 +10,22 @@ import {
     Col
 } from 'react-bootstrap';
 
+//accepts argument if the user is logged
 const AdminLogin = ({ checkAuth }) => {
-
+    //initiate the state for the form values
     let [frmOnChange, setFrmOnChange] = useState({});
-
+    
+    //onChange function to set state the form values
     const textOnChange = (e) => {
         setFrmOnChange({...frmOnChange, [e.target.name]: e.target.value });
     }
 
+    //submit form value function, async
     const frmOnSubmit = async (e) => {
+        //stops the form to continue with normal procedure when submitting a form, ie. reloading the page or loading the action
         e.preventDefault();
 
+        //initiate the form data
         const frmData = new FormData();
         frmData.append("email", frmOnChange.username);
         frmData.append("password", frmOnChange.password);

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//set the payload headers and URL
 const api = axios.create({
     baseURL: process.env.REACT_APP_API,
     headers : {

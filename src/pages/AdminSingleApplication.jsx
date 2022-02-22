@@ -12,6 +12,7 @@ import api from '../api/api';
 
 import ApplicationFormSoloParent from '../components/ApplicationFormSoloParent';
 import ApplicationFormPwd from '../components/ApplicationFormPwd';
+import ApplicationFormSeniorCitizen from '../components/ApplicationFormSeniorCitizen';
 
 const AdminSingleApplication = () => {
     let { appId } = useParams();
@@ -44,7 +45,7 @@ const AdminSingleApplication = () => {
                                 <ApplicationFormPwd subDate={appliData.created_at} appData={JSON.parse(appliData.application_data)} />
                             :
                                 JSON.parse(appliData.application_data).appliType === 3 ?
-                                    <>Senior Citizen</>
+                                    <ApplicationFormSeniorCitizen appData={JSON.parse(appliData.application_data)} />
                                 :
                                     ""
                         
