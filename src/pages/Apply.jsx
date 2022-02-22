@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import {
     Container,
     Row,
     Col,
     Form,
-    Button,
     Alert
 } from 'react-bootstrap';
 
@@ -14,7 +13,7 @@ import IdAppliPwd from '../components/IdAppliPwd';
 import IdAppliSeniorCitizen from '../components/IdAppliSeniorCitizen';
 
 const Apply = () => {
-    let { serviceId } = useParams();
+    //let { serviceId } = useParams();
 
     let [selectedCt, setSelectedCt] = useState(false);
 

@@ -12,7 +12,7 @@ const IdAppliPwd = ({ submitApplication }) => {
     let [frmData, setFrmData] = useState({'appliType': 2});
     let [pic, setPic] = useState(false);
     let [sig, setSig] = useState(false);
-    let [isMulti, setIsMulti] = useState(true);
+    //let [isMulti, setIsMulti] = useState(true);
     let [agreeCheck, setAgreeCheck] = useState(true);
 
     let disabilities = [
