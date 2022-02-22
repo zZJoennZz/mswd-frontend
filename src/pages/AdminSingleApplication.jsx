@@ -19,14 +19,13 @@ const AdminSingleApplication = () => {
 
     let [appliData, setAppliData] = useState(false);
 
-    const getApp = async () => {
-        let res = await api.get(`application/${appId}`);
-        setAppliData(res.data.data);
-    }
-
     useEffect(() => {
+        const getApp = async () => {
+            let res = await api.get(`application/${appId}`);
+            setAppliData(res.data.data);
+        }
         getApp();
-    }, [])
+    }, [appId])
 
     return (
         <Container fluid>

@@ -6,7 +6,7 @@ import {
     Card,
     Breadcrumb
 } from 'react-bootstrap';
-import api from '../api/api';
+//import api from '../api/api';
 
 const AdminDashboard = ({ dashCtr }) => {
     let [currDay, setCurrDay] = useState('Loading...');
