@@ -9,7 +9,7 @@ import {
 import apifrm from '../api/apifrm';
 
 const IdAppliSeniorCitizen = ({ submitApplication }) => {
-    let [frmData, setFrmData] = useState({'appliType': 1});
+    let [frmData, setFrmData] = useState({'appliType': 3});
     let [pic, setPic] = useState(false);
     let [sig, setSig] = useState(false);
     let [agreeCheck, setAgreeCheck] = useState(true);
@@ -24,7 +24,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
 
     const submitForm = async (e) => {
         e.preventDefault();
-
+        //
         try {
             let formData = new FormData();
             formData.append('application_data', JSON.stringify(frmData));
@@ -64,7 +64,15 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
             <Form onSubmit={submitForm}>
                 <Row>
                     <Col md={12}>
-                        <Form.Label>Name of Señor Citizen</Form.Label>
+                        <Form.Group className="mb-3">
+                            <Form.Label>OSCA ID NO.</Form.Label>
+                            <Form.Control type="text" name="osca_id" id="osca_id" onChange={textOnChange} />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={12}>
+                        <Form.Label>Name of Senior Citizen</Form.Label>
                     </Col>
                 </Row>
                 <Row>

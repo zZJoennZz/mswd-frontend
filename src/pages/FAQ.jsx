@@ -22,7 +22,7 @@ const FAQ = () => {
     }, []);
     
     return (
-            <Container className="p-3">
+            <Container className="p-3" style={{ minHeight: "90vh" }}>
                 <Row>
                     <Col md={12}>
                         <h1 className="mb-3">Frequently Asked Questions</h1>

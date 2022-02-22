@@ -8,7 +8,7 @@ import {
     Form
 } from 'react-bootstrap'
 
-const ApplicationFormPwd = ({ appData, subDate }) => {
+const ApplicationFormSeniorCitizen = ({ appData, subDate }) => {
     //let famCom = appData.fam_composition.split('\n');
     //let [famComArr, setFamComArr] = React.useState(false);
 
@@ -407,4 +407,4 @@ const ApplicationFormPwd = ({ appData, subDate }) => {
     )
 }
 
-export default ApplicationFormPwd;
+export default ApplicationFormSeniorCitizen;

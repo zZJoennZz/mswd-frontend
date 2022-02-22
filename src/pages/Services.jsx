@@ -10,7 +10,7 @@ import { Container,
 
 const Services = () => {
     return (
-        <div className="mt-5 services">
+        <div className="mt-5 mb-5 services">
             <h1 className="mt-5 pt-3">Services</h1>
             <Container>
                 <Row>
@@ -24,11 +24,11 @@ const Services = () => {
                         <Card className="mb-3">
                             <Card.Body>
                                 <Card.Title>Who may avail</Card.Title>
-                                <Card.Text style={{ textAlign: 'left' }}>
+                                <span style={{ textAlign: 'left' }}>
                                     <ul>
                                         <li>Indigent individuals or families</li>
                                     </ul>
-                                </Card.Text>
+                                </span>
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
@@ -78,7 +78,7 @@ const Services = () => {
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
-                            <Button href="/apply/1" size="lg" variant="primary">Apply</Button>
+                            <Button href="/apply/1" size="lg" variant="primary">Inquire</Button>
                         </Card>
                     </Col>
                     <Col md="4">
@@ -90,13 +90,13 @@ const Services = () => {
                         <Card className="mb-3">
                             <Card.Body>
                                 <Card.Title>Who may avail</Card.Title>
-                                <Card.Text style={{ textAlign: 'left' }}>
+                                <span style={{ textAlign: 'left' }}>
                                     <ul>
                                         <li>Solo parents</li>
                                         <li>Person with Disabilities (PWD)</li>
                                         <li>Senior citizen</li>
                                     </ul>
-                                </Card.Text>
+                                </span>
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
@@ -145,27 +145,27 @@ const Services = () => {
                         <Card className="mb-3">
                             <Card.Body>
                                 <Card.Title>Who may avail</Card.Title>
-                                <Card.Text style={{ textAlign: 'left' }}>
+                                <div style={{ textAlign: 'left' }}>
                                     <ul>
                                         <li>Senior citizen</li>
                                         <li>Person with Disabilities (PWD)</li>
                                     </ul>
-                                </Card.Text>
+                                </div>
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
                             <Card.Body>
                                 <Card.Title>Requirements</Card.Title>
                                 
-                                <Card.Text eventKey="soloparent" title="Solo Parent" style={{ textAlign: "left" }}>
+                                <div style={{ textAlign: "left" }}>
                                     <ul>
                                         <li>Senior citizen/PWD Identification card</li>
                                     </ul> 
-                                </Card.Text>
+                                </div>
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
-                            <Button href="/apply/3" size="lg" variant="primary">Apply</Button>
+                            <Button href="/apply/3" size="lg" variant="primary">Inquire</Button>
                         </Card>
                     </Col>
                 </Row>
@@ -179,17 +179,17 @@ const Services = () => {
                         <Card className="mb-3">
                             <Card.Body>
                                 <Card.Title>Who may avail</Card.Title>
-                                <Card.Text style={{ textAlign: 'left' }}>
+                                <div style={{ textAlign: 'left' }}>
                                     <ul>
                                         <li>Bonafide resident who belongs to marginalized group of families</li>
                                     </ul>
-                                </Card.Text>
+                                </div>
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
                             <Card.Body>
                                 <Card.Title>Requirements</Card.Title>
-                                <Card.Text style={{ textAlign: 'left' }}>
+                                <div style={{ textAlign: 'left' }}>
                                     <div>
                                         PAO and IBP
                                     </div>
@@ -197,11 +197,11 @@ const Services = () => {
                                         <li>Certificate of no property from assessor's office</li>
                                         <li>Certificate of indigency from Punong Barangay</li>
                                     </ul>
-                                </Card.Text>
+                                </div>
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
-                            <Button href="/apply/4" size="lg" variant="primary">Apply</Button>
+                            <Button href="/apply/4" size="lg" variant="primary">Inquire</Button>
                         </Card>
                     </Col>
                     <Col md="4">
@@ -213,25 +213,25 @@ const Services = () => {
                         <Card className="mb-3">
                             <Card.Body>
                                 <Card.Title>Who may avail</Card.Title>
-                                <Card.Text style={{ textAlign: 'left' }}>
+                                <div style={{ textAlign: 'left' }}>
                                     <ul>
                                         <li>Couples even if they already have a child</li>
                                     </ul>
-                                </Card.Text>
+                                </div>
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
                             <Card.Body>
                                 <Card.Title>Requirements</Card.Title>
-                                <Card.Text style={{ textAlign: 'left' }}>
+                                <div style={{ textAlign: 'left' }}>
                                     <ul>
                                         <li>Accomplished PMC registration form</li>
                                     </ul>
-                                </Card.Text>
+                                </div>
                             </Card.Body>
                         </Card>
                         <Card className="mb-3">
-                            <Button href="/apply/5" size="lg" variant="primary">Apply</Button>
+                            <Button href="/apply/5" size="lg" variant="primary">Inquire</Button>
                         </Card>
                     </Col>
                     <Col md="4">

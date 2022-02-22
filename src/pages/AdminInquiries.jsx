@@ -119,7 +119,7 @@ const AdminInquiries = () => {
                                         ctMsg.map(d => 
                                             <tr key={d.id}>
                                                 <td>{d.id}</td>
-                                                <td><Link to="/">{d.subject}</Link></td>
+                                                <td><Link to={"/admin/inquiries/" + d.id}>{d.subject}</Link></td>
                                                 <td>{d.full_name}</td>
                                                 <td><p style={{ cursor: "pointer" }} onClick={openModal.bind(this, d.id, d.status)}>{d.status === "0" ? <Badge bg="warning">Unsolve</Badge> : <Badge bg="success">Solved</Badge>}</p></td>
                                                 <td>{changeDateFormat(d.created_at)}</td>

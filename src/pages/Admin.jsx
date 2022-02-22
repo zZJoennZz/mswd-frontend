@@ -14,6 +14,7 @@ import AdminInquiries from './AdminInquiries';
 import AdminAnnouncements from './AdminAnnouncements';
 import AdminSingleAnnouncement from './AdminSingleAnnouncement';
 import AdminNewAnnouncement from './AdminNewAnnouncement';
+import AdminSingleInquiry from './AdminSingleInquiry';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -29,6 +30,7 @@ const Admin = () => {
 
     let [isAuth, setIsAuth] = useState(false);
     let [isLoading, setIsLoading] = useState(true);
+    let [dashCtr, setDashCtr] = useState(false);
 
     const checkToken = async () => {
         setIsLoading(true);
@@ -67,6 +69,11 @@ const Admin = () => {
     }
 
     useEffect(() => {
+        const getCtr = async () => {
+            let res = await api.get('dashboard/count');
+            setDashCtr(res.data);
+        }
+        getCtr();
         checkToken();
     }, [isAuth])
     
@@ -87,10 +94,11 @@ const Admin = () => {
                                     </Col>
                                     <Col as="main" style={{ height: "100vh" }} md={9} lg={10} className="text-start ml-sm-auto px-md-4 py-4">
                                         <Routes>
-                                            <Route exact path="/" element={<AdminDashboard />} />
+                                            <Route exact path="/" element={<AdminDashboard dashCtr={dashCtr} />} />
                                             <Route exact path="/applications" element={<AdminApplications />} />
                                             <Route exact path="/applications/:appId" element={<AdminSingleApplication />} />
                                             <Route exact path="/inquiries" element={<AdminInquiries />} />
+                                            <Route exact path="/inquiries/:inqId" element={<AdminSingleInquiry />} />
                                             <Route exact path="/announcements" element={<AdminAnnouncements />} />
                                             <Route exact path="/announcements/:annId" element={<AdminSingleAnnouncement />} />
                                             <Route exact path="/announcements/new" element={<AdminNewAnnouncement />} />
