@@ -25,6 +25,7 @@ const AdminNavBar = ({ logOut }) => {
 
                         <Dropdown.Menu>
                             {/* <Dropdown.Item href="/action-1">Settings</Dropdown.Item> */}
+                            <Dropdown.Item href="/admin/settings">Settings</Dropdown.Item>
                             <Dropdown.Item onClick={logOut}>Log Out</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
