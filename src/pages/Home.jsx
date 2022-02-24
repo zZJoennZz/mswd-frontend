@@ -48,7 +48,7 @@ const Home = () => {
                 <Row>
                     <Col md="8">
                         <h3 className="mb-3">Announcements</h3>
-                        <div style={{ maxHeight: '500px', overflow: 'auto' }}>
+                        <div className="newsBox" style={{ maxHeight: '500px', overflow: 'auto' }}>
                             {
                                 ann.data ?
                                     ann.data.map(d => 

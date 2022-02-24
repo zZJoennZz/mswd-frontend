@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+
+/* Works on Firefox */
+.newsBox {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(31, 31, 93) rgb(223, 223, 223);
+}
+
+/* Works on Chrome, Edge, and Safari */
+.newsBox::-webkit-scrollbar {
+  width: 10px;
+}
+
+.newsBox::-webkit-scrollbar-track {
+  background: rgb(223, 223, 223);
+}
+
+.newsBox::-webkit-scrollbar-thumb {
+  background-color: rgb(31, 31, 93);
+  border-radius: 20px;
+  border: 2px solid rgb(223, 223, 223);
+}
