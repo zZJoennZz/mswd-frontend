@@ -12,6 +12,7 @@ const ContactUs = () => {
         <Container className="mt-5 mb-5" style={{ minHeight: "80vh" }}>
             <Row>
                 <Col md={12}>
+                    <h1>Contact Us</h1>
                     <ContactForm />
                 </Col>
             </Row>

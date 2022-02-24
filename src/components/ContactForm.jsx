@@ -7,11 +7,19 @@ import {
 
 import api from '../api/api';
 
-const ContactForm = () => {
+const ContactForm = ({ prefix }) => {
+    let subPrefix = parseInt(prefix) === undefined ? "" : parseInt(prefix) === 1 ? "[Social Case Study Report]" : parseInt(prefix) === 3 ? "[Purchase Booklet]" : parseInt(prefix) === 4 ? "[Certificate of Indigency]" : parseInt(prefix) === 5 ? "[Issuance of Pre-Marriage Counselling (PMC) Certificate]" : "";
+
     let [frmData, setFrmData] = React.useState({});
     let [frmSubmit, setFrmSubmit] = React.useState(false);
 
-    const onChangeText = (e) => setFrmData({...frmData, [e.target.name] : e.target.value});
+    const onChangeText = (e) => {
+        if (e.target.name === "subject") {
+            setFrmData({...frmData, [e.target.name] : subPrefix + ' ' + e.target.value})
+        } else {
+            setFrmData({...frmData, [e.target.name] : e.target.value})
+        }
+    }
 
     const onSubmitFrm = async (e) => {
         e.preventDefault();

@@ -46,7 +46,7 @@ const Home = () => {
             </Container>
             <Container className="pt-5 pb-5">
                 <Row>
-                    <Col md="6">
+                    <Col md="8">
                         <h3 className="mb-3">Announcements</h3>
                         <div style={{ maxHeight: '500px', overflow: 'auto' }}>
                             {
@@ -59,7 +59,7 @@ const Home = () => {
                             }
                         </div>
                     </Col>
-                    <Col md="6">
+                    <Col md="4">
                         <h3 className="mb-3">Inquire</h3>
                         <ContactForm />
                     </Col>

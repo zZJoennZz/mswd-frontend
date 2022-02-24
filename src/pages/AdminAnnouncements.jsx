@@ -9,7 +9,8 @@ import {
     Spinner,
     Table,
     Form,
-    Button
+    Button,
+    Badge
 } from 'react-bootstrap';
 
 import api from '../api/api';
@@ -25,6 +26,20 @@ const AdminAnnouncements = () => {
         } catch (error) {
             alert(error + " Please contact website administrator!");
             setAnnList(false);
+        }
+    }
+
+    const deleteAnn = async (annId) => {
+        let confirmDelete = window.confirm("Are you sure to delete this? You will not be able to restore this record.");
+        if (confirmDelete) {
+            try {
+                await api.delete(`announcement/delete/${annId}`)
+                .then(data => alert(data.data.message))
+                .catch(err => alert("Announcement NOT deleted. " + err));
+                getAnn();
+            } catch (error) {
+                alert("Something went wrong. " + error);
+            }
         }
     }
 
@@ -71,7 +86,7 @@ const AdminAnnouncements = () => {
                                         annList.map(d => <tr key={d.id}>
                                             <td><Link to={`/admin/announcements/${d.id}`}>{d.announcement_title}</Link></td>
                                             <td>{changeDateFormat(d.created_at)}</td>
-                                            <td>{changeDateFormat(d.updated_at)}</td>
+                                            <td>{changeDateFormat(d.updated_at)} <Badge onClick={deleteAnn.bind(this, d.id)} bg="danger" style={{ cursor: "pointer", float: "right" }}>X</Badge></td>
                                         </tr>)
                                     }
                                 </tbody>

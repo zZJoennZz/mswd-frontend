@@ -75,10 +75,8 @@ const Services = () => {
                                         </ul>
                                     </Tab>
                                 </Tabs>
+                                <Button href="/apply/1" size="lg" variant="primary">Inquire</Button>
                             </Card.Body>
-                        </Card>
-                        <Card className="mb-3">
-                            <Button href="/apply/1" size="lg" variant="primary">Inquire</Button>
                         </Card>
                     </Col>
                     <Col md="4">
@@ -130,10 +128,8 @@ const Services = () => {
                                         </ul>
                                     </Tab>
                                 </Tabs>
+                                <Button href="/apply/2" size="lg" variant="primary">Apply</Button>
                             </Card.Body>
-                        </Card>
-                        <Card className="mb-3">
-                            <Button href="/apply/2" size="lg" variant="primary">Apply</Button>
                         </Card>
                     </Col>
                     <Col md="4">
@@ -162,10 +158,8 @@ const Services = () => {
                                         <li>Senior citizen/PWD Identification card</li>
                                     </ul> 
                                 </div>
+                                <Button href="/apply/3" size="lg" variant="primary">Inquire</Button>
                             </Card.Body>
-                        </Card>
-                        <Card className="mb-3">
-                            <Button href="/apply/3" size="lg" variant="primary">Inquire</Button>
                         </Card>
                     </Col>
                 </Row>
@@ -198,10 +192,8 @@ const Services = () => {
                                         <li>Certificate of indigency from Punong Barangay</li>
                                     </ul>
                                 </div>
+                                <Button href="/apply/4" size="lg" variant="primary">Inquire</Button>
                             </Card.Body>
-                        </Card>
-                        <Card className="mb-3">
-                            <Button href="/apply/4" size="lg" variant="primary">Inquire</Button>
                         </Card>
                     </Col>
                     <Col md="4">
@@ -228,10 +220,8 @@ const Services = () => {
                                         <li>Accomplished PMC registration form</li>
                                     </ul>
                                 </div>
+                                <Button href="/apply/5" size="lg" variant="primary">Inquire</Button>
                             </Card.Body>
-                        </Card>
-                        <Card className="mb-3">
-                            <Button href="/apply/5" size="lg" variant="primary">Inquire</Button>
                         </Card>
                     </Col>
                     <Col md="4">

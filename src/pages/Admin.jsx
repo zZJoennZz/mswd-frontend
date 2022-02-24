@@ -15,6 +15,8 @@ import AdminAnnouncements from './AdminAnnouncements';
 import AdminSingleAnnouncement from './AdminSingleAnnouncement';
 import AdminNewAnnouncement from './AdminNewAnnouncement';
 import AdminSingleInquiry from './AdminSingleInquiry';
+import AdminSettings from './AdminSettings';
+import AdminFAQs from './AdminFAQs';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -102,6 +104,8 @@ const Admin = () => {
                                             <Route exact path="/announcements" element={<AdminAnnouncements />} />
                                             <Route exact path="/announcements/:annId" element={<AdminSingleAnnouncement />} />
                                             <Route exact path="/announcements/new" element={<AdminNewAnnouncement />} />
+                                            <Route exact path="/settings" element={<AdminSettings />} />
+                                            <Route exact path="/faqs" element={<AdminFAQs />} />
                                         </Routes>
                                     </Col>
                                 </Row>
