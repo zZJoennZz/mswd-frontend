@@ -13,16 +13,15 @@ const AnnouncementSingle = () => {
     const { annId } = useParams();
     let [ann, setAnn] = React.useState(false)
 
-    const getAnn = async () => {
-        await api.get(`announcement/${annId}`)
-            .then(res => setAnn(res.data.data))
-            .catch(err => {
-                alert(err + ". Please contact your website administrator.")
-                setAnn(false);
-            });
-    }
-
     React.useEffect(() => {
+        const getAnn = async () => {
+            await api.get(`announcement/${annId}`)
+                .then(res => setAnn(res.data.data))
+                .catch(err => {
+                    alert(err + ". Please contact your website administrator.")
+                    setAnn(false);
+                });
+        }
         getAnn();
     }, [annId])
 
