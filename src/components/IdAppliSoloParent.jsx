@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
     Form,
     Button,
@@ -12,16 +12,30 @@ const IdAppliSoloParent = ({ submitApplication }) => {
     let [frmData, setFrmData] = useState({'appliType': 1});
     let [pic, setPic] = useState(false);
     let [sig, setSig] = useState(false);
+    let [docs, setDocs] = useState(false);
     let [agreeCheck, setAgreeCheck] = useState(true);
+    let [fcHolder, setFcHolder] = useState({
+        fc_name : '',
+        fc_age : '',
+        fc_bday : '',
+        fc_mi : '',
+        fc_rel : '',
+        fc_status : ''
+    });
+    //let [famComp, setFamComp] = useState("");
+    const famComRef = useRef('');
 
     const submitForm = async (e) => {
         e.preventDefault();
-
+        
         try {
             let formData = new FormData();
             formData.append('application_data', JSON.stringify(frmData));
             formData.append('application_pic', pic[0]);
             formData.append('application_sig', sig[0]);
+            for (let i = 0; i < docs.length; i++) {
+                formData.append(`docs[${i}]`, docs[i])
+            }
 
             let res = await apifrm.post("application/post", formData);
             submitApplication(res.data.application_id);
@@ -41,6 +55,34 @@ const IdAppliSoloParent = ({ submitApplication }) => {
 
     const sigOnChange = (e) => {
         setSig(e.target.files);
+    }
+
+    const docsOnChange = (e) => {
+        setDocs(e.target.files);
+    }
+
+    const fcOnChange = (e) => setFcHolder({...fcHolder, [e.target.name] : e.target.value});
+
+    const setFcField = () => {
+        //setFamComp(famComp + fcHolder.fc_name + ',' + fcHolder.fc_rel + ',' + fcHolder.fc_age + ',' + fcHolder.fc_status + ',' + fcHolder.fc_bday + ',' + fcHolder.fc_mi + '\n');
+    
+        setFcHolder({
+            fc_name : '',   
+            fc_age : '',
+            fc_bday : '',
+            fc_mi : '',
+            fc_rel : '',
+            fc_status : ''
+        });
+
+        if (famComRef.current.value.trim() === "") {
+            famComRef.current.value += fcHolder.fc_name + ',' + fcHolder.fc_rel + ',' + fcHolder.fc_age + ',' + fcHolder.fc_status + ',' + fcHolder.fc_bday + ',' + fcHolder.fc_mi;
+        } else {
+            famComRef.current.value += '\n' + fcHolder.fc_name + ',' + fcHolder.fc_rel + ',' + fcHolder.fc_age + ',' + fcHolder.fc_status + ',' + fcHolder.fc_bday + ',' + fcHolder.fc_mi;
+        }
+        
+        
+        setFrmData({...frmData, fam_composition: famComRef.current.value});
     }
 
     // const testBtn = (e) => {
@@ -164,11 +206,44 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <Form.Group className="mb-3">
+                        <Form.Group className="mb-1">
                             <Form.Label>I. Family Composition: (PANGALAN NG MGA ANAK AT IBA PANG KASAMA SA BAHAY)</Form.Label>
-                            <p>Format each line: Name, Relationship, Age, Status, Birthday, Occupation/Monthly Income (Don't use comma)</p>
-                            <Form.Control placeholder="Example: Juan de la Cruz, Anak, 23, Single, 06/14/1996, Waiter/10000" as="textarea" name="fam_composition" id="fam_composition" onChange={textOnChange} rows={5}></Form.Control>
+                            <div><small>Use form below to add each family members</small></div>
+                            <Row className="mb-3">
+                                <Col lg={2} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_name} name="fc_name" id="fc_name" placeholder="Full Name" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={2} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_rel} name="fc_rel" id="fc_rel" placeholder="Relationship" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={1} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_age} name="fc_age" id="fc_age" placeholder="Age" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={2} className="mb-sm-1">
+                                    <Form.Select name="fc_status" id="fc_status" value={fcHolder.fc_status} onChange={fcOnChange}>
+                                        <option value="">Select</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Separated">Separated</option>
+                                        <option value="Widowed">Widowed</option>
+                                    </Form.Select>
+                                </Col>
+                                <Col lg={2} className="mb-sm-1">
+                                    <Form.Control type="date" value={fcHolder.fc_bday} name="fc_bday" id="fc_bday" placeholder="Birthday" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={2} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_mi} name="fc_mi" id="fc_mi" placeholder="Monthly Income" onChange={fcOnChange} />
+                                </Col>
+                                <Col>
+                                    <Button onClick={setFcField}>
+                                        + Add
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <Form.Control placeholder="Example: Juan de la Cruz, Anak, 23, Single, 06/14/1996, Waiter/10000" as="textarea" name="fam_composition" id="fam_composition" ref={famComRef} onChange={textOnChange} rows={5}></Form.Control>
                         </Form.Group>
+                        <Button style={{float:'right'}} size="sm" onClick={() => famComRef.current.value = ""}>Clear Family Composition</Button>
                         <p>Include family members and other members of the household.</p>
                     </Col>
                 </Row>
@@ -177,7 +252,7 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                         <Form.Group className="mb-3">
                             <Form.Label>II. Classification/Circumstances of Being a Solo Parent</Form.Label>
                             <Form.Text> Dahilan ng pagiging solo parent</Form.Text>
-                            <Form.Control as="textarea" name="solo_parent_classification" id="solo_parent_classification" onChange={textOnChange} rows={5}></Form.Control>
+                            <Form.Control as="textarea" name="solo_parent_classification" id="solo_parent_classification" onChange={textOnChange} rows={2}></Form.Control>
                         </Form.Group>
                     </Col>
                 </Row>
@@ -186,7 +261,7 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                         <Form.Group className="mb-3">
                             <Form.Label>III. Needs/Problems of Solo Parents:</Form.Label>
                             <Form.Text> Mga pangangailangan bilang solo parent</Form.Text>
-                            <Form.Control as="textarea" name="needs_of_solo_parents" id="needs_of_solo_parents" onChange={textOnChange} rows={5}></Form.Control>
+                            <Form.Control as="textarea" name="needs_of_solo_parents" id="needs_of_solo_parents" onChange={textOnChange} rows={2}></Form.Control>
                         </Form.Group>
                     </Col>
                 </Row>
@@ -194,7 +269,7 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                     <Col md={12}>
                         <Form.Group className="mb-3">
                             <Form.Label>IV. Family Resources:</Form.Label>
-                            <Form.Control as="textarea" name="family_resources" id="family_resources" onChange={textOnChange} rows={5}></Form.Control>
+                            <Form.Control as="textarea" name="family_resources" id="family_resources" onChange={textOnChange} rows={2}></Form.Control>
                         </Form.Group>
                     </Col>
                 </Row>
@@ -210,6 +285,18 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                             <Form.Label>Signature over printed name</Form.Label>
                             <Form.Control type="file" name="signature" id="signature" accept="image/png, image/jpeg" onChange={sigOnChange} />
                         </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={6}>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Documents</Form.Label>
+                            <div className="mb-1"><small>Solo parent certificate mula sa barangay kung hiwalay, death certificate kung balo/biyida, and birth certificate ng mga anak. (<a href="https://i.ibb.co/wyhLcD5/drag-and-select.gif" target="_blank" rel="noreferrer">You can multiply select files.</a>) PDF Only</small></div>
+                            <Form.Control type="file" name="docs" id="docs" accept="application/pdf" onChange={docsOnChange} multiple />
+                        </Form.Group>
+                    </Col>
+                    <Col md={6}>
+                       
                     </Col>
                 </Row>
                 <Row>

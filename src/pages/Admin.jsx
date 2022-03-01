@@ -17,6 +17,8 @@ import AdminNewAnnouncement from './AdminNewAnnouncement';
 import AdminSingleInquiry from './AdminSingleInquiry';
 import AdminSettings from './AdminSettings';
 import AdminFAQs from './AdminFAQs';
+import AdminFAQNew from './AdminFAQNew';
+import AdminFAQSingle from './AdminFAQSingle';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -33,6 +35,7 @@ const Admin = () => {
     let [isAuth, setIsAuth] = useState(false);
     let [isLoading, setIsLoading] = useState(true);
     let [dashCtr, setDashCtr] = useState(false);
+    let [currId, setCurrId] = useState(0);
 
     const checkToken = async () => {
         setIsLoading(true);
@@ -40,12 +43,15 @@ const Admin = () => {
         try {
             let res = await api.post("validate");
             if (res.data.success) {
+                setCurrId(res.data.id);
                 setIsAuth(true);
             } else {
+                setCurrId(0);
                 setIsAuth(false);
             }
         } catch(e) {
             console.log(e);
+            setCurrId(0);
             setIsLoading(false);
         }
 
@@ -55,7 +61,7 @@ const Admin = () => {
     const logOut = async () => {
         setIsLoading(true);
         await api.post("signout");
-
+        setCurrId(0);
         setIsAuth(false);
         setIsLoading(false);
     }
@@ -104,8 +110,10 @@ const Admin = () => {
                                             <Route exact path="/announcements" element={<AdminAnnouncements />} />
                                             <Route exact path="/announcements/:annId" element={<AdminSingleAnnouncement />} />
                                             <Route exact path="/announcements/new" element={<AdminNewAnnouncement />} />
-                                            <Route exact path="/settings" element={<AdminSettings />} />
+                                            <Route exact path="/settings" element={<AdminSettings userId={currId} />} />
                                             <Route exact path="/faqs" element={<AdminFAQs />} />
+                                            <Route exact path="/faqs/:faqId" element={<AdminFAQSingle />} />
+                                            <Route exact path="/faqs/add" element={<AdminFAQNew />} />
                                         </Routes>
                                     </Col>
                                 </Row>

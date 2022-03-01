@@ -14,7 +14,7 @@ import NewsBox from '../components/NewsBox';
 import ContactForm from '../components/ContactForm';
 
 const Home = () => {
-    let [ann, setAnn] = useState([]);
+    let [ann, setAnn] = useState(false);
 
     const getAnn = async() => {
         let res = await api.get("announcement");
@@ -50,12 +50,12 @@ const Home = () => {
                         <h3 className="mb-3">Announcements</h3>
                         <div className="newsBox" style={{ maxHeight: '500px', overflow: 'auto' }}>
                             {
-                                ann.data ?
+                                !ann ?
+                                    <Spinner className="mt-5" animation="border" variant="info" />
+                                :
                                     ann.data.map(d => 
                                             <NewsBox key={d.id} announcementData={d} />
-                                        )
-                                :
-                                    <Spinner className="mt-5" animation="border" variant="info" />   
+                                        )                   
                             }
                         </div>
                     </Col>

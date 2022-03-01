@@ -10,6 +10,8 @@ import {
     Col
 } from 'react-bootstrap';
 
+import { Link } from 'react-router-dom';
+
 //accepts argument if the user is logged
 const AdminLogin = ({ checkAuth }) => {
     //initiate the state for the form values
@@ -72,6 +74,7 @@ const AdminLogin = ({ checkAuth }) => {
                                     Login
                                 </Button>
                             </Form>
+                            <div className="small" style={{ textAlign: "right" }}><Link to="/">Return to website</Link></div>
                         </Col>
                     </Row>
                 </Col>

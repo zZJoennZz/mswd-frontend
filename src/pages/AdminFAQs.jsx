@@ -29,6 +29,23 @@ const AdminFAQs = () => {
         }
     }
 
+    const deleteFaq = async (faqId) => {
+        let confirmDelete = window.confirm('Are you sure to delete this FAQ? You cannot undo this.');
+        try {
+            if (confirmDelete) {
+                await api.delete(`faq/delete/${faqId}`)
+                    .then(res => {
+                        alert(res.data.message);
+                        getFaqRec();
+                    })
+                    .catch(err => alert(err + ". Something went wrong, please contact your website administrator."));
+            }
+        } catch (error) {
+            alert(error + ". Something went wrong, please contact your website administrator");
+            getFaqRec();
+        }
+    } 
+
     const changeDateFormat = (dateToChange) => {
         let theDate = new Date(dateToChange);
         return theDate.toLocaleDateString("en-US");
@@ -46,7 +63,7 @@ const AdminFAQs = () => {
             </Breadcrumb>
             <Row className="mb-3">
                 <Col md={12}>
-                    <Button>Add New</Button>
+                    <Button href="/admin/faqs/add">Add New</Button>
                 </Col>
             </Row>
             <Row>
@@ -60,20 +77,20 @@ const AdminFAQs = () => {
                                     <tr>
                                         <th>Question</th>
                                         <th>Answer</th>
-                                        <th>Submitted on</th>
-                                        <th>Last Updated</th>
-                                        <th>Actions</th>
+                                        <th width="15%">Submitted on</th>
+                                        <th width="15%">Last Updated</th>
+                                        <th width="15%">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {
                                         getFaq.map(d => 
                                             <tr key={d.id}>
-                                                <td>{d.question}</td>
-                                                <td>{d.answer}</td>
+                                                <td><span style={{ width: "15ch", textOverflow: "ellipsis", whiteSpace: "nowrap", display: 'inline-block', overflow: 'hidden' }}>{d.question}</span></td>
+                                                <td><span style={{ width: "15ch", textOverflow: "ellipsis", whiteSpace: "nowrap", display: 'inline-block', overflow: 'hidden' }}>{d.answer}</span></td>
                                                 <td>{changeDateFormat(d.created_at)}</td>
                                                 <td>{changeDateFormat(d.updated_at)}</td>
-                                                <td>Edit Delete</td>
+                                                <td><Button size="sm" href={"/admin/faqs/" + d.id}>Edit</Button> <Button size="sm" variant="danger" onClick={deleteFaq.bind(this, d.id)}>X</Button></td>
                                             </tr>    
                                         )
                                     }

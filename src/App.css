@@ -40,20 +40,20 @@
 /* Works on Firefox */
 .newsBox {
   scrollbar-width: thin;
-  scrollbar-color: rgb(31, 31, 93) rgb(223, 223, 223);
+  scrollbar-color: rgb(31, 31, 93) rgba(223, 223, 223, 0);
 }
 
 /* Works on Chrome, Edge, and Safari */
 .newsBox::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 .newsBox::-webkit-scrollbar-track {
-  background: rgb(223, 223, 223);
+  background: rgba(223, 223, 223, 0);
 }
 
 .newsBox::-webkit-scrollbar-thumb {
   background-color: rgb(31, 31, 93);
   border-radius: 20px;
-  border: 2px solid rgb(223, 223, 223);
+  border: 2px solid rgba(223, 223, 223, 0);
 }

@@ -128,7 +128,7 @@ const Services = () => {
                                         </ul>
                                     </Tab>
                                 </Tabs>
-                                <Button href="/apply/2" size="lg" variant="primary">Apply</Button>
+                                <Button href="/apply/2" size="lg" variant="success">Apply</Button>
                             </Card.Body>
                         </Card>
                     </Col>
