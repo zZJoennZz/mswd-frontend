@@ -7,7 +7,7 @@ import {
     Table
 } from 'react-bootstrap'
 
-const ApplicationFormSoloParent = ({ appData }) => {
+const ApplicationFormSoloParent = ({ appData, appFiles }) => {
     let famCom = appData.fam_composition.split('\n');
     let [famComArr, setFamComArr] = React.useState(false);
 
@@ -118,6 +118,19 @@ const ApplicationFormSoloParent = ({ appData }) => {
                 <Col md={12}>
                     <div className="mb-1"><strong>IV. Family Resources:</strong></div>
                     {appData.family_resources}
+                </Col>
+            </Row>
+            <Row className="mt-3 mb-3">
+                <Col md={12}>
+                    <div className="mb-1"><strong>Attached Documents:</strong></div>
+                    {
+                        !appFiles ?
+                            "Loading..."
+                        :
+                        appFiles.map(d => 
+                            <div key={d.id}><a href={d.file_url} target="_blank" rel="noreferrer">{d.file_name}</a></div>    
+                        )
+                    }
                 </Col>
             </Row>
         </Container>

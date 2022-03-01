@@ -85,7 +85,7 @@ const AdminSingleAnnouncement = () => {
                                 </Form.Group>
                                 <Form.Group className="mb-3">
                                     <Form.Label>Announcement Image</Form.Label>
-                                    <Image className="mb-3" fluid src={process.env.REACT_APP_URL_ANNOUNCEMENT_IMG + "/" + currAnn.image_path}></Image>
+                                    <Image className="mb-3" fluid src={currAnn.image_path}></Image>
                                     <Form.Control type="file" name="file" id="file" onChange={fileOnChange} />
                                 </Form.Group>
                                 <Button type="submit">Save Changes</Button>

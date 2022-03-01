@@ -44,18 +44,23 @@ const AnnouncementSingle = () => {
         <Container fluid className="pb-5" style={{ minHeight: "90vh" }}>
             {
                 !ann ?
-                    <Spinner />
+                    <Spinner animation="border" className="mt-5" />
                 :
                     <div>
-                        <Row style={bannerCss(process.env.REACT_APP_URL_ANNOUNCEMENT_IMG + "/" + ann.image_path)}>
+                        <Row style={bannerCss(ann.image_path)}>
                             <Col md={12}>
                                 <h1>{ann.announcement_title}</h1>  
-                                <p><span style={{fontStyle: 'italic', color: '#858585'}}>Posted on</span> {changeDateFormat(ann.created_at)} (<span style={{fontStyle: 'italic', color: '#858585'}}>Last updated on</span> {changeDateFormat(ann.updated_at)})</p>  
+                                <p><span style={{fontStyle: 'italic', color: '#858585'}}>Posted on</span> {changeDateFormat(ann.created_at)} 
+                                {
+                                    ann.created_at === ann.updated_at ? "" :
+                                    <> (<span style={{fontStyle: 'italic', color: '#858585'}}>Last updated on</span> {changeDateFormat(ann.updated_at)})</>
+                                }
+                                </p>  
                             </Col>
                         </Row>
                         <Row>
                             <Col md={2}></Col>
-                            <Col md={8} className="p-5" dangerouslySetInnerHTML={{__html: ann.announcement_body}}></Col>
+                            <Col md={8} className="p-5" style={{ textAlign: "left" }} dangerouslySetInnerHTML={{__html: ann.announcement_body}}></Col>
                             <Col md={2}></Col>
                         </Row>
                     </div>

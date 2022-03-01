@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
     Form,
     Button,
@@ -12,7 +12,49 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
     let [frmData, setFrmData] = useState({'appliType': 3});
     let [pic, setPic] = useState(false);
     let [sig, setSig] = useState(false);
+    let [docs, setDocs] = useState(false);
     let [agreeCheck, setAgreeCheck] = useState(true);
+
+    let [fcHolder, setFcHolder] = useState({
+        fc_name : '',
+        fc_age : '',
+        fc_address : '',
+        fc_mi : '',
+        fc_rel : '',
+        fc_status : '',
+        fc_educ_attain: '',
+        fc_con_num: '',
+        fc_work: ''
+    });
+    //let [famComp, setFamComp] = useState("");
+    const famComRef = useRef('');
+
+    const fcOnChange = (e) => setFcHolder({...fcHolder, [e.target.name] : e.target.value});
+
+    const setFcField = () => {
+        //setFamComp(famComp + fcHolder.fc_name + ',' + fcHolder.fc_rel + ',' + fcHolder.fc_age + ',' + fcHolder.fc_status + ',' + fcHolder.fc_bday + ',' + fcHolder.fc_mi + '\n');
+    
+        setFcHolder({
+            fc_name : '',
+            fc_age : '',
+            fc_address : '',
+            fc_mi : '',
+            fc_rel : '',
+            fc_status : '',
+            fc_educ_attain: '',
+            fc_con_num: '',
+            fc_work: ''
+        });
+
+        if (famComRef.current.value.trim() === "") {
+            famComRef.current.value += fcHolder.fc_name + ',' + fcHolder.fc_age + ',' + fcHolder.fc_rel + ',' + fcHolder.fc_status + ',' + fcHolder.fc_address + ',' + fcHolder.fc_con_num + ',' + fcHolder.fc_educ_attain + ',' + fcHolder.fc_work + ',' + fcHolder.fc_mi;
+        } else {
+            famComRef.current.value += '\n' + fcHolder.fc_name + ',' + fcHolder.fc_age + ',' + fcHolder.fc_rel + ',' + fcHolder.fc_status + ',' + fcHolder.fc_address + ',' + fcHolder.fc_con_num + ',' + fcHolder.fc_educ_attain + ',' + fcHolder.fc_work + ',' + fcHolder.fc_mi;
+        }
+        
+        
+        setFrmData({...frmData, fam_composition: famComRef.current.value});
+    }
 
     const educ_attain = [
         { id: 1, name: 'Elementary' },
@@ -30,6 +72,9 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
             formData.append('application_data', JSON.stringify(frmData));
             formData.append('application_pic', pic[0]);
             formData.append('application_sig', sig[0]);
+            for (let i = 0; i < docs.length; i++) {
+                formData.append(`docs[${i}]`, docs[i])
+            }
 
             let res = await apifrm.post("application/post", formData);
             submitApplication(res.data.application_id);
@@ -37,6 +82,10 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
             submitApplication("failed");
             alert(error + ". Please contact your website administrator.");
         }
+    }
+
+    const docsOnChange = (e) => {
+        setDocs(e.target.files);
     }
 
     const textOnChange = (e) => {
@@ -147,7 +196,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
                                 <option>Select</option>
                                 <option value={1}>Single</option>
                                 <option value={2}>Married</option>
-                                <option value={3}>Windowed</option>
+                                <option value={3}>Widowed</option>
                                 <option value={4}>Separated</option>
                             </Form.Select>
                         </Form.Group>
@@ -339,11 +388,53 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <Form.Group className="mb-3">
+                        <Form.Group className="mb-1">
                             <Form.Label>Family Composition/Household Members</Form.Label>
-                            <p><Form.Text>Format each line: Name, Age, Relationship to Señor Citizen, Civil Status, Address, Contact No., Educational Attainment, Work, Monthly Income (Don't use comma)</Form.Text></p>
-                            <Form.Control placeholder="Example: Juan de la Cruz, 24, Grand son, Single, Example St. San Rafael Bulacan, 09111111111, Bachelor's Degree, Clerk, 12000" as="textarea" name="fam_composition" id="fam_composition" onChange={textOnChange} rows={5}></Form.Control>
+                            <div><small>Use form below to add each family members. <strong>Please don't use commas!</strong></small></div>
+                            <Row className="mb-3">
+                                <Col lg={3} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_name} name="fc_name" id="fc_name" placeholder="Full Name" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={1} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_age} name="fc_age" id="fc_age" placeholder="Age" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={2} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_rel} name="fc_rel" id="fc_rel" placeholder="Relationship" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={2} className="mb-sm-1">
+                                    <Form.Select name="fc_status" id="fc_status" value={fcHolder.fc_status} onChange={fcOnChange}>
+                                        <option value="">Select</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Separated">Separated</option>
+                                        <option value="Widowed">Widowed</option>
+                                    </Form.Select>
+                                </Col>
+                                <Col lg={4} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_address} name="fc_address" id="fc_address" placeholder="Address" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={3} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_con_num} name="fc_con_num" id="fc_con_num" placeholder="Contact Number" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={3} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_educ_attain} name="fc_educ_attain" id="fc_educ_attain" placeholder="Educational Attainment" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={3} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_work} name="fc_work" id="fc_work" placeholder="Work" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={2} className="mb-sm-1">
+                                    <Form.Control type="text" value={fcHolder.fc_mi} name="fc_mi" id="fc_mi" placeholder="Monthly Income" onChange={fcOnChange} />
+                                </Col>
+                                <Col lg={1}>
+                                    <Button onClick={setFcField}>
+                                        + Add
+                                    </Button>
+                                </Col>
+                            </Row>
+                            <Form.Control placeholder="Example: Juan de la Cruz, 24, Grand son, Single, Example St. San Rafael Bulacan, 09111111111, Bachelor's Degree, Clerk, 12000" as="textarea" name="fam_composition" id="fam_composition" onChange={textOnChange} ref={famComRef} rows={3}></Form.Control>
                         </Form.Group>
+                        <Button style={{float:'right'}} size="sm" onClick={() => famComRef.current.value = ""}>Clear Family Composition</Button>
                         <p>Include family members and other members of the household.</p>
                     </Col>
                 </Row>
@@ -359,6 +450,16 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
                             <Form.Label>Signature over printed name</Form.Label>
                             <Form.Control type="file" name="signature" id="signature" accept="image/png, image/jpeg" onChange={sigOnChange} />
                         </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col md={6}>
+                    <Form.Label>Documents</Form.Label>
+                        <div className="mb-1"><small>Valid ID with birthday and address in San Rafael (Voter's, SSS/UMID, LTO, Passport), affidavit of loss (if lost ID), or if no valid ID available: Birth certificate or certificate of residency (<a href="https://i.ibb.co/wyhLcD5/drag-and-select.gif" target="_blank" rel="noreferrer">You can multiply select files.</a>) PDF Only</small></div>
+                        <Form.Control type="file" name="docs" id="docs" accept="application/pdf" onChange={docsOnChange} multiple />
+                    </Col>
+                    <Col md={6}>
+                        
                     </Col>
                 </Row>
                 <Row>

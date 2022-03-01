@@ -66,7 +66,7 @@ const AdminNewAnnouncement = () => {
                             <Form.Label>Announcement Image</Form.Label>
                             <Form.Control type="file" name="file" id="file" onChange={fileOnChange} />
                         </Form.Group>
-                        <Button type="submit">Save Changes</Button>
+                        <Button type="submit">Save</Button>
                     </Form>
                 </Col>
             </Row>

@@ -18,11 +18,13 @@ const AdminSingleApplication = () => {
     let { appId } = useParams();
 
     let [appliData, setAppliData] = useState(false);
+    let [appliFiles, setAppliFiles] = useState(false);
 
     useEffect(() => {
         const getApp = async () => {
             let res = await api.get(`application/${appId}`);
             setAppliData(res.data.data);
+            setAppliFiles(res.data.files);
         }
         getApp();
     }, [appId])
@@ -37,14 +39,14 @@ const AdminSingleApplication = () => {
             <Row>
                 <Col md={12}>
                     {
-                        appliData ? JSON.parse(appliData.application_data).appliType === 1 ?
-                            <ApplicationFormSoloParent appData={JSON.parse(appliData.application_data)} />
+                        appliData || appliFiles ? JSON.parse(appliData.application_data).appliType === 1 ?
+                            <ApplicationFormSoloParent appFiles={appliFiles} appData={JSON.parse(appliData.application_data)} />
                         :
                             JSON.parse(appliData.application_data).appliType === 2 ?
-                                <ApplicationFormPwd subDate={appliData.created_at} appData={JSON.parse(appliData.application_data)} />
+                                <ApplicationFormPwd appFiles={appliFiles} subDate={appliData.created_at} appData={JSON.parse(appliData.application_data)} />
                             :
                                 JSON.parse(appliData.application_data).appliType === 3 ?
-                                    <ApplicationFormSeniorCitizen appData={JSON.parse(appliData.application_data)} />
+                                    <ApplicationFormSeniorCitizen appFiles={appliFiles} appData={JSON.parse(appliData.application_data)} />
                                 :
                                     ""
                         
