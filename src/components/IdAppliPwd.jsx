@@ -9,9 +9,10 @@ import {
 import apifrm from '../api/apifrm';
 
 const IdAppliPwd = ({ submitApplication }) => {
-    let [frmData, setFrmData] = useState({'appliType': 2});
+    let [frmData, setFrmData] = useState({'appliType': 2, 'cod' : ''});
     let [pic, setPic] = useState(false);
     let [sig, setSig] = useState(false);
+    let [docs, setDocs] = useState(false);
     //let [isMulti, setIsMulti] = useState(true);
     let [agreeCheck, setAgreeCheck] = useState(true);
 
@@ -193,6 +194,9 @@ const IdAppliPwd = ({ submitApplication }) => {
             formData.append('application_data', JSON.stringify(frmData));
             formData.append('application_pic', pic[0]);
             formData.append('application_sig', sig[0]);
+            for (let i = 0; i < docs.length; i++) {
+                formData.append(`docs[${i}]`, docs[i])
+            }
 
             let res = await apifrm.post("application/post", formData);
             submitApplication(res.data.application_id);
@@ -201,6 +205,10 @@ const IdAppliPwd = ({ submitApplication }) => {
             alert(error + ". Please contact your website administrator.");
         }
     }
+
+    const docsOnChange = (e) => {
+        setDocs(e.target.files);
+    } 
 
     const textOnChange = (e) => {
         setFrmData({...frmData, [e.target.name] : e.target.value});
@@ -270,6 +278,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                         <Form.Group className="mb-3">
                             <Form.Label>4. Type of Disability</Form.Label>
                             <div>
+                                
                                 {
                                     disabilities.map(m => 
                                         <Form.Check inline type="radio" key={"tod" + m.id} id={"tod" + m.id} name="tod" label={m.name} value={m.id} onChange={textOnChange} />)
@@ -288,9 +297,11 @@ const IdAppliPwd = ({ submitApplication }) => {
                             <div>
                                 {
                                     causes.map(d => 
-                                        <Form.Check inline type="checkbox" value={d.id} key={d.id} id={"cod" + d.id} name="cod" label={d.name} />    
+                                        <Form.Check inline type="radio" value={d.id} key={d.id} id={"cod" + d.id} name="cod" label={d.name} onChange={textOnChange} />    
                                     )
                                 }
+                                <Form.Text><p className="mt-4">If Multiple Causes, please specify instead:</p></Form.Text>
+                                <Form.Control type="text" name="cod" id="cod" onChange={textOnChange} />
                             </div>
                         </Form.Group>
                     </Col>
@@ -367,7 +378,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                         <Form.Group className="mb-3">
                             <Form.Label>10. Civil Status</Form.Label>
                             <Form.Select name="cs" id="cs" onChange={textOnChange}>
-                                <option>Select</option>
+                                <option value={0}>Select</option>
                                 <option value={1}>Single</option>
                                 <option value={2}>Married</option>
                                 <option value={3}>Widow/er</option>
@@ -396,7 +407,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                         <Form.Group className="mb-3">
                             <Form.Label>12. Employment Status</Form.Label> <Form.Text>Please select if employed</Form.Text>
                             <Form.Select name="es" id="es" onChange={textOnChange}>
-                                <option>Select</option>
+                                <option value={0}>Select</option>
                                 <option value={1}>Employed</option>
                                 <option value={2}>Unemployed</option>
                             </Form.Select>
@@ -405,27 +416,39 @@ const IdAppliPwd = ({ submitApplication }) => {
                     <Col md={4}>
                         <Form.Group className="mb-3">
                             <Form.Label>13. Type of Employment</Form.Label> <Form.Text>Please select if employed</Form.Text>
-                            <Form.Select name="t_of_emp" id="t_of_emp" onChange={textOnChange}>
-                                <option>Select</option>
-                                <option value={1}>Private</option>
-                                <option value={2}>Government</option>
-                            </Form.Select>
-                        </Form.Group>
+                            {
+                                frmData.es === "1" ?
+                                <Form.Select name="t_of_emp" id="t_of_emp"  onChange={textOnChange}>
+                                    <option value={0}>Select</option>
+                                    <option value={1}>Private</option>
+                                    <option value={2}>Government</option>
+                                </Form.Select>
+                                :
+                                ""
+                            }
+                        </Form.Group> 
                     </Col>
                     <Col md={4}>
+                        
                         <Form.Group className="mb-3">
                             <Form.Label>14. Type of Employer</Form.Label> <Form.Text>Please select if employed</Form.Text>
-                            <Form.Select name="t_of_emper" id="t_of_emper" onChange={textOnChange}>
-                                <option>Select</option>
-                                <option value={1}>Permanent</option>
-                                <option value={2}>Regular</option>
-                                <option value={3}>Contractual</option>
-                                <option value={4}>Casual</option>
-                                <option value={5}>Self-Employed</option>
-                                <option value={6}>Seasonal</option>
-                                <option value={7}>Emergency</option>
-                            </Form.Select>
+                            {
+                                frmData.es === "1" ?
+                                    <Form.Select name="t_of_emper" id="t_of_emper" onChange={textOnChange}>
+                                        <option value={0}>Select</option>
+                                        <option value={1}>Permanent</option>
+                                        <option value={2}>Regular</option>
+                                        <option value={3}>Contractual</option>
+                                        <option value={4}>Casual</option>
+                                        <option value={5}>Self-Employed</option>
+                                        <option value={6}>Seasonal</option>
+                                        <option value={7}>Emergency</option>
+                                    </Form.Select>
+                                :
+                                    ""
+                            }
                         </Form.Group>
+
                     </Col>
                 </Row>
                 <Row>
@@ -457,7 +480,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                             <Form.Group className="mb-3">
                                 <Form.Label>17. Blood Type</Form.Label>
                                 <Form.Select name="bt" id="bt" onChange={textOnChange}>
-                                    <option>Select</option>
+                                    <option value={0}>Select</option>
                                     <option value={1}>A+</option>
                                     <option value={2}>A-</option>
                                     <option value={3}>B+</option>
@@ -538,15 +561,25 @@ const IdAppliPwd = ({ submitApplication }) => {
                 <Row>
                     <Col md={6}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Picture in white background (1x1)</Form.Label>
-                            <Form.Control type="file" name="picture1x1" id="picture1x1" accept="image/png, image/jpeg" onChange={picOnChange} />
+                            <Form.Label>Picture in white background (1x1) PNG ONLY</Form.Label>
+                            <Form.Control type="file" name="picture1x1" id="picture1x1" accept="image/png" onChange={picOnChange} />
                         </Form.Group>
                     </Col>
                     <Col md={6}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Signature over printed name</Form.Label>
-                            <Form.Control type="file" name="signature" id="signature" accept="image/png, image/jpeg" onChange={sigOnChange} />
+                            <Form.Label>Signature over printed name. PNG ONLY</Form.Label>
+                            <Form.Control type="file" name="signature" id="signature" accept="image/png" onChange={sigOnChange} />
                         </Form.Group>
+                    </Col>
+                </Row>
+                <Row className="mb-3">
+                    <Col md={6}>
+                    <Form.Label>Documents</Form.Label>
+                        <div className="mb-1"><small>Valid ID with birthday and address in San Rafael (Voter's, SSS/UMID, LTO, Passport), affidavit of loss (if lost ID), or if no valid ID available: Birth certificate or certificate of residency (<a href="https://i.ibb.co/wyhLcD5/drag-and-select.gif" target="_blank" rel="noreferrer">You can multiply select files.</a>) PDF Only</small></div>
+                        <Form.Control type="file" name="docs" id="docs" accept="application/pdf" onChange={docsOnChange} multiple />
+                    </Col>
+                    <Col md={6}>
+                        
                     </Col>
                 </Row>
                 <Row>

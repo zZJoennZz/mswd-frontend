@@ -229,12 +229,12 @@ const ApplicationFormPwd = ({ appData, subDate }) => {
             </Row>
             <Row className="mb-3">
                 <Col md={12}>
-                    <strong>4. Type of Disability:</strong> {disabilities[appData.tod].name}
+                    <strong>4. Type of Disability:</strong> {appData.tod > 0 ? disabilities[appData.tod].name : appData.tod}
                 </Col>
             </Row>
             <Row className="mb-3">
                 <Col md={12}>
-                    <strong>5. Causes of Disability:</strong> {causes[appData.cod ? appData.cod : 4-1].name}
+                    <strong>5. Causes of Disability:</strong> {appData.cod > 0 ? causes[appData.cod ? appData.cod : 4-1].name : appData.cod}
                 </Col>
             </Row>
             <Row className="mb-3">
@@ -301,6 +301,8 @@ const ApplicationFormPwd = ({ appData, subDate }) => {
                             
                         )
                     }
+                    <br />
+                    { appData.occu > 0 ? "" : appData.occu }
                 </Col>
                 <Col md={6}>
                     <Row>
