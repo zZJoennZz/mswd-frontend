@@ -276,14 +276,14 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                 <Row>
                     <Col md={6}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Picture in white background (1x1)</Form.Label>
-                            <Form.Control type="file" name="picture1x1" id="picture1x1" accept="image/png, image/jpeg" onChange={picOnChange} />
+                            <Form.Label>Picture in white background (1x1) PNG ONLY</Form.Label>
+                            <Form.Control type="file" name="picture1x1" id="picture1x1" accept="image/png" onChange={picOnChange} />
                         </Form.Group>
                     </Col>
                     <Col md={6}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Signature over printed name</Form.Label>
-                            <Form.Control type="file" name="signature" id="signature" accept="image/png, image/jpeg" onChange={sigOnChange} />
+                            <Form.Label>Signature over printed name PNG ONLY</Form.Label>
+                            <Form.Control type="file" name="signature" id="signature" accept="image/png" onChange={sigOnChange} />
                         </Form.Group>
                     </Col>
                 </Row>
