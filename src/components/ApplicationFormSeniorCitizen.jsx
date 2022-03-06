@@ -53,7 +53,7 @@ const ApplicationFormSeniorCitizen = ({ appData, appFiles }) => {
     }, [famCom])
 
     return (
-        <Container fluid style={{ border: "1px solid #000" }} className="p-4"> {console.log(appData)}
+        <Container fluid style={{ border: "1px solid #000" }} className="p-4">
             <Row>
                 <Col md={12}>
                     <p className="text-uppercase text-center">OSCA ID Application Form</p>
