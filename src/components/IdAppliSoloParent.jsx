@@ -3,7 +3,8 @@ import {
     Form,
     Button,
     Row,
-    Col
+    Col,
+    Spinner
 } from 'react-bootstrap';
 
 import apifrm from '../api/apifrm';
@@ -22,10 +23,12 @@ const IdAppliSoloParent = ({ submitApplication }) => {
         fc_rel : '',
         fc_status : ''
     });
+    let [isSubmit, setIsSubmit] = useState(false);
     //let [famComp, setFamComp] = useState("");
     const famComRef = useRef('');
 
     const submitForm = async (e) => {
+        setIsSubmit(true);
         e.preventDefault();
         
         try {
@@ -39,9 +42,11 @@ const IdAppliSoloParent = ({ submitApplication }) => {
 
             let res = await apifrm.post("application/post", formData);
             submitApplication(res.data.application_id);
+            setIsSubmit(false);
         } catch (error) {
             submitApplication("failed");
             alert(error + ". Please contact your website administrator.");
+            setIsSubmit(false);
         }
     }
 
@@ -308,9 +313,22 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <Button className="mb-3" variant="primary" type="submit" disabled={agreeCheck}>
-                            Submit Application
-                        </Button>
+                    {
+                            isSubmit ? 
+                            <Button variant="primary" disabled>
+                                <Spinner
+                                    as="span"
+                                    animation="grow"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                /> Submitting...
+                            </Button>
+                            :
+                            <Button className="mb-3" variant="primary" type="submit" disabled={agreeCheck}>
+                                Submit Application
+                            </Button>
+                        }
                     </Col>
                 </Row>
             </Form>

@@ -76,7 +76,7 @@ const AdminApplications = () => {
                                             <td><Link to={`/admin/applications/${d.id}`}>{d.application_id}</Link></td>
                                             <td>{JSON.parse(d.application_data).first_name + " " + JSON.parse(d.application_data).middle_name + " " + JSON.parse(d.application_data).last_name}</td>
                                             <td>{JSON.parse(d.application_data).appliType === 1 ? "Solo Parent" : JSON.parse(d.application_data).appliType === 2 ? "PWD" : JSON.parse(d.application_data).appliType === 3 ? "Senior Citizen" : "" }</td>
-                                            <td>{d.status === 0 ? <Badge bg="warning">Processing</Badge> : <Badge bg="success">Completed</Badge>}</td>
+                                            <td>{d.status === 0 ? <Badge bg="warning">Processing</Badge> : d.status === 2 ? <Badge bg="danger">Denied</Badge> : <Badge bg="success">Completed</Badge>}</td>
                                             <td>{changeDateFormat(d.created_at)}</td>
                                             <td>{changeDateFormat(d.updated_at)} <Badge onClick={deleteApp.bind(this, d.id)} bg="danger" style={{ cursor: "pointer", float: "right" }}>X</Badge></td>
                                         </tr>)

@@ -3,7 +3,8 @@ import {
     Form,
     Button,
     Row,
-    Col
+    Col,
+    Spinner
 } from 'react-bootstrap';
 
 import apifrm from '../api/apifrm';
@@ -15,6 +16,7 @@ const IdAppliPwd = ({ submitApplication }) => {
     let [docs, setDocs] = useState(false);
     //let [isMulti, setIsMulti] = useState(true);
     let [agreeCheck, setAgreeCheck] = useState(true);
+    let [isSubmit, setIsSubmit] = useState(false);
 
     let disabilities = [
         {'id' : 1, 'name': 'Mental/Intellectual'},
@@ -186,6 +188,7 @@ const IdAppliPwd = ({ submitApplication }) => {
     ];
 
     const submitForm = async (e) => {
+        setIsSubmit(true);
         e.preventDefault();
         
         //console.log(frmData);
@@ -200,9 +203,11 @@ const IdAppliPwd = ({ submitApplication }) => {
 
             let res = await apifrm.post("application/post", formData);
             submitApplication(res.data.application_id);
+            setIsSubmit(false);
         } catch (error) {
             submitApplication("failed");
             alert(error + ". Please contact your website administrator.");
+            setIsSubmit(false);
         }
     }
 
@@ -591,9 +596,22 @@ const IdAppliPwd = ({ submitApplication }) => {
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <Button className="mb-3" variant="primary" type="submit" disabled={agreeCheck}>
-                            Submit Application
-                        </Button>
+                        {
+                            isSubmit ? 
+                            <Button variant="primary" disabled>
+                                <Spinner
+                                    as="span"
+                                    animation="grow"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"
+                                /> Submitting...
+                            </Button>
+                            :
+                            <Button className="mb-3" variant="primary" type="submit" disabled={agreeCheck}>
+                                Submit Application
+                            </Button>
+                        }
                     </Col>
                 </Row>
             </Form>
