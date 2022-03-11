@@ -14,6 +14,7 @@ import {
 } from 'react-bootstrap';
 
 import api from '../api/api';
+import { sortByDesc } from '../fn/functions';
 
 const AdminAnnouncements = () => {
 
@@ -22,7 +23,10 @@ const AdminAnnouncements = () => {
     const getAnn = async () => {
         try {
             let res = await api.get("announcement");
-            setAnnList(res.data.data);
+            let data = res.data.data;
+
+            setAnnList(sortByDesc(data));
+
         } catch (error) {
             alert(error + " Please contact website administrator!");
             setAnnList(false);

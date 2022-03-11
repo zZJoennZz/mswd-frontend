@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 
 import api from '../api/api';
+import { sortByDesc } from '../fn/functions';
 
 const AdminApplications = () => {
 
@@ -22,15 +23,16 @@ const AdminApplications = () => {
 
         if (a) {
             await api.delete(`application/delete/${appId}`)
-            .then(() => alert("Application deleted."))
-            .then(() => getApp())
-            .catch((e) => alert("Something went wrong. Contact your website administrator and send this message: " + e));
+                .then(() => alert("Application deleted."))
+                .then(() => getApp())
+                .catch((e) => alert("Something went wrong. Contact your website administrator and send this message: " + e));
         }
     }
 
     const getApp = async () => {
         let res = await api.get("application");
-        setApplicationList(res.data.data);
+        let data = res.data.data;
+        setApplicationList(sortByDesc(data));
     }
 
     useEffect(() => {
