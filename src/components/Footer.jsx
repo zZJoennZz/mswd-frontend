@@ -13,6 +13,9 @@ const Footer = () => {
                     <Col xs="12">
                         &copy; {new Date().getFullYear()} MSWD
                     </Col>
+                    <Col xs="12">
+                        <small>Banner Image by Ramon F Velasquez</small>
+                    </Col>
                 </Row>
             </Container>
         </div>

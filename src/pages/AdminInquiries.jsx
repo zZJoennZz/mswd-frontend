@@ -15,6 +15,8 @@ import {
 
 import api from '../api/api';
 
+import { sortByDesc } from '../fn/functions';
+
 const ChangeStatusModal = (props) => {
 
     const changeStatus = async () => {
@@ -70,7 +72,8 @@ const AdminInquiries = () => {
 
     const getCtMsg = async () => {
         let res = await api.get('client_message');
-        setCtMsg(res.data.data);
+        let data = res.data.data;
+        setCtMsg(sortByDesc(data));
     }
 
     React.useEffect(() => {

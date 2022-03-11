@@ -12,13 +12,18 @@ import {
 
 import api from '../api/api';
 
+import { sortByDesc } from '../fn/functions';
+
 const AdminFAQs = () => {
     let [getFaq, setGetFaq] = React.useState(false);
 
     const getFaqRec = async () => {
         try {
             await api.get("faq")
-                .then(res => setGetFaq(res.data.data))
+                .then(res => {
+                    let data = res.data.data;
+                    setGetFaq(sortByDesc(data));
+                })
                 .catch(err => {
                     alert(err + ". Something went wrong, please contact your website administrator.")
                     setGetFaq(false);
