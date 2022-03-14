@@ -16,8 +16,10 @@ const AdminOrganization = () => {
                 <Breadcrumb.Item href="/admin/">Admin Dashboard</Breadcrumb.Item>
                 <Breadcrumb.Item active>Organization</Breadcrumb.Item>
             </Breadcrumb>
-            <Row className="mb-12">
-                <AdminDivision />
+            <Row>
+                <Col md={12}>
+                    <AdminDivision />
+                </Col>
             </Row>
         </Container>
     )
