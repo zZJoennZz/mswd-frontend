@@ -5,6 +5,8 @@ import {
     Col
 } from 'react-bootstrap'
 
+import OrgChart from '../components/OrgChart';
+
 const About = () => {
   return (
     <div className="about pt-3">
@@ -44,6 +46,11 @@ const About = () => {
                 <Col md="9" style={{ fontSize: '24px' }} className="p-3">
                     <p>We, the official and employees of the Municipal Social Welfare and Development Office of San Rafael, Bulacan pledge and commit to deliver quality services that will really meet the needs of our clientele as promised in this Citizen's Charter; to ensure their normal social fucntioning and maximum participation in community affairs.</p>
                     <p>We, will demonstrate sensitivity and appropriate behavior and professionalism based on the social worker's code of ethics.</p>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={12}>
+                    <OrgChart />
                 </Col>
             </Row>
         </Container>
