@@ -103,28 +103,30 @@ const Services = () => {
                                 <Tabs defaultActiveKey="soloparent" id="uncontrolled-tab-example" className="mb-3">
                                     <Tab eventKey="soloparent" title="Solo Parent" style={{ textAlign: "left" }}>
                                         <ul>
-                                            <li>Filled up application form</li>
-                                            <li>2 copies of 1x1 picture</li>
-                                            <li>Any of the three (3):</li>
-                                            <ul>
-                                                <li>Death certificate of spouse</li>
-                                                <li>Certification from Punong Barangay that they are separated</li>
-                                                <li>Certification from Punong Barangay that the spouse is imprisoned for more than 1 year</li>
-                                            </ul>
+                                            <li>1 pc 1x1 ID picture (latest picture in white background)</li>
+                                            <li>Solo parent certificate from barangay (kung hiwalay)</li>
+                                            <li>Death certificate kung balo/biyuda</li>
+                                            <li>Birth certificate ng mga anak</li>
                                         </ul> 
                                     </Tab>
                                     <Tab eventKey="pwd" title="PWD" style={{ textAlign: "left" }}>
                                         <ul>
-                                            <li>Filled up application form</li>
+                                            <li>Medical Certificate Indicating Disability</li>
                                             <li>2 copies of 1x1 picture</li>
-                                            <li>Medical certificate indicating type of disability</li>
+                                            <li>Blood Type</li>
                                         </ul>
                                     </Tab>
                                     <Tab eventKey="senior" title="Senior Citizens" style={{ textAlign: "left" }}>
                                         <ul>
-                                            <li>Filled up application form</li>
-                                            <li>2 copies of 1x1 picture</li>
-                                            <li>Proof of age (Birth/Baptismal/Marriage certificate or Voters registration record)</li>
+                                            <li>Photocopy - Valid ID with birthday and address in San Rafael (Voter's, SSS/UMID/ LTO/ Passport)</li>
+                                            <li>2 pcs latest 1x1 colored ID picture in white background</li>
+                                            <li>Affidavit of loss (if lost ID)</li>
+                                            <li>If no valid id available
+                                                <ul>
+                                                    <li>Birth certificate</li>
+                                                    <li>Certificate of residency</li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </Tab>
                                 </Tabs>
