@@ -18,7 +18,7 @@ const Menu = () => {
 
     return (
         <>
-            <Navbar collapseOnSelect expand="lg" variant="dark" bg="dark">
+            <Navbar collapseOnSelect expand="lg" variant="light" bg="light">
                 <Container>
                     <Navbar.Brand href="/" className="fw-bold">MSWD</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />

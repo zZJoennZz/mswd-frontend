@@ -19,6 +19,8 @@ import AdminSettings from './AdminSettings';
 import AdminFAQs from './AdminFAQs';
 import AdminFAQNew from './AdminFAQNew';
 import AdminFAQSingle from './AdminFAQSingle';
+import AdminOrganization from './AdminOrganization';
+// import AdminDivision from './AdminDivision';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -114,6 +116,7 @@ const Admin = () => {
                                             <Route exact path="/faqs" element={<AdminFAQs />} />
                                             <Route exact path="/faqs/:faqId" element={<AdminFAQSingle />} />
                                             <Route exact path="/faqs/add" element={<AdminFAQNew />} />
+                                            <Route exact path="/organization" element={<AdminOrganization />} />
                                         </Routes>
                                     </Col>
                                 </Row>
