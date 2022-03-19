@@ -17,7 +17,7 @@ import { sortByDesc } from '../fn/functions';
 
 import GlobalToast from '../components/GlobalToast';
 
-const AdminDivision = () => {
+const AdminPosition = () => {
     let [modalShow, setModalShow] = React.useState(false);
     let [frmTitle, setFrmTitle] = React.useState('');
     let [frmContent, setFrmContent] = React.useState('');
@@ -28,13 +28,13 @@ const AdminDivision = () => {
 
     let [editId, setEditId] = React.useState(0);
     
-    let [division, setDivision] = React.useState(0);
+    let [position, setPosition] = React.useState(0);
 
-    let [divisionName, setDivisionName] = React.useState('');
+    let [positionName, setPositionName] = React.useState('');
+    let [positionDesc, setPositionDesc] = React.useState('');
 
-    const textOnChange = (e) => {
-        setDivisionName(e.target.value);
-    }
+    const onPosNameChange = (e) => setPositionName(e.target.value);
+    const onPosDescChange = (e) => setPositionDesc(e.target.value);
 
     const changeDateFormat = (dateToChange) => {
         let theDate = new Date(dateToChange);
@@ -43,19 +43,16 @@ const AdminDivision = () => {
 
     const modalOnHide = () => setModalShow(false);
 
-    const openModal = (frmMode, id = 0, div_name) => {
+    const openModal = (frmMode, id = 0, posName, posDesc) => {
         if (frmMode === 'new') {
-            if (division.length <= 0) {
-                alert("This will be the main division.");
-            }
-            setFrmTitle('New Division');
-            setFrmContent(<NewDivision textOnCh={textOnChange} />);
-            setFrmBtnText('Save Division');
+            setFrmTitle('New Position');
+            setFrmContent(<NewPosition textPosName={onPosNameChange} textPosDesc={onPosDescChange} />);
+            setFrmBtnText('Save Position');
             setModalShow(true);
         } else if(frmMode === 'edit') {
-            setFrmTitle(`Edit ${div_name}`);
+            setFrmTitle(`Edit ${posName}`);
             setEditId(id);
-            setFrmContent(<EditDivision textOnCh={textOnChange} divName={div_name} />);
+            setFrmContent(<EditPosition textPosName={onPosNameChange} textPosDesc={onPosDescChange} positionName={posName} positionDesc={posDesc} />);
             setFrmBtnText('Save Changes');
             setModalShow(true);
         }else {
@@ -71,17 +68,16 @@ const AdminDivision = () => {
             'Allow-Control-Allow-Origin' : '*',
         }
         
+        let data = {
+            position_name : positionName,
+            position_desc : positionDesc
+        }
 
-        if (frmTitle === 'New Division') {
-            let data = {
-                'division_name' : divisionName,
-                'order' : division.length <= 0 ? 1 : 2,
-                'sub_division_of' : division.length <= 0 ? 0 : division[division.length-1].id,
-            }
+        if (frmTitle === 'New Position') {
             try { 
-                await axios.post(`${process.env.REACT_APP_API}org/division/post`, data, {headers: headers})
+                await axios.post(`${process.env.REACT_APP_API}org/position/post`, data, {headers: headers})
                     .then(res => {
-                        setToastMsg("Division is saved");
+                        setToastMsg("Position is saved");
                         setShowToast(true);
                         setModalShow(false);
                     }).catch(error => {
@@ -89,20 +85,16 @@ const AdminDivision = () => {
                         setShowToast(true);
                         setModalShow(false);
                     })
-                console.log(data)
             } catch (error) {
                 setToastMsg(error);
                 setShowToast(true);
                 setModalShow(false);
             }
         } else {
-            let data = {
-                'division_name' : divisionName,
-            }
             try {
-                await axios.put(`${process.env.REACT_APP_API}org/division/put/${editId}`, data,{headers: headers})
+                await axios.put(`${process.env.REACT_APP_API}org/position/put/${editId}`, data, {headers: headers})
                     .then(res => {
-                        setToastMsg("Division changes is saved");
+                        setToastMsg("Position changes is saved");
                         setShowToast(true);
                         setModalShow(false);
                     }).catch(error => {
@@ -118,6 +110,31 @@ const AdminDivision = () => {
         }
     }
 
+    const delPosition = async (posId) => {
+        let headers = {
+            'Authorization' : localStorage.getItem('token'),
+            'Accept' : 'application/json',
+            'Content-Type' : 'application/json',
+            'Allow-Control-Allow-Origin' : '*',
+        }
+        let a = window.confirm("Are you sure to delete this position?");
+        if (a) {
+            try {
+                await axios.delete(`${process.env.REACT_APP_API}org/position/delete/${posId}`, {headers: headers})
+                    .then(res => {
+                        setToastMsg("Position successfully deleted");
+                        setShowToast(true);
+                    }).catch(error => {
+                        setToastMsg(error);
+                        setShowToast(true);
+                    })
+            } catch (error) {
+                setToastMsg(error);
+                setShowToast(true);
+            }
+        }
+    }
+
     React.useEffect(() => {
         const getDivision = async () => {
             let headers = {
@@ -126,12 +143,12 @@ const AdminDivision = () => {
                 'Content-Type' : 'application/json',
                 'Allow-Control-Allow-Origin' : '*',
             }
+            
             try {
-                let res = await axios.get(`${process.env.REACT_APP_API}org/division`, {headers: headers});
-                setDivision(sortByDesc(res.data.data));
-                //setDivision([]);
+                let res = await axios.get(`${process.env.REACT_APP_API}org/position`, {headers: headers});
+                setPosition(sortByDesc(res.data.data));
             } catch (error) {
-                setDivision(false)
+                setPosition(false)
             }
         }
         getDivision();
@@ -139,11 +156,11 @@ const AdminDivision = () => {
 
     return (
         <Container style={{ maxHeight: '500px', overflow: 'auto'}} fluid>
-            <h3>Divisions</h3>
-            
+            <h3>Positions</h3>
+
             <Button onClick={openModal.bind(this, 'new')} className="mb-3">Add New</Button>
             {
-                !division ?
+                !position ?
                     <div>
                         <Spinner animation="border" />
                     </div>
@@ -151,22 +168,20 @@ const AdminDivision = () => {
                     <Table responsive striped bordered hover>
                         <thead>
                             <tr>
-                                <th>Division Name</th>
-                                <th>Under Of</th>
-                                <th>Order</th>
+                                <th>Position Name</th>
+                                <th>Position Description</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                division.map(d => 
-                                    <tr key={d.id} style={{ cursor: 'pointer' }} onClick={openModal.bind(this, "edit", d.id, d.division_name)}>
-                                        <td>{d.division_name}</td>
-                                        <td>{d.sub_division_of === 0 ? "N/A" : division.filter(divi => divi.id === d.sub_division_of)[0].division_name}</td>
-                                        <td>{d.order}</td>
+                                position.map(d => 
+                                    <tr key={d.id}>
+                                        <td onClick={openModal.bind(this, "edit", d.id, d.position_name, d.position_desc)} style={{ cursor: 'pointer' }}>{d.position_name}</td>
+                                        <td>{d.position_desc}</td>
                                         <td>{changeDateFormat(d.created_at)}</td>
-                                        <td>{changeDateFormat(d.updated_at)}</td>
+                                        <td>{changeDateFormat(d.updated_at)} <Button onClick={delPosition.bind(this, d.id)} style={{ float: 'right' }} variant="danger" size="sm">X</Button></td>
                                     </tr>    
                                 )
                             }
@@ -186,27 +201,35 @@ const AdminDivision = () => {
     )
 }
 
-const NewDivision = ({textOnCh}) => {
+const NewPosition = ({textPosName, textPosDesc}) => {
     
     return (
         <Form>
             <Form.Group className="mb-3">
-                <Form.Label>Division Name</Form.Label>
-                <Form.Control type="text" name="division_name" id="division_name" onChange={textOnCh} />
+                <Form.Label>Position Name</Form.Label>
+                <Form.Control type="text" name="position_name" id="position_name" onChange={textPosName} />
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Position Description</Form.Label>
+                <Form.Control type="text" name="position_desc" id="position_desc" onChange={textPosDesc} />
             </Form.Group>
         </Form>
     )
 }
 
-const EditDivision = ({divName, textOnCh}) => {
+const EditPosition = ({positionName, textPosName, textPosDesc, positionDesc}) => {
     return (
         <Form>
             <Form.Group className="mb-3">
                 <Form.Label>Division Name</Form.Label>
-                <Form.Control type="text" defaultValue={divName} name="division_name" id="division_name" onChange={textOnCh} />
+                <Form.Control type="text" defaultValue={positionName} name="position_name" id="position_name" onChange={textPosName} />
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Position Description</Form.Label>
+                <Form.Control type="text" defaultValue={positionDesc} name="position_desc" id="position_desc" onChange={textPosDesc} />
             </Form.Group>
         </Form>
     )
 }
 
-export default AdminDivision;
+export default AdminPosition;
