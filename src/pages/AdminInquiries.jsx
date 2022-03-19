@@ -13,7 +13,10 @@ import {
     Button
 } from 'react-bootstrap';
 
+import GlobalToast from '../components/GlobalToast';
+
 import api from '../api/api';
+import axios from 'axios';
 
 import { sortByDesc } from '../fn/functions';
 
@@ -61,7 +64,8 @@ const ChangeStatusModal = (props) => {
 }
 
 const AdminInquiries = () => {
-
+    let [showToast, setShowToast] = React.useState(false);
+    let [toastMsg, setToastMsg] = React.useState("Nothing to see here");
     let [ctMsg, setCtMsg] = React.useState(false);
 
     //
@@ -76,9 +80,34 @@ const AdminInquiries = () => {
         setCtMsg(sortByDesc(data));
     }
 
+    const delCtMsg = async (id) => {
+        let a = window.confirm("Are you sure to delete this? You cannot undo this action.");
+        if (a) {
+            try {
+                let headers = {
+                    'Authorization' : localStorage.getItem('token'),
+                    'Accept' : 'application/json',
+                    'Content-Type' : 'application/json',
+                    'Allow-Control-Allow-Origin' : '*',
+                }
+                await axios.delete(`${process.env.REACT_APP_API}client_message/delete/${id}`, {headers: headers})
+                    .then(res => {
+                        setToastMsg(res.data.message);
+                        setShowToast(true);
+                    }).catch(error => {
+                        setToastMsg(error);
+                        setShowToast(true);
+                    })
+            } catch (error) {
+                setToastMsg(error);
+                setShowToast(true);
+            }
+        }
+    }
+
     React.useEffect(() => {
         getCtMsg();
-    }, [])
+    }, [showToast])
 
     const changeDateFormat = (dateToChange) => {
         let theDate = new Date(dateToChange);
@@ -125,7 +154,7 @@ const AdminInquiries = () => {
                                                 <td><Link to={"/admin/inquiries/" + d.id}>{d.subject}</Link></td>
                                                 <td>{d.full_name}</td>
                                                 <td><p style={{ cursor: "pointer" }} onClick={openModal.bind(this, d.id, d.status)}>{d.status === "0" ? <Badge bg="warning">Unsolve</Badge> : <Badge bg="success">Solved</Badge>}</p></td>
-                                                <td>{changeDateFormat(d.created_at)}</td>
+                                                <td>{changeDateFormat(d.created_at)} <Button style={{ float: 'right' }} size="sm" onClick={delCtMsg.bind(this, d.id)} variant="danger">X</Button></td>
                                             </tr>    
                                         )
                                     }
@@ -134,6 +163,7 @@ const AdminInquiries = () => {
                     }
                 </Col>
             </Row>
+            <GlobalToast onClose={() => setShowToast(false)} show={showToast} msg={toastMsg} title="Saved" />
             <ChangeStatusModal 
                 show={modalShow}
                 selInq={selectedInq}

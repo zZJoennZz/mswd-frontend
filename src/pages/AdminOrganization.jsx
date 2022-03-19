@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap';
 
 import AdminDivision from '../components/AdminDivision';
+import AdminPosition from '../components/AdminPosition';
 
 const AdminOrganization = () => {
     return (
@@ -19,6 +20,12 @@ const AdminOrganization = () => {
             <Row>
                 <Col md={12}>
                     <AdminDivision />
+                </Col>
+            </Row>
+            <hr />
+            <Row>
+                <Col md={12}>
+                    <AdminPosition />
                 </Col>
             </Row>
         </Container>
