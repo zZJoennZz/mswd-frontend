@@ -9,6 +9,7 @@ import {
 
 import AdminDivision from '../components/AdminDivision';
 import AdminPosition from '../components/AdminPosition';
+import AdminOrgPeople from '../components/AdminOrgPeople';
 
 const AdminOrganization = () => {
     return (
@@ -26,6 +27,12 @@ const AdminOrganization = () => {
             <Row>
                 <Col md={12}>
                     <AdminPosition />
+                </Col>
+            </Row>
+            <hr />
+            <Row>
+                <Col md={12}>
+                    <AdminOrgPeople />
                 </Col>
             </Row>
         </Container>
