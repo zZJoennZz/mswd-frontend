@@ -31,3 +31,43 @@
 .sidebar .nav-link.active {
   color: #0d6efd;
 }
+
+.admin-body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.admin-body::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #eee;
+  box-shadow: 0 0 1px 1px #bbb, inset 0 0 7px rgba(0, 0, 0, 0.3);
+}
+.admin-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(to left, #96a6bf, #63738c);
+  box-shadow: inset 0 0 1px 1px #5c6670;
+}
+.admin-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to left, #8391a6, #536175);
+}
+
+.admin-body::-webkit-scrollbar,
+.org-body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.admin-body::-webkit-scrollbar-track,
+.org-body::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #eee;
+  box-shadow: 0 0 1px 1px #bbb, inset 0 0 7px rgba(0, 0, 0, 0.3);
+}
+.admin-body::-webkit-scrollbar-thumb,
+.org-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: linear-gradient(to left, #96a6bf, #63738c);
+  box-shadow: inset 0 0 1px 1px #5c6670;
+}
+.admin-body::-webkit-scrollbar-thumb:hover,
+.org-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to left, #8391a6, #536175);
+}

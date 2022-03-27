@@ -19,18 +19,29 @@ const ContactForm = ({ prefix }) => {
     let [frmSubmit, setFrmSubmit] = React.useState(false);
 
     const onChangeText = (e) => {
-        if (e.target.name === "subject") {
-            setFrmData({...frmData, [e.target.name] : subPrefix + ' ' + e.target.value})
-        } else {
-            setFrmData({...frmData, [e.target.name] : e.target.value})
-        }
+        setFrmData({...frmData, [e.target.name] : e.target.value})
+        // if (e.target.name === "subject") {
+        //     if (e.target.value === "") {
+        //         setFrmData({...frmData, [e.target.name] : subPrefix + ' ' + e.target.value})
+        //     } else {
+        //         setFrmData({...frmData, [e.target.name] : e.target.value})
+        //     }
+        // } else {
+        //     setFrmData({...frmData, [e.target.name] : e.target.value})
+        // }
     }
 
     const onSubmitFrm = async (e) => {
         e.preventDefault();
         setFrmSubmit(true);
+        let formD = {
+            'email_address' : frmData.email_address,
+            'full_name' : frmData.full_name,
+            'subject' : subPrefix + ' ' + frmData.subject,
+            'message' : frmData.message,
+        };
         try {
-            await api.post("client_message/post", frmData)
+            await api.post("client_message/post", formD)
                 .then((res) => {
                     alert("Your inquiry is submitted!");
                     setFrmData({

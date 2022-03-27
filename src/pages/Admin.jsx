@@ -102,7 +102,7 @@ const Admin = () => {
                                     <Col as="nav" id="sidebar" md={3} lg={2} className="d-md-block bg-light sidebar">
                                         <AdminSideBar />
                                     </Col>
-                                    <Col as="main" style={{ height: "100vh" }} md={9} lg={10} className="text-start ml-sm-auto px-md-4 py-4">
+                                    <Col as="main" style={{ height: "93vh", overflow: "auto" }} md={9} lg={10} className="text-start ml-sm-auto px-md-4 py-4 admin-body">
                                         <Routes>
                                             <Route exact path="/" element={<AdminDashboard dashCtr={dashCtr} />} />
                                             <Route exact path="/applications" element={<AdminApplications />} />

@@ -155,7 +155,7 @@ const AdminPosition = () => {
     }, [showToast])
 
     return (
-        <Container style={{ maxHeight: '500px', overflow: 'auto'}} fluid>
+        <Container className="org-body" style={{ maxHeight: '500px', overflow: 'auto'}} fluid>
             <h3>Positions</h3>
 
             <Button onClick={openModal.bind(this, 'new')} className="mb-3">Add New</Button>
