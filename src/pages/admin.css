@@ -43,11 +43,11 @@
 }
 .admin-body::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: linear-gradient(left, #96a6bf, #63738c);
+  background: linear-gradient(to left, #96a6bf, #63738c);
   box-shadow: inset 0 0 1px 1px #5c6670;
 }
 .admin-body::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(left, #8391a6, #536175);
+  background: linear-gradient(to left, #8391a6, #536175);
 }
 
 .admin-body::-webkit-scrollbar,
@@ -64,10 +64,10 @@
 .admin-body::-webkit-scrollbar-thumb,
 .org-body::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background: linear-gradient(left, #96a6bf, #63738c);
+  background: linear-gradient(to left, #96a6bf, #63738c);
   box-shadow: inset 0 0 1px 1px #5c6670;
 }
 .admin-body::-webkit-scrollbar-thumb:hover,
 .org-body::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(left, #8391a6, #536175);
+  background: linear-gradient(to left, #8391a6, #536175);
 }
