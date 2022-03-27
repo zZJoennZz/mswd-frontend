@@ -8,7 +8,7 @@ import {
 
 const DownloadableForms = () => {
     return (
-        <div className="about pt-3">
+        <div className="about pt-3" style={{ minHeight: '90vh'}}>
             <Container style={{ textAlign: "left" }}>
                 <h1 style={{ textAlign: "left" }}>Downloadable Forms</h1>
                 <Row className="p-3">
