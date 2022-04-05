@@ -8,7 +8,7 @@ import {
     Form
 } from 'react-bootstrap'
 
-const ApplicationFormPwd = ({ appData, subDate }) => {
+const ApplicationFormPwd = ({ appData, subDate, appFiles }) => {
     //let famCom = appData.fam_composition.split('\n');
     //let [famComArr, setFamComArr] = React.useState(false);
 
@@ -202,7 +202,7 @@ const ApplicationFormPwd = ({ appData, subDate }) => {
     // }, [famCom])
 
     return (
-        <Container fluid style={{ border: "1px solid #000" }} className="p-4"> {console.log(appData)}
+        <Container fluid style={{ border: "1px solid #000" }} className="p-4">
             <Row>
                 <Col md={12}>
                     <p className="text-uppercase text-center">Philippine Registry Form for Persons With Disability Ver. 2.0</p>
@@ -297,7 +297,7 @@ const ApplicationFormPwd = ({ appData, subDate }) => {
                             parseInt(appData.occu) === m.id ? 
                                 <Form.Check type="radio" checked="checked" key={"occu" + m.id} id={"occu" + m.id} name="occu" label={m.name} value={m.id} readOnly />
                             : 
-                                <Form.Check type="radio" key={"occu" + m.id} id={"occu" + m.id} name="occu" label={m.name} value={m.id} readOnly />
+                                <Form.Check type="radio" key={"occu" + m.id} id={"occu" + m.id} name="occu" label={m.name} value={m.id} disabled />
                             
                         )
                     }
@@ -324,12 +324,12 @@ const ApplicationFormPwd = ({ appData, subDate }) => {
                                 parseInt(appData.phtype) === 0 ?
                                     <>
                                         <Form.Check type="radio" checked="checked" id="ph-type-1" name="phtype" label="PhilHealth Member" value={0} readOnly />
-                                        <Form.Check type="radio" id="ph-type-2" name="phtype" label="PhilHealth Member Dependent" value={1} readOnly />
+                                        <Form.Check type="radio" id="ph-type-2" name="phtype" label="PhilHealth Member Dependent" value={1} disabled />
                                     </>
                                 :
                                     <>
                                         <Form.Check type="radio" id="ph-type-1" name="phtype" label="PhilHealth Member" value={0} readOnly />
-                                        <Form.Check type="radio" checked="checked" id="ph-type-2" name="phtype" label="PhilHealth Member Dependent" value={1} readOnly />
+                                        <Form.Check type="radio" checked="checked" id="ph-type-2" name="phtype" label="PhilHealth Member Dependent" value={1} disabled />
                                     </>
                             }
                         </Col>
@@ -403,6 +403,19 @@ const ApplicationFormPwd = ({ appData, subDate }) => {
             <Row className="mb-3">
                 <Col md={12}>
                     <strong>Registration Number:</strong> {appData.reg_num}
+                </Col>
+            </Row>
+            <Row className="mt-3 mb-3">
+                <Col md={12}>
+                    <div className="mb-1"><strong>Attached Documents:</strong></div>
+                    {
+                        !appFiles ?
+                            "Loading..."
+                        :
+                        appFiles.map(d => 
+                            <div key={d.id}><a href={d.file_url} target="_blank" rel="noreferrer">{d.file_name}</a></div>    
+                        )
+                    }
                 </Col>
             </Row>
         </Container>

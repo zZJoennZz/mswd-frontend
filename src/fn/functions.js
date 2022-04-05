@@ -7,4 +7,9 @@ const sortByDesc = (data) => {
     return sorted;
 }
 
-export { sortByDesc }
+const changeDateFormat = (dateToChange) => {
+    let theDate = new Date(dateToChange);
+    return theDate.toLocaleDateString("en-US");
+}
+
+export { sortByDesc, changeDateFormat }

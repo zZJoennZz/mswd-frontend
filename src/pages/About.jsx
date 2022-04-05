@@ -5,7 +5,7 @@ import {
     Col
 } from 'react-bootstrap'
 
-// import OrgChart from '../components/OrgChart';
+import OrgChart from '../components/OrgChart';
 
 const About = () => {
   return (
@@ -48,11 +48,11 @@ const About = () => {
                     <p>We, will demonstrate sensitivity and appropriate behavior and professionalism based on the social worker's code of ethics.</p>
                 </Col>
             </Row>
-            {/* <Row>
+            <Row>
                 <Col md={12}>
                     <OrgChart />
                 </Col>
-            </Row> */}
+            </Row>
         </Container>
     </div>
   );

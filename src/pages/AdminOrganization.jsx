@@ -10,6 +10,7 @@ import {
 import AdminDivision from '../components/AdminDivision';
 import AdminPosition from '../components/AdminPosition';
 import AdminOrgPeople from '../components/AdminOrgPeople';
+import AdminOrgChart from '../components/AdminOrgChart';
 
 const AdminOrganization = () => {
     return (
@@ -33,6 +34,12 @@ const AdminOrganization = () => {
             <Row>
                 <Col md={12}>
                     <AdminOrgPeople />
+                </Col>
+            </Row>
+            <hr />
+            <Row>
+                <Col md={12}>
+                    <AdminOrgChart />
                 </Col>
             </Row>
         </Container>
