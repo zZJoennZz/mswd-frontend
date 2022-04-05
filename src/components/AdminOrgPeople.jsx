@@ -32,11 +32,39 @@ const AdminOrgPeople = () => {
     
     let [orgPer, setOrgPer] = React.useState(0);
 
-    let [positionName, setPositionName] = React.useState('');
-    let [positionDesc, setPositionDesc] = React.useState('');
+    let [fName, setFName] = React.useState('');
+    let [mInitial,setMInitial] = React.useState('');
+    let [lName, setLName] = React.useState('');
+    let [nSuffix, setNSuffix] = React.useState('');
+    let [gender, setGender] = React.useState(3);
+    let [birthday, setBirthday] = React.useState('');
 
-    const onPosNameChange = (e) => setPositionName(e.target.value);
-    const onPosDescChange = (e) => setPositionDesc(e.target.value);
+    const textFormOnChange = (e) => {
+        let fieldName = e.target.name;
+        let fieldValue = e.target.value;
+        switch(fieldName){
+            case 'first_name':
+                setFName(fieldValue);
+                break;
+            case 'middle_initial':
+                setMInitial(fieldValue);
+                break;  
+            case 'last_name':
+                setLName(fieldValue); 
+                break;
+            case 'suffix':
+                setNSuffix(fieldValue); 
+                break;
+            case 'gender':
+                setGender(fieldValue); 
+                break;
+            case 'birthday':
+                setBirthday(fieldValue); 
+                break;
+            default:
+                return;
+        }
+    }
 
     const changeDateFormat = (dateToChange) => {
         let theDate = new Date(dateToChange);
@@ -45,16 +73,16 @@ const AdminOrgPeople = () => {
 
     const modalOnHide = () => setModalShow(false);
 
-    const openModal = (frmMode, id = 0, posName, posDesc) => {
+    const openModal = (frmMode, id = 0, firstName, middleInitial, lastName, suffix, gender, birthday) => {
         if (frmMode === 'new') {
             setFrmTitle('New Person');
-            setFrmContent(<NewPerson textPersonName={onPosNameChange} textPersonDesc={onPosDescChange} />);
+            setFrmContent(<NewPerson textOnChange={textFormOnChange} />);
             setFrmBtnText('Save Person');
             setModalShow(true);
         } else if(frmMode === 'edit') {
-            setFrmTitle(`Edit ${posName}`);
+            setFrmTitle(`Edit ${firstName + ' ' + middleInitial + ' ' + lastName}`);
             setEditId(id);
-            setFrmContent(<EditPosition textPosName={onPosNameChange} textPosDesc={onPosDescChange} positionName={posName} positionDesc={posDesc} />);
+            setFrmContent(<EditPerson textOnChange={textFormOnChange} firstName={firstName} middleInitial={middleInitial} lastName={lastName} suffix={suffix} gender={gender} birthday={birthday} />);
             setFrmBtnText('Save Changes');
             setModalShow(true);
         }else {
@@ -71,15 +99,19 @@ const AdminOrgPeople = () => {
         }
         
         let data = {
-            position_name : positionName,
-            position_desc : positionDesc
+            first_name : fName,
+            middle_initial : mInitial,
+            last_name : lName,
+            suffix: nSuffix,
+            gender: gender,
+            birthday: birthday
         }
 
         if (frmTitle === 'New Person') {
             try { 
-                await axios.post(`${process.env.REACT_APP_API}org/position/post`, data, {headers: headers})
+                await axios.post(`${process.env.REACT_APP_API}org/person/post`, data, {headers: headers})
                     .then(res => {
-                        setToastMsg("Position is saved");
+                        setToastMsg("Person is saved");
                         setShowToast(true);
                         setModalShow(false);
                     }).catch(error => {
@@ -94,9 +126,9 @@ const AdminOrgPeople = () => {
             }
         } else {
             try {
-                await axios.put(`${process.env.REACT_APP_API}org/position/put/${editId}`, data, {headers: headers})
+                await axios.put(`${process.env.REACT_APP_API}org/person/put/${editId}`, data, {headers: headers})
                     .then(res => {
-                        setToastMsg("Position changes is saved");
+                        setToastMsg("Person changes is saved");
                         setShowToast(true);
                         setModalShow(false);
                     }).catch(error => {
@@ -112,24 +144,29 @@ const AdminOrgPeople = () => {
         }
     }
 
-    const delPosition = async (posId) => {
+    const delPerson = async (perId) => {
         let headers = {
             'Authorization' : localStorage.getItem('token'),
             'Accept' : 'application/json',
             'Content-Type' : 'application/json',
             'Allow-Control-Allow-Origin' : '*',
         }
-        let a = window.confirm("Are you sure to delete this position?");
+        let a = window.confirm("Are you sure to delete this person?");
         if (a) {
             try {
-                await axios.delete(`${process.env.REACT_APP_API}org/position/delete/${posId}`, {headers: headers})
+                await axios.delete(`${process.env.REACT_APP_API}org/person/delete/${perId}`, {headers: headers})
                     .then(res => {
-                        setToastMsg("Position successfully deleted");
-                        setShowToast(true);
+                        if (res.data.success) {
+                            setToastMsg("Person successfully deleted");
+                            setShowToast(true);
+                        } else {
+                            setToastMsg("Person is used in the organization chart.");
+                            setShowToast(true);
+                        }
                     }).catch(error => {
                         setToastMsg(error);
                         setShowToast(true);
-                    })
+                    });
             } catch (error) {
                 setToastMsg(error);
                 setShowToast(true);
@@ -138,6 +175,7 @@ const AdminOrgPeople = () => {
     }
 
     React.useEffect(() => {
+        let isActive = true;
         const getPpl = async () => {
             let headers = {
                 'Authorization' : localStorage.getItem('token'),
@@ -148,12 +186,13 @@ const AdminOrgPeople = () => {
             
             try {
                 let res = await axios.get(`${process.env.REACT_APP_API}org/person`, {headers: headers});
-                setOrgPer(sortByDesc(res.data.data));
+                isActive && setOrgPer(sortByDesc(res.data.data));
             } catch (error) {
-                setOrgPer(false)
+                isActive && setOrgPer(false)
             }
         }
         getPpl();
+        return () => isActive = false;
     }, [showToast])
 
     return (
@@ -179,9 +218,9 @@ const AdminOrgPeople = () => {
                             {
                                 orgPer.map(d => 
                                     <tr key={d.id}>
-                                        <td onClick={openModal.bind(this, "edit", d.id, d.position_name, d.position_desc)} style={{ cursor: 'pointer' }}>{d.first_name + " " + d.middle_initial + " " + d.last_name}</td>
+                                        <td onClick={openModal.bind(this, "edit", d.id, d.first_name, d.middle_initial, d.last_name, d.suffix, d.gender, d.birthday)} style={{ cursor: 'pointer' }}>{d.first_name + " " + d.middle_initial + " " + d.last_name}</td>
                                         <td>{changeDateFormat(d.created_at)}</td>
-                                        <td>{changeDateFormat(d.updated_at)} <Button onClick={delPosition.bind(this, d.id)} style={{ float: 'right' }} variant="danger" size="sm">X</Button></td>
+                                        <td>{changeDateFormat(d.updated_at)} <Button onClick={delPerson.bind(this, d.id)} style={{ float: 'right' }} variant="danger" size="sm">X</Button></td>
                                     </tr>    
                                 )
                             }
@@ -201,7 +240,7 @@ const AdminOrgPeople = () => {
     )
 }
 
-const NewPerson = ({textPosName, textPosDesc}) => {
+const NewPerson = ({textOnChange}) => {
     
     return (
         <Form>
@@ -209,25 +248,25 @@ const NewPerson = ({textPosName, textPosDesc}) => {
                 <Col md={4}>
                     <Form.Group className="mb-3">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="text" name="first_name" id="first_name" onChange={textPosName} />
+                        <Form.Control type="text" name="first_name" id="first_name" onChange={textOnChange} />
                     </Form.Group>
                 </Col>
                 <Col md={2}>
                     <Form.Group className="mb-3">
                         <Form.Label>Middle Initial</Form.Label>
-                        <Form.Control type="text" name="middle_initial" id="middle_initial" onChange={textPosName} />
+                        <Form.Control type="text" name="middle_initial" id="middle_initial" onChange={textOnChange} />
                     </Form.Group>
                 </Col>
                 <Col md={4}>
                     <Form.Group className="mb-3">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="text" name="last_name" id="last_name" onChange={textPosName} />
+                        <Form.Control type="text" name="last_name" id="last_name" onChange={textOnChange} />
                     </Form.Group>
                 </Col>
                 <Col md={2}>
                     <Form.Group className="mb-3">
                         <Form.Label>Suffix</Form.Label>
-                        <Form.Control type="text" name="suffix" id="suffix" onChange={textPosName} />
+                        <Form.Control type="text" name="suffix" id="suffix" onChange={textOnChange} />
                     </Form.Group>
                 </Col>
             </Row>
@@ -235,13 +274,17 @@ const NewPerson = ({textPosName, textPosDesc}) => {
                 <Col md={6}>
                     <Form.Group className="mb-3">
                         <Form.Label>Gender</Form.Label>
-                        <Form.Control type="text" name="suffix" id="suffix" onChange={textPosName} />
+                        <Form.Select name="gender" id="gender" onChange={textOnChange}>
+                            <option value={0}>None</option>
+                            <option value={1}>Male</option>
+                            <option value={1}>Female</option>
+                        </Form.Select>
                     </Form.Group>
                 </Col>
                 <Col md={6}>
                     <Form.Group className="mb-3">
                         <Form.Label>Birthday</Form.Label>
-                        <Form.Control type="date" name="birthday" id="birthday" onChange={textPosName} />
+                        <Form.Control type="date" name="birthday" id="birthday" onChange={textOnChange} />
                     </Form.Group>
                 </Col>
             </Row>
@@ -249,17 +292,53 @@ const NewPerson = ({textPosName, textPosDesc}) => {
     )
 }
 
-const EditPosition = ({positionName, textPosName, textPosDesc, positionDesc}) => {
+const EditPerson = ({textOnChange, firstName, middleInitial, lastName, suffix, gender, birthday}) => {
     return (
         <Form>
-            <Form.Group className="mb-3">
-                <Form.Label>Division Name</Form.Label>
-                <Form.Control type="text" defaultValue={positionName} name="position_name" id="position_name" onChange={textPosName} />
-            </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Label>Position Description</Form.Label>
-                <Form.Control type="text" defaultValue={positionDesc} name="position_desc" id="position_desc" onChange={textPosDesc} />
-            </Form.Group>
+            <Row>
+                <Col md={4}>
+                    <Form.Group className="mb-3">
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control defaultValue={firstName} type="text" name="first_name" id="first_name" onChange={textOnChange} />
+                    </Form.Group>
+                </Col>
+                <Col md={2}>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Middle Initial</Form.Label>
+                        <Form.Control defaultValue={middleInitial} type="text" name="middle_initial" id="middle_initial" onChange={textOnChange} />
+                    </Form.Group>
+                </Col>
+                <Col md={4}>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control defaultValue={lastName} type="text" name="last_name" id="last_name" onChange={textOnChange} />
+                    </Form.Group>
+                </Col>
+                <Col md={2}>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Suffix</Form.Label>
+                        <Form.Control defaultValue={suffix} type="text" name="suffix" id="suffix" onChange={textOnChange} />
+                    </Form.Group>
+                </Col>
+            </Row>
+            <Row>
+                <Col md={6}>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Gender</Form.Label>
+                        <Form.Select defaultValue={gender} name="gender" id="gender" onChange={textOnChange}>
+                            <option value={0}>None</option>
+                            <option value={1}>Male</option>
+                            <option value={2}>Female</option>
+                        </Form.Select>
+                    </Form.Group>
+                </Col>
+                <Col md={6}>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Birthday</Form.Label>
+                        <Form.Control defaultValue={birthday} type="date" name="birthday" id="birthday" onChange={textOnChange} />
+                    </Form.Group>
+                </Col>
+            </Row>
         </Form>
     )
 }

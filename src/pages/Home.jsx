@@ -31,7 +31,7 @@ const Home = () => {
     
     return (
         <div>
-            <div style={{ background: `linear-gradient(0deg, rgba(25, 25, 25, 0.8), rgba(58, 58, 58, 0.5)), url('https://i.ibb.co/3TjmLDx/1440px-San-Rafael-Bulacanjf4845-01.jpg'), #000`, backgroundPosition: 'center', color: '#fff' }}>
+            <div style={{ background: `linear-gradient(0deg, rgba(25, 25, 25, 0.8), rgba(58, 58, 58, 0.5)), url('https://i.ibb.co/3TjmLDx/1440px-San-Rafael-Bulacanjf4845-01.jpg'), #000`, backgroundPosition: 'center', color: '#fff', backgroundSize: 'cover' }}>
                 <Container>
                     <Row className="pt-5">
                         <Col xs="12">
