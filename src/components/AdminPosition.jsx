@@ -44,6 +44,8 @@ const AdminPosition = () => {
     const modalOnHide = () => setModalShow(false);
 
     const openModal = (frmMode, id = 0, posName, posDesc) => {
+        setPositionName('');
+        setPositionDesc('');
         if (frmMode === 'new') {
             setFrmTitle('New Position');
             setFrmContent(<NewPosition textPosName={onPosNameChange} textPosDesc={onPosDescChange} />);

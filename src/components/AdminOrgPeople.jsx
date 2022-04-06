@@ -74,6 +74,13 @@ const AdminOrgPeople = () => {
     const modalOnHide = () => setModalShow(false);
 
     const openModal = (frmMode, id = 0, firstName, middleInitial, lastName, suffix, gender, birthday) => {
+        setFName('');
+        setMInitial('');
+        setLName('');
+        setNSuffix('');
+        setGender('0');
+        setBirthday('');
+
         if (frmMode === 'new') {
             setFrmTitle('New Person');
             setFrmContent(<NewPerson textOnChange={textFormOnChange} />);

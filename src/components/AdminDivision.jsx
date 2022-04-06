@@ -44,6 +44,7 @@ const AdminDivision = () => {
     const modalOnHide = () => setModalShow(false);
 
     const openModal = (frmMode, id = 0, div_name) => {
+        setDivisionName('');
         if (frmMode === 'new') {
             if (division.length <= 0) {
                 alert("This will be the main division.");
