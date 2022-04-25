@@ -16,6 +16,9 @@ const Footer = () => {
                     <Col xs="12">
                         <small>Banner Image by Ramon F Velasquez</small>
                     </Col>
+                    <Col xs="12">
+                        <small>v0.1</small>
+                    </Col>
                 </Row>
             </Container>
         </div>

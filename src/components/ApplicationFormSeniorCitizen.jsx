@@ -149,7 +149,7 @@ const ApplicationFormSeniorCitizen = ({ appData, appFiles }) => {
                     <strong>Landline:</strong> {appData.landline}
                 </Col>
                 <Col md={4}>
-                    <strong>Email:</strong> {appData.email}
+                    <strong>Email:</strong> {appData.email_address}
                 </Col>
             </Row>
             <Row className="mb-3">

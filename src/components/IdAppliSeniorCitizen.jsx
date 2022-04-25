@@ -321,7 +321,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
                     <Col md={4}>
                         <Form.Group className="mb-3">
                             <Form.Label>Email Address</Form.Label>
-                            <Form.Control type="text" name="email" id="email" onChange={textOnChange} />
+                            <Form.Control type="text" name="email_address" id="email_address" onChange={textOnChange} />
                         </Form.Group>
                     </Col>
                 </Row>

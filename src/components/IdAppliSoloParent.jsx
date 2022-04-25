@@ -144,10 +144,16 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                             <Form.Control type="date" name="dob" id="dob" onChange={textOnChange} />
                         </Form.Group>
                     </Col>
-                    <Col md={8}>
+                    <Col md={4}>
                         <Form.Group className="mb-3">
                             <Form.Label>Place of Birth</Form.Label>
                             <Form.Control type="text" name="pob" id="pob" onChange={textOnChange} />
+                        </Form.Group>
+                    </Col>
+                    <Col md={4}>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Email Address</Form.Label>
+                            <Form.Control type="text" name="email_address" id="email_address" onChange={textOnChange} />
                         </Form.Group>
                     </Col>
                 </Row>
