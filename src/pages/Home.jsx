@@ -456,8 +456,16 @@ const Home = () => {
                     </Col>
                     <Col lg={3}>
                         <h3 className="mb-3">Inquire</h3>
-                        <Card className="p-3">
+                        <Card className="p-3 mb-3">
                             <ContactForm />
+                        </Card>
+                        <Card className="p-3" style={{ textAlign: 'left' }}>
+                            <strong>You may reach us</strong>
+                            <ul>
+                                <li>Contact Number: (+63) 922-564-5695</li>
+                                <li>Email Address: mswdosanrafaelbulacan@gmail.com</li>
+                                <li>Location: Maharlika Highway, Brgy. Sampaloc, San Rafael Bulacan.</li>
+                            </ul>
                         </Card>
                     </Col>
                 </Row>
