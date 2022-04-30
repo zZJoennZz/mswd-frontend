@@ -34,11 +34,13 @@ const AdminLogin = ({ checkAuth }) => {
         
         try {
             let res = await api.post("signin", frmData);
-            if (res.status === 200) {
+            if (res.status === 200 && res.data.isAdmin === "1") {
                 alert("You are logged in!");
                 localStorage.removeItem("token");
                 localStorage.setItem("token", `Bearer ` + res.data.token);
                 checkAuth(true);
+            } else {
+                alert("You have NO authorization here!");
             }
         } catch(e) {
             alert("Logging in failed Error: " + e);
