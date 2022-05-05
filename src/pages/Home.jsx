@@ -177,18 +177,22 @@ const Home = () => {
                         </Card>
                         <Card className="mb-3 p-3">
                             <center>
-                                <img
-                                    src={mswdoLogo}
-                                    width={200}
-                                    alt="MSWDO Logo"
-                                />
-                                <a href="https://www.foi.gov.ph/" target="_blank" rel="noreferrer">
+                                <div>
                                     <img
-                                        src={foiphLogo}
+                                        src={mswdoLogo}
                                         width={200}
-                                        alt="Freedom of Information Philippines Logo"
+                                        alt="MSWDO Logo"
                                     />
-                                </a>
+                                </div>
+                                <div>
+                                    <a href="https://www.foi.gov.ph/" target="_blank" rel="noreferrer">
+                                        <img
+                                            src={foiphLogo}
+                                            width={200}
+                                            alt="Freedom of Information Philippines Logo"
+                                        />
+                                    </a>
+                                </div>
                             </center>
                         </Card>
                         <Card className="mb-3 p-3">
