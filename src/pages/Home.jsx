@@ -199,29 +199,29 @@ const Home = () => {
                             <strong>Sitemap</strong>
                             <ul style={{ textAlign: 'left' }}>
                                 <li>
-                                    <strong>Home</strong> 
+                                    <a href="/" rel="noreferrer"><strong>Home</strong></a>
                                     <ul>
-                                        <li>Announcement</li>
-                                        <li>Vision, Mission, Objectives, and Pledge</li>
-                                        <li>Service Offered</li>
+                                        <li><a href="#announcements" rel="noreferrer">Announcement</a></li>
+                                        <li><a href="#about" rel="noreferrer">Vision, Mission, Objectives, and Pledge</a></li>
+                                        <li><a href="#services" rel="noreferrer">Service Offered</a></li>
                                     </ul>
                                 </li>
-                                <li><strong>E-Services</strong></li>
-                                <li><strong>Services Offered</strong></li>
+                                <li><a href="/eservices" rel="noreferrer"><strong>E-Services</strong></a></li>
+                                <li><a href="/services" rel="noreferrer"><strong>Services Offered</strong></a></li>
                                 <li>
-                                    <strong>About Us</strong>
+                                    <a href="/about" rel="noreferrer"><strong>About Us</strong></a>
                                     <ul>
-                                        <li>Vision, Mission, Objectives, and Pledge</li>
-                                        <li>Organization Chart</li>
+                                        <li><a href="/about" rel="noreferrer">Vision, Mission, Objectives, and Pledge</a></li>
+                                        <li><a href="/about" rel="noreferrer">Organization Chart</a></li>
                                     </ul>
                                 </li>
-                                <li><strong>FAQ</strong></li>
-                                <li><strong>Downloadable Forms</strong></li>
+                                <li><a href="/faq" rel="noreferrer"><strong>FAQ</strong></a></li>
+                                <li><a href="/download-forms" rel="noreferrer"><strong>Downloadable Forms</strong></a></li>
                             </ul>
                         </Card>
                     </Col>
                     <Col lg={6}>
-                        <Card className="p-3 mb-3">
+                        <Card className="p-3 mb-3" id="announcements">
                             <h5 className="mb-3" style={{ textAlign: 'left', textTransform: 'uppercase' }}>Announcements</h5>
                             <div className="newsBox" style={{ maxHeight: '500px', overflow: 'auto' }}>
                                 {
@@ -235,7 +235,7 @@ const Home = () => {
                             </div>
                         </Card>
 
-                        <Card className="p-3 mb-3" style={{ textAlign: 'left' }}>
+                        <Card className="p-3 mb-3" style={{ textAlign: 'left' }} id="about">
                             <h5 style={{ textTransform: 'uppercase' }}>Vision</h5>
                             <p>An ideal office embodied by truly dedicated personnel whose path is governed by God and by the Professional Social Worker’s Code of Ethics, Values and Principles. Our collective efforts are towards the empowerment, participation and rehabilitation of the disadvantaged sectors of society whether individual, group and community designed for the restoration of their normal level of social functioning.</p>
                             <p style={{ fontWeight: 'bold', fontStyle: 'italic' }}>“Empowered families and individuals in the municipality who actively participate in community affairs and have normal level of social functioning”.</p>
@@ -269,7 +269,7 @@ const Home = () => {
                             <p>We, the official and employees of the Municipal Social Welfare and Development Office of San Rafael, Bulacan pledge and commit to deliver quality services that will really meet the needs of our clientele as promised in this Citizen's Charter; to ensure their normal social functioning and maximum participation in community affairs. We, will demonstrate sensitivity and appropriate behavior and professionalism based on the social worker's code of ethics.</p>
                         </Card>
 
-                        <Card className="p-3 mb-3" style={{ textAlign: 'left' }}>
+                        <Card className="p-3 mb-3" style={{ textAlign: 'left' }} id="services">
                             <h4 className="mb-3" style={{ textTransform: 'uppercase' }}>Services Offered by MSWD</h4>
                             <Accordion>
                                 <Accordion.Item eventKey="0">
