@@ -302,7 +302,7 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                     <Col md={6}>
                         <Form.Group className="mb-3">
                             <Form.Label>Documents</Form.Label>
-                            <div className="mb-1"><small>Solo parent certificate mula sa barangay kung hiwalay, death certificate kung balo/biyida, and birth certificate ng mga anak. (<a href="https://i.ibb.co/wyhLcD5/drag-and-select.gif" target="_blank" rel="noreferrer">You can multiply select files.</a>) PDF Only</small></div>
+                            <div className="mb-1"><small>Solo parent certificate mula sa barangay kung hiwalay, death certificate kung balo/biyida, and birth certificate ng mga anak. (<a href="https://i.ibb.co/wyhLcD5/drag-and-select.gif" target="_blank" rel="noreferrer">You can multiple select files.</a>) PDF Only</small></div>
                             <Form.Control type="file" name="docs" id="docs" accept="application/pdf" onChange={docsOnChange} multiple />
                         </Form.Group>
                     </Col>

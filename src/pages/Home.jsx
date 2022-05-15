@@ -459,8 +459,9 @@ const Home = () => {
                         </Card>
                     </Col>
                     <Col lg={3}>
-                        <h3 className="mb-3">Inquire</h3>
                         <Card className="p-3 mb-3">
+                            <h5 style={{ textTransform: 'uppercase', textAlign: 'left' }}>Inquire</h5>
+                        
                             <ContactForm />
                         </Card>
                         <Card className="p-3" style={{ textAlign: 'left' }}>

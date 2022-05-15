@@ -5,7 +5,8 @@ import {
     Nav, 
     Navbar,
     Form,
-    Button
+    Button,
+    NavDropdown
   } from 'react-bootstrap';
 
 const Menu = () => {
@@ -25,7 +26,10 @@ const Menu = () => {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto my-2 my-lg-0">
                             <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/services">Services</Nav.Link>
+                            <NavDropdown title="Services" id="navbarScrollingDropdown">
+                                <NavDropdown.Item href="/services">Services</NavDropdown.Item>
+                                <NavDropdown.Item href="/eservices">e-Services</NavDropdown.Item>
+                            </NavDropdown>
                             <Nav.Link href="/about">About</Nav.Link>
                             <Nav.Link href="/faq">FAQ</Nav.Link>
                             <Nav.Link href="/contact-us">Contact Us</Nav.Link>

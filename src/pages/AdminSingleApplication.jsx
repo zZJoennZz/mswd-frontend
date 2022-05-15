@@ -45,6 +45,7 @@ const AdminSingleApplication = () => {
             .then(res => {
                 setToastMsg("Status successfully updated")
                 setShowToast(true);
+                window.location.reload();
             })
             .catch(err => {
                 setToastMsg("Something went wrong and status is not updated")

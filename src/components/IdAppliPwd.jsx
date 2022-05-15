@@ -162,27 +162,27 @@ const IdAppliPwd = ({ submitApplication }) => {
           "name": " Region XVIII  (Negros Island Region)"
         },
         {
-          "id": 12,
+          "id": 13,
           "name": " Region IX  (Zamboanga Peninsula)"
         },
         {
-          "id": 13,
+          "id": 14,
           "name": " Region X  (Northern Mindanao)"
         },
         {
-          "id": 14,
+          "id": 15,
           "name": " Region XI  (Davao Region)"
         },
         {
-          "id": 15,
+          "id": 16,
           "name": " Region XII  (SOCCSKSARGEN)"
         },
         {
-          "id": 16,
+          "id": 17,
           "name": " Region XIII  (Caraga)"
         },
         {
-          "id": 17,
+          "id": 18,
           "name": " ARMM  (Autonomous Region in Muslim Mindanao)"
         }
     ];
@@ -580,7 +580,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                 <Row className="mb-3">
                     <Col md={6}>
                     <Form.Label>Documents</Form.Label>
-                        <div className="mb-1"><small>Valid ID with birthday and address in San Rafael (Voter's, SSS/UMID, LTO, Passport), affidavit of loss (if lost ID), or if no valid ID available: Birth certificate or certificate of residency (<a href="https://i.ibb.co/wyhLcD5/drag-and-select.gif" target="_blank" rel="noreferrer">You can multiply select files.</a>) PDF Only</small></div>
+                        <div className="mb-1"><small>Valid ID with birthday and address in San Rafael (Voter's, SSS/UMID, LTO, Passport), affidavit of loss (if lost ID), or if no valid ID available: Birth certificate or certificate of residency (<a href="https://i.ibb.co/wyhLcD5/drag-and-select.gif" target="_blank" rel="noreferrer">You can multiple select files.</a>) PDF Only</small></div>
                         <Form.Control type="file" name="docs" id="docs" accept="application/pdf" onChange={docsOnChange} multiple />
                     </Col>
                     <Col md={6}>

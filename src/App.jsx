@@ -19,6 +19,7 @@ import DownloadableForms from './pages/DownloadableForms';
 import ContactUs from './pages/ContactUs';
 import AnnouncementSingle from './pages/AnnouncementSingle';
 import Track from './pages/Track';
+import EServices from './pages/EServices';
 
 //other
 import { Routes, Route } from 'react-router-dom';
@@ -33,6 +34,7 @@ const App = () => {
             <><Menu /><Home /><Footer /></>
           } />
           <Route exact path="/services" element={<><Menu /><Services /><Footer /></>} />
+          <Route exact path="/eservices" element={<><Menu /><EServices /><Footer /></>} />
           <Route exact path="/announcement/:annId" element={<><Menu /><AnnouncementSingle /><Footer /></>} />
           <Route exact path="/about" element={<><Menu /><About /><Footer /></>} />
           <Route exact path="/contact-us" element={<><Menu /><ContactUs /><Footer /></>} />

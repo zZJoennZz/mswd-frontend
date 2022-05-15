@@ -460,7 +460,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
                 <Row className="mb-3">
                     <Col md={6}>
                     <Form.Label>Documents</Form.Label>
-                        <div className="mb-1"><small>Valid ID with birthday and address in San Rafael (Voter's, SSS/UMID, LTO, Passport), affidavit of loss (if lost ID), or if no valid ID available: Birth certificate or certificate of residency (<a href="https://i.ibb.co/wyhLcD5/drag-and-select.gif" target="_blank" rel="noreferrer">You can multiply select files.</a>) PDF Only</small></div>
+                        <div className="mb-1"><small>Valid ID with birthday and address in San Rafael (Voter's, SSS/UMID, LTO, Passport), affidavit of loss (if lost ID), or if no valid ID available: Birth certificate or certificate of residency (<a href="https://i.ibb.co/wyhLcD5/drag-and-select.gif" target="_blank" rel="noreferrer">You can multiple select files.</a>) PDF Only</small></div>
                         <Form.Control type="file" name="docs" id="docs" accept="application/pdf" onChange={docsOnChange} multiple />
                     </Col>
                     <Col md={6}>
