@@ -12,6 +12,7 @@ const AdminManageAcct = ({ saveChanges }) => {
     let [userId, setUserId] = React.useState(0);
     let [userDets, setUserDets] = React.useState({
         'name' : '',
+        'last_name' : '',
         'email' : '',
         'password' : ''
     });
@@ -29,6 +30,7 @@ const AdminManageAcct = ({ saveChanges }) => {
                 .then(res => {
                     setUserDets({
                         'name' : res.data.name,
+                        'last_name' : res.data.last_name,
                         'email' : res.data.email
                     })
                     setUserId(res.data.id);
@@ -43,8 +45,16 @@ const AdminManageAcct = ({ saveChanges }) => {
                 <Row>
                     <Col md={12}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Full Name</Form.Label>
+                            <Form.Label>First Name</Form.Label>
                             <Form.Control defaultValue={userDets.name} type="text" name="name1" id="name1" onChange={onChangeField} />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={12}>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control defaultValue={userDets.last_name} type="text" name="last_name1" id="last_name1" onChange={onChangeField} />
                         </Form.Group>
                     </Col>
                 </Row>

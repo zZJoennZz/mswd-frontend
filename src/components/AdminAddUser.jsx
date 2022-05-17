@@ -14,8 +14,16 @@ const AdminAddUser = ({ userDets, onSubmitAdd, onChangeField }) => {
                 <Row>
                     <Col md={12}>
                         <Form.Group className="mb-3">
-                            <Form.Label>Full Name <span className="text-danger">*</span></Form.Label>
+                            <Form.Label>First Name <span className="text-danger">*</span></Form.Label>
                             <Form.Control value={userDets.name} type="text" name="name" id="name" onChange={onChangeField} required />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={12}>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Last Name <span className="text-danger">*</span></Form.Label>
+                            <Form.Control value={userDets.last_name} type="text" name="last_name" id="last_name" onChange={onChangeField} required />
                         </Form.Group>
                     </Col>
                 </Row>

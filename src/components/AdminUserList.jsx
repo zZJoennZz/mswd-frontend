@@ -14,11 +14,13 @@ const AdminManageAcct = ({usrList, saveChanges}) => {
     let [userId, setUserId] = React.useState(0);
     let [userDetail, setUserDetail] = React.useState({
         'name' : '',
+        'last_name' : '',
         'email' : '',
         'password' : ''
     });
     let [userDetail1, setUserDetail1] = React.useState({
         'name' : '',
+        'last_name' : '',
         'email' : '',
         'password' : ''
     });
@@ -68,7 +70,7 @@ const AdminManageAcct = ({usrList, saveChanges}) => {
                                     {
                                         usrList.map(d => 
                                             <tr key={d.id}>
-                                                <td>{d.name}</td>
+                                                <td>{d.name + ' ' + d.last_name}</td>
                                                 <td>{changeDateFormat(d.created_at)}</td>
                                                 <td>{changeDateFormat(d.updated_at)}</td>
                                                 <td style={{ textAlign: "right" }}><Button size="sm" onClick={() => setUserId(d.id)} disabled={d.id === 1 ? true : false}>Edit</Button> <Button variant="danger" size="sm" disabled={d.id === 1 ? true : false}>X</Button></td>
@@ -89,8 +91,16 @@ const AdminManageAcct = ({usrList, saveChanges}) => {
                         <Row>
                             <Col md={12}>
                                 <Form.Group className="mb-3">
-                                    <Form.Label>Full Name</Form.Label>
+                                    <Form.Label>First Name</Form.Label>
                                     <Form.Control onChange={onChangeText} defaultValue={userDetail.name} type="text" name="name" id="name" />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={12}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Last Name</Form.Label>
+                                    <Form.Control onChange={onChangeText} defaultValue={userDetail.last_name} type="text" name="last_name" id="last_name" />
                                 </Form.Group>
                             </Col>
                         </Row>

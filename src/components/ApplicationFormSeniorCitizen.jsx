@@ -7,8 +7,11 @@ import {
     Table
 } from 'react-bootstrap'
 
+import { barangays } from 'select-philippines-address';
+
 const ApplicationFormSeniorCitizen = ({ appData, appFiles }) => {
     let famCom = appData.fam_composition.split('\n');
+    let [brgyList, setBrgyList] = React.useState(false);
     let [famComArr, setFamComArr] = React.useState(false);
 
     const living_arr = [
@@ -41,16 +44,33 @@ const ApplicationFormSeniorCitizen = ({ appData, appFiles }) => {
     ];
 
     React.useEffect(() => {
+        let isMounted = true;
         const getFamCom = () => {
             let holder, allParts = '';
             for(let i = 0; i < famCom.length; i++) {
                 holder = famCom[i].split(',');
                 allParts += `<tr><td>${holder[0]}</td><td>${holder[1]}</td><td>${holder[2]}</td><td>${holder[3]}</td><td>${holder[4]}</td><td>${holder[5]}</td><td>${holder[6]}</td><td>${holder[7]}</td><td>${holder[8]}</td></tr>`
             }
-            setFamComArr(allParts);
+            if (isMounted) {
+                setFamComArr(allParts);
+            }
         }
+        
+        
         getFamCom();
-    }, [famCom])
+        
+        
+        barangays('031422').then((barangays) => {
+            if (isMounted) {
+                setBrgyList(barangays)
+            }
+        });
+
+        return () => {
+            isMounted = false;
+        };
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <Container fluid style={{ border: "1px solid #000" }} className="p-4">
@@ -74,7 +94,7 @@ const ApplicationFormSeniorCitizen = ({ appData, appFiles }) => {
             </Row>
             <Row className="mb-3">
                 <Col md={12}>
-                    <strong>Address:</strong> {appData.address}
+                    <strong>Address:</strong> {appData.houseno}, {appData.street}, { brgyList !== false ? brgyList.filter((brgy) => brgy.brgy_code === appData.barangay)[0].brgy_name : "" }, San Rafael, Bulacan
                 </Col>
             </Row>
             <Row className="mb-3">

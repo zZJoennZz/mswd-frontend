@@ -41,6 +41,7 @@ const AdminSettings = ({ userId }) => {
     const onSubmitSaveUser = async (frmDat, userId) => {
         let data = {
             name : frmDat.name,
+            last_name : frmDat.last_name,
             email : frmDat.email,
             password : frmDat.password,
         }
@@ -67,6 +68,7 @@ const AdminSettings = ({ userId }) => {
         frmData.append("email", userDetail.email);
         frmData.append("password", userDetail.password);
         frmData.append("name", userDetail.name);
+        frmData.append("last_name", userDetail.last_name);
         
         await apifrm.post('signup', frmData)
             .then(res => {
@@ -75,6 +77,7 @@ const AdminSettings = ({ userId }) => {
                 setUserDetail(
                     {
                         'name' : '',
+                        'last_name': '',
                         'password' : '',
                         'email' : ''
                     }
@@ -90,6 +93,7 @@ const AdminSettings = ({ userId }) => {
         try {
             let data = {
                 name : frmData.name1,
+                last_name : frmData.last_name1,
                 email : frmData.email1,
                 password : frmData.password1,
             }

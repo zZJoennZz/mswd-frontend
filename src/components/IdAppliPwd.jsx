@@ -4,10 +4,14 @@ import {
     Button,
     Row,
     Col,
-    Spinner
+    Spinner,
+    Accordion,
+    Card
 } from 'react-bootstrap';
 
 import apifrm from '../api/apifrm';
+
+import { barangays } from 'select-philippines-address';
 
 const IdAppliPwd = ({ submitApplication }) => {
     let [frmData, setFrmData] = useState({'appliType': 2, 'cod' : ''});
@@ -17,6 +21,7 @@ const IdAppliPwd = ({ submitApplication }) => {
     //let [isMulti, setIsMulti] = useState(true);
     let [agreeCheck, setAgreeCheck] = useState(true);
     let [isSubmit, setIsSubmit] = useState(false);
+    let [brgyList, setBrgyList] = useState(false);
 
     let disabilities = [
         {'id' : 1, 'name': 'Mental/Intellectual'},
@@ -112,80 +117,6 @@ const IdAppliPwd = ({ submitApplication }) => {
         }
     ];
 
-    let regions = [
-        {
-          "id": 1,
-          "name": " NCR  (National Capital Region)"
-        },
-        {
-          "id": 2,
-          "name": " CAR  (Cordillera Administrative Region)"
-        },
-        {
-          "id": 3,
-          "name": " Region I  (Ilocos Region)"
-        },
-        {
-          "id": 4,
-          "name": " Region II  (Cagayan Valley)"
-        },
-        {
-          "id": 5,
-          "name": " Region III  (Central Luzon)"
-        },
-        {
-          "id": 6,
-          "name": " Region IV-A  (CALABARZON)"
-        },
-        {
-          "id": 7,
-          "name": " Region IV-B  (MIMAROPA)"
-        },
-        {
-          "id": 8,
-          "name": " Region V  (Bicol Region)"
-        },
-        {
-          "id": 9,
-          "name": " Region VI  (Western Visayas)"
-        },
-        {
-          "id": 10,
-          "name": " Region VII  (Central Visayas)"
-        },
-        {
-          "id": 11,
-          "name": " Region VIII  (Eastern Visayas)"
-        },
-        {
-          "id": 12,
-          "name": " Region XVIII  (Negros Island Region)"
-        },
-        {
-          "id": 13,
-          "name": " Region IX  (Zamboanga Peninsula)"
-        },
-        {
-          "id": 14,
-          "name": " Region X  (Northern Mindanao)"
-        },
-        {
-          "id": 15,
-          "name": " Region XI  (Davao Region)"
-        },
-        {
-          "id": 16,
-          "name": " Region XII  (SOCCSKSARGEN)"
-        },
-        {
-          "id": 17,
-          "name": " Region XIII  (Caraga)"
-        },
-        {
-          "id": 18,
-          "name": " ARMM  (Autonomous Region in Muslim Mindanao)"
-        }
-    ];
 
     const submitForm = async (e) => {
         setIsSubmit(true);
@@ -240,9 +171,98 @@ const IdAppliPwd = ({ submitApplication }) => {
     //     }
     // }
 
+    React.useEffect(() => {
+        let isMounted = true;
+
+        barangays('031422').then((barangays) => {
+            if (isMounted) {
+                setBrgyList(barangays)
+            }
+        });
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
     return (
         <div>
-            <h2 className="text-uppercase">Application Form for Persons with Disability</h2>
+            <h2 className="text-uppercase mb-3">Application for Identification Card of Persons with Disability</h2>
+            
+            <Card className="mb-5">
+                <Card.Header><strong>Please read all of the requirements prior to your application <em>(Basahing mabuti bago mag fill-up ng application form)</em></strong></Card.Header>
+                <Card.Body className="mb-3 p-3">
+                    <Accordion>
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header>Who is considered under the law as a “PWD or Person with Disabilities"? <em>(Sino ang itinuturing sa ilalim ng batas bilang "PWD or Person with Disabilities"?)</em></Accordion.Header>
+                            <Accordion.Body>
+                            <p>Persons with Disabilities are those suffering from restriction of different abilities, as a result of a mental, physical or sensory impairment, to perform an activity in the manner or within the range considered normal for a human being <em>(Ang mga taong may Kapansanan ay ang mga dumaranas ng paghihigpit sa iba't ibang kakayahan, bilang resulta ng kapansanan sa pag-iisip, pisikal o pandama, upang magsagawa ng aktibidad sa paraang o sa loob ng saklaw na itinuturing na normal para sa isang tao.)</em></p>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="1">
+                            <Accordion.Header>
+                                How can I use the MSWD E-Services in securing PWD I.D. or Person with Disabilities I.D.? <em>(Paano ko gagamitin ang DSWD E-Services sa pagkuha ng PWD I.D. o Person with Disabilities I.D.?)</em>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <p><strong>Step 1: </strong>Review the documents required before proceeding. <em>(Suriing mabuti ang mga dokumentong kinakailangan bago magpatuloy.)</em></p>
+
+                                <p><strong>Step 2: </strong>Fill up all required fields in the Person with Disabilities I.D. application form. <em>(Sagutan ang lahat ng kailangan sa Person with Disabilities I.D. application form.)</em></p>
+
+                                <p><strong>Step 3: </strong>Upload scanned copies of required documents. <em>(Mag-upload ng mga na-scan na kopya ng mga kinakailangang dokumento.)</em></p>
+
+                                <p><strong>Step 4: </strong>Check submitted application. <em>(Suriin ang pinunang aplikasyon.)</em></p>
+
+                                <p><strong>Step 5: </strong>Applicant will receive notification of the successful application Person with Disabilities I.D. via email. <em>(Makakatanggap ng email ang aplikante na matagumpay na aplikayson para sa Person with Disabilities I.D.)</em></p>
+
+                                <p><strong>Step 6: </strong>MSWD Staff will assess the submitted online application. <em>(Susuriin ng MSWD Staff ang naisumiteng aplikasyon.)</em></p>
+
+                                <p><strong>Step 7: </strong>Applicant will be able to track their transaction by clicking the “Track my application” tab in their dashboard. <em>(Magagawang subaybayan ng aplikante ang kanilang transaksyon sa pamamagitan ng pag-click sa tab na "Track my application" sa kanilang dashboard.)</em></p>
+
+                                <p><strong>Step 8: </strong>Applicant will receive notification if his/her Person with Disabilities I.D. are ready to release. <em>(Makakatanggap ang aplikante ng abiso kung ang kanyang Person with Disabilities I.D. ay handa at maari ng kuhain.)</em></p>
+
+                                <p><strong>Step 9: </strong>Applicant will proceed to MSWD office in San Rafael Bulacan to claim his/ Person with Disabilities I.D.  after they receive notification. <em>(Magpunta sa MSWD Office of San Rafael Bulacan para kunin ang Person with Disabilities I.D. pagkatapos matanggap ang abiso.)</em></p>
+                                <p className="text-center" style={{ textTransform: 'uppercase' }}>*** End of transaction ***</p>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="2">
+                            <Accordion.Header>
+                                What is the Schedule of Availability of Service? <em>(Ano ang iskedyul ng serbisyo?) </em>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul>
+                                    <li>The online application for Person with Disabilities I.D. is only available for residents of San Rafael Bulacan <em>(Ang online na aplikasyon para sa Person with Disabilities I.D. ay magagamit lamang para sa mga residente ng San Rafael Bulacan.)</em></li>
+                                    <li>Your application will only be processed during office hours, Monday to Friday, 8:00am - 5:00pm without noon break. <em>(Ang inyong aplikasyon ay ipoproseso lamang mula Lunes hanggang Biyernes, 8:00 ng umaga - 5:00 ng hapon.)</em></li>
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="3">
+                            <Accordion.Header>
+                                How much is the processing fee in securing Solo Parent I.D.? <em>(Magkano ang bayad sa pagpoproseso ng Solo Parent I.D.?)</em>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <ul>
+                                    <li>NONE REQUIRED FEES</li>
+                                </ul>
+                                <p>The MSWD shall not collect any processing fee for securing Person with Disabilities I.D. <em>(Ang MSWD ay hindi mangongolekta ng anumang bayad sa pagproseso para sa pagkuha ng Person with Disabilities I.D.)</em></p>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                        <Accordion.Item eventKey="4">
+                            <Accordion.Header>
+                                What do I need before I apply? <em>(Ano ang mga kailangan ko bago ako mag-apply?)</em>
+                            </Accordion.Header>
+                            <Accordion.Body>
+                                <p>The requirements needed to obtain Person with Disabilities I.D. <em>(Ang mga kinakailangan upang makakuha ng Person with Disabilities I.D.)</em></p>
+                                <ul>
+                                    <li>MEDICAL CERTIFICATE INDICATING DISABILITY <em>(MEDICAL CERTIFICATE NA NAGPAPAHAYAG NG DISABILIDAD)</em></li>
+                                    <li>2PCS 1X1 ID PICTURE</li>
+                                    <li>BLOOD TYPE <em>(Uri ng iyong dugo)</em></li>
+                                </ul>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
+                </Card.Body>        
+            </Card>
+
             <Form onSubmit={submitForm}>
                 <Row>
                     <Col md={6}>
@@ -316,29 +336,28 @@ const IdAppliPwd = ({ submitApplication }) => {
                         <Form.Group className="mb-3">
                             <Form.Label>6. Address</Form.Label>
                             <Row className="mb-3">
-                                <Col md={6}>
-                                    <Form.Control type="text" placeholder="House No. and Street" name="houseno" id="houseno" onChange={textOnChange} />
+                                <Col md={3}>
+                                <Form.Label>House No.</Form.Label>
+                                    <Form.Control type="text" name="houseno" id="houseno" placeholder="House No." onChange={textOnChange} />
                                 </Col>
-                                <Col md={6}>
-                                    <Form.Control type="text" placeholder="Barangay" name="brgy" id="brgy" onChange={textOnChange} />
+                                <Col md={3}>
+                                <Form.Label>Street or Sitio</Form.Label>
+                                    <Form.Control type="text" name="street" id="street" placeholder="Street or Sitio" onChange={textOnChange} />
                                 </Col>
-                            </Row>
-                            <Row>
-                                <Col md={4}>
-                                    <Form.Control type="text" placeholder="Municipality" name="muni" id="muni" onChange={textOnChange} />
-                                </Col>
-                                <Col md={4}>
-                                    <Form.Control type="text" placeholder="Province" name="prov" id="prov" onChange={textOnChange} />
-                                </Col>
-                                <Col md={4}>
-                                    <Form.Select type="text" placeholder="Region" name="reg" id="reg" onChange={textOnChange}>
+                                <Col md={3}>
+                                    <Form.Label>Barangay</Form.Label>
+                                    <Form.Select id="barangay" name="barangay" onChange={textOnChange}>
                                         <option>Select</option>
                                         {
-                                            regions.map(d => 
-                                                <option key={d.id} value={d.id}>{d.name}</option>
-                                            )
+                                            brgyList !== false ? brgyList.map(d => 
+                                                <option key={d.brgy_code} value={d.brgy_code}>{d.brgy_name}</option>   
+                                            ) : ""
                                         }
                                     </Form.Select>
+                                </Col>
+                                <Col md={3}>
+                                    <Form.Label>City and Province</Form.Label>
+                                    <Form.Control type="text" value="San Rafael, Bulacan" readOnly />
                                 </Col>
                             </Row>
                         </Form.Group>

@@ -6,11 +6,14 @@ import {
     Col,
     Table,
     Form
-} from 'react-bootstrap'
+} from 'react-bootstrap';
+
+import { barangays } from 'select-philippines-address';
 
 const ApplicationFormPwd = ({ appData, subDate, appFiles }) => {
     //let famCom = appData.fam_composition.split('\n');
     //let [famComArr, setFamComArr] = React.useState(false);
+    let [brgyList, setBrgyList] = React.useState(false);
 
     const changeDateFormat = (dateToChange) => {
         let theDate = new Date(dateToChange);
@@ -114,81 +117,20 @@ const ApplicationFormPwd = ({ appData, subDate, appFiles }) => {
         }
     ];
 
-    let regions = [
-        {
-          "id": 1,
-          "name": " NCR  (National Capital Region)"
-        },
-        {
-          "id": 2,
-          "name": " CAR  (Cordillera Administrative Region)"
-        },
-        {
-          "id": 3,
-          "name": " Region I  (Ilocos Region)"
-        },
-        {
-          "id": 4,
-          "name": " Region II  (Cagayan Valley)"
-        },
-        {
-          "id": 5,
-          "name": " Region III  (Central Luzon)"
-        },
-        {
-          "id": 6,
-          "name": " Region IV-A  (CALABARZON)"
-        },
-        {
-          "id": 7,
-          "name": " Region IV-B  (MIMAROPA)"
-        },
-        {
-          "id": 8,
-          "name": " Region V  (Bicol Region)"
-        },
-        {
-          "id": 9,
-          "name": " Region VI  (Western Visayas)"
-        },
-        {
-          "id": 10,
-          "name": " Region VII  (Central Visayas)"
-        },
-        {
-          "id": 11,
-          "name": " Region VIII  (Eastern Visayas)"
-        },
-        {
-          "id": 12,
-          "name": " Region XVIII  (Negros Island Region)"
-        },
-        {
-          "id": 12,
-          "name": " Region IX  (Zamboanga Peninsula)"
-        },
-        {
-          "id": 13,
-          "name": " Region X  (Northern Mindanao)"
-        },
-        {
-          "id": 14,
-          "name": " Region XI  (Davao Region)"
-        },
-        {
-          "id": 15,
-          "name": " Region XII  (SOCCSKSARGEN)"
-        },
-        {
-          "id": 16,
-          "name": " Region XIII  (Caraga)"
-        },
-        {
-          "id": 17,
-          "name": " ARMM  (Autonomous Region in Muslim Mindanao)"
-        }
-    ];
 
+    React.useEffect(() => {
+        let isMounted = true;
+
+        barangays('031422').then((barangays) => {
+            if (isMounted) {
+                setBrgyList(barangays)
+            }
+        });
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
     // useEffect(() => {
     //     // const getFamCom = () => {
     //     //     let holder, allParts = '';
@@ -242,7 +184,7 @@ const ApplicationFormPwd = ({ appData, subDate, appFiles }) => {
                     <strong>6. Address:</strong>
                 </Col>
                 <Col md={12}>
-                    {appData.houseno} {appData.brgy} {appData.muni} {appData.prov} {regions[parseInt(appData.reg)-1].name} 
+                {appData.houseno}, {appData.street}, { brgyList !== false ? brgyList.filter((brgy) => brgy.brgy_code === appData.barangay)[0].brgy_name : "" }, San Rafael, Bulacan
                 </Col>
             </Row>
             <Row className="mb-3">

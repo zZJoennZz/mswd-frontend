@@ -20,6 +20,121 @@ const OrgChart = () => {
     return (
         <div style={{ textAlign: 'left', paddingBottom: '20px' }}>
             <h2 style={{ textAlign: 'center' }} className="mt-5 mb-3">Organization Chart</h2>
+            <div class="container1">
+                <div class="level-1 rectangle">
+                
+                    <div className="mb-5">
+                        <div>
+                            <img src={org[0].img_path} className="img-avatar" alt={org[0].first_name + " " + org[0].middle_initial + " " + org[0].last_name} />
+                        </div>
+                        <span className="division-people">{org[0].first_name + " " + org[0].middle_initial + " " + org[0].last_name}</span>
+                        <div className="division-position-description">{org[0].position_name}</div>
+                    </div>
+                
+                </div>
+                <ol class="level-2-wrapper">
+                    <li>
+                    <div class="level-2 rectangle">
+                    <div className="mb-5">
+                            <div>
+                                <img src={org[1].img_path} className="img-avatar" alt={org[1].first_name + " " + org[1].middle_initial + " " + org[1].last_name} />
+                            </div>
+                            <span className="division-people">{org[1].first_name + " " + org[1].middle_initial + " " + org[1].last_name}</span>
+                            <div className="division-position-description">{org[1].position_name}</div>
+                        </div>
+                    </div>
+                    <ol class="level-3-wrapper">
+                        <li>
+                            <div class="level-3 rectangle">
+                                <div>
+                                    <img src={org[2].img_path} className="img-avatar" alt={org[2].first_name + " " + org[2].middle_initial + " " + org[2].last_name} />
+                                </div>
+                                <span className="division-people">{org[2].first_name + " " + org[2].middle_initial + " " + org[2].last_name}</span>
+                                <div className="division-position-description">{org[2].position_name}</div>
+                            </div>
+                            <ol class="level-4-wrapper">
+                            <li>
+                                    <h4 class="level-4 rectangle">Person A</h4>
+                                    </li>
+                                    <li>
+                                    <h4 class="level-4 rectangle">Person B</h4>
+                                    </li>
+                                    <li>
+                                    <h4 class="level-4 rectangle">Person C</h4>
+                                    </li>
+                                    <li>
+                                    <h4 class="level-4 rectangle">Person D</h4>
+                                </li>
+                                <li>
+                                    <h4 class="level-4 rectangle">Person A</h4>
+                                    </li>
+                                    <li>
+                                    <h4 class="level-4 rectangle">Person B</h4>
+                                    </li>
+                                    <li>
+                                    <h4 class="level-4 rectangle">Person C</h4>
+                                    </li>
+                                    <li>
+                                    <h4 class="level-4 rectangle">Person D</h4>
+                                </li>
+                                <li>
+                                    <h4 class="level-4 rectangle">Person A</h4>
+                                    </li>
+                                    <li>
+                                    <h4 class="level-4 rectangle">Person B</h4>
+                                    </li>
+                                    <li>
+                                    <h4 class="level-4 rectangle">Person C</h4>
+                                    </li>
+                                    <li>
+                                    <h4 class="level-4 rectangle">Person D</h4>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                    </li>
+
+                    {/* <li>
+                    <h2 class="level-2 rectangle">Director A</h2>
+                    <ol class="level-3-wrapper">
+                        <li>
+                        <h3 class="level-3 rectangle">Manager A</h3>
+                        <ol class="level-4-wrapper">
+                            <li>
+                            <h4 class="level-4 rectangle">Person A</h4>
+                            </li>
+                            <li>
+                            <h4 class="level-4 rectangle">Person B</h4>
+                            </li>
+                            <li>
+                            <h4 class="level-4 rectangle">Person C</h4>
+                            </li>
+                            <li>
+                            <h4 class="level-4 rectangle">Person D</h4>
+                            </li>
+                        </ol>
+                        </li>
+                        <li>
+                        <h3 class="level-3 rectangle">Manager B</h3>
+                        <ol class="level-4-wrapper">
+                            <li>
+                            <h4 class="level-4 rectangle">Person A</h4>
+                            </li>
+                            <li>
+                            <h4 class="level-4 rectangle">Person B</h4>
+                            </li>
+                            <li>
+                            <h4 class="level-4 rectangle">Person C</h4>
+                            </li>
+                            <li>
+                            <h4 class="level-4 rectangle">Person D</h4>
+                            </li>
+                        </ol>
+                        </li>
+                    </ol>
+                    </li> */}
+                </ol>
+            </div>
             <ol className="organizational-chart">
                 <li>
                     {
@@ -33,7 +148,10 @@ const OrgChart = () => {
                                     <div className="division-people">
                                     {
                                         org.filter((e) => e.division_id === division.filter((d) => d.sub_division_of === 0)[0].id).map(d => 
-                                            <div key={d.id}>
+                                            <div key={d.id} className="mb-5">
+                                                <div>
+                                                    <img src={d.img_path} className="img-avatar" alt={d.first_name + " " + d.middle_initial + " " + d.last_name} />
+                                                </div>
                                                 <span className="division-people">{d.first_name + " " + d.middle_initial + " " + d.last_name}</span>
                                                 <div className="division-position-description">{d.position_name}</div>
                                             </div>

@@ -1,260 +1,333 @@
-ol.organizational-chart,
-ol.organizational-chart ol,
-ol.organizational-chart li,
-ol.organizational-chart li > div {
-  position: relative;
-}
-ol.organizational-chart,
-ol.organizational-chart ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-ol.organizational-chart {
-  text-align: center;
-}
-ol.organizational-chart ol {
-  padding-top: 1em;
-}
-ol.organizational-chart ol:before,
-ol.organizational-chart ol:after,
-ol.organizational-chart li:before,
-ol.organizational-chart li:after,
-ol.organizational-chart > li > div:before,
-ol.organizational-chart > li > div:after {
-  background-color: #b7a6aa;
-  content: "";
-  position: absolute;
-}
-ol.organizational-chart ol > li {
-  padding: 1em 0 0 1em;
-}
-ol.organizational-chart > li ol:before {
-  height: 1em;
-  left: 50%;
-  top: 0;
-  width: 3px;
-}
-ol.organizational-chart > li ol:after {
-  height: 3px;
-  left: 3px;
-  top: 1em;
-  width: 50%;
-}
-ol.organizational-chart > li ol > li:not(:last-of-type):before {
-  height: 3px;
-  left: 0;
-  top: 2em;
-  width: 1em;
-}
-ol.organizational-chart > li ol > li:not(:last-of-type):after {
-  height: 100%;
-  left: 0;
-  top: 0;
-  width: 3px;
-}
-ol.organizational-chart > li ol > li:last-of-type:before {
-  height: 3px;
-  left: 0;
-  top: 2em;
-  width: 1em;
-}
-ol.organizational-chart > li ol > li:last-of-type:after {
-  height: 2em;
-  left: 0;
-  top: 0;
-  width: 3px;
-}
-ol.organizational-chart li > div {
-  background-color: #fff;
-  border-radius: 3px;
-  min-height: 2em;
-  padding: 0.5em;
-}
-/*** PRIMARY ***/
-ol.organizational-chart > li > div {
-  background-color: #e9f5ff;
-  margin-right: 1em;
-}
-ol.organizational-chart > li > div:before {
-  bottom: 2em;
-  height: 3px;
-  right: -1em;
-  width: 1em;
-}
-ol.organizational-chart > li > div:first-of-type:after {
-  bottom: 0;
-  height: 2em;
-  right: -1em;
-  width: 3px;
-}
-ol.organizational-chart > li > div + div {
-  margin-top: 1em;
-}
-ol.organizational-chart > li > div + div:after {
-  height: calc(100% + 1em);
-  right: -1em;
-  top: -1em;
-  width: 3px;
-}
-/*** SECONDARY ***/
-ol.organizational-chart > li > ol:before {
-  left: inherit;
-  right: 0;
-}
-ol.organizational-chart > li > ol:after {
-  left: 0;
-  width: 100%;
-}
-ol.organizational-chart > li > ol > li > div {
-  background-color: #e0f3f2;
-}
-/*** TERTIARY ***/
-ol.organizational-chart > li > ol > li > ol > li > div {
-  background-color: #fd6470;
-}
-/*** QUATERNARY ***/
-ol.organizational-chart > li > ol > li > ol > li > ol > li > div {
-  background-color: #fca858;
-}
-/*** QUINARY ***/
-ol.organizational-chart > li > ol > li > ol > li > ol > li > ol > li > div {
-  background-color: #fddc32;
-}
+/* RESET STYLES & HELPER CLASSES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  :root {
+    --level-1: #8dccad;
+    --level-2: #f5cc7f;
+    --level-3: #7b9fe0;
+    --level-4: #f27c8d;
+    --black: black;
+  }
 
-@media only screen and (min-width: 64em) {
-  ol.organizational-chart {
-    margin-left: -1em;
-    margin-right: -1em;
+  ol {
+    list-style: none;
   }
-  /* PRIMARY */
-  ol.organizational-chart > li > div {
-    display: inline-block;
-    float: none;
-    margin: 0 1em 1em 1em;
-    vertical-align: bottom;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-size: inherit;
   }
-  ol.organizational-chart > li > div:only-of-type {
-    margin-bottom: 0;
-    width: calc((100% / 1) - 2em - 4px);
+
+  .container1 {
+    max-width: 800px;
+    padding: 0 10px;
+    margin: 0 auto;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-column-gap: 20px;
+    grid-template-columns: auto auto;
   }
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(2),
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(2) ~ div {
-    width: calc((100% / 2) - 2em - 4px);
+
+  .rectangle {
+    position: relative;
+    padding: 20px;
+    width: 200px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   }
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(3),
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(3) ~ div {
-    width: calc((100% / 3) - 2em - 4px);
+
+
+  /* LEVEL-1 STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .level-1 {
+    background: var(--level-1);
   }
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(4),
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(4) ~ div {
-    width: calc((100% / 4) - 2em - 4px);
+
+  .level-1::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--black);
   }
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(5),
-  ol.organizational-chart > li > div:first-of-type:nth-last-of-type(5) ~ div {
-    width: calc((100% / 5) - 2em - 4px);
+
+
+  /* LEVEL-2 STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .level-2-wrapper {
+    position: relative;
+    padding-left: 20px;
+    border-left: 2px solid var(--black);
   }
-  ol.organizational-chart > li > div:before,
-  ol.organizational-chart > li > div:after {
-    bottom: -1em !important;
-    top: inherit !important;
-  }
-  ol.organizational-chart > li > div:before {
-    height: 1em !important;
-    left: 50% !important;
-    width: 3px !important;
-  }
-  ol.organizational-chart > li > div:only-of-type:after {
+
+  .level-2-wrapper::before {
     display: none;
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    width: 2px;
+    height: calc(100% + 40px);
+    background: var(--black);
   }
-  ol.organizational-chart > li > div:first-of-type:not(:only-of-type):after,
-  ol.organizational-chart > li > div:last-of-type:not(:only-of-type):after {
-    bottom: -1em;
-    height: 3px;
-    width: calc(50% + 1em + 3px);
-  }
-  ol.organizational-chart > li > div:first-of-type:not(:only-of-type):after {
-    left: calc(50% + 3px);
-  }
-  ol.organizational-chart > li > div:last-of-type:not(:only-of-type):after {
-    left: calc(-1em - 3px);
-  }
-  ol.organizational-chart > li > div + div:not(:last-of-type):after {
-    height: 3px;
-    left: -2em;
-    width: calc(100% + 4em);
-  }
-  /* SECONDARY */
-  ol.organizational-chart > li > ol {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-  ol.organizational-chart > li > ol:before,
-  ol.organizational-chart > li > ol > li:before {
-    height: 1em !important;
-    left: 50% !important;
-    top: 0 !important;
-    width: 3px !important;
-  }
-  ol.organizational-chart > li > ol:after {
+
+  .level-2-wrapper::after {
     display: none;
+    content: "";
+    position: absolute;
+    left: 10px;
+    bottom: -20px;
+    width: calc(100% - 10px);
+    height: 2px;
+    background: var(--black);
   }
-  ol.organizational-chart > li > ol > li {
-    flex-grow: 1;
-    padding-left: 1em;
-    padding-right: 1em;
-    padding-top: 1em;
+
+  .level-2-wrapper > li {
+    position: relative;
+    display: grid;
+    align-items: flex-start;
+    grid-column-gap: 20px;
+    grid-template-columns: auto auto;
   }
-  ol.organizational-chart > li > ol > li:only-of-type {
-    padding-top: 0;
+
+  .level-2-wrapper > li:last-child {
+    margin-top: 100px;
+    align-items: flex-end;
   }
-  ol.organizational-chart > li > ol > li:only-of-type:before,
-  ol.organizational-chart > li > ol > li:only-of-type:after {
+
+  .level-2 {
+    background: var(--level-2);
+  }
+
+  .level-2::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--black);
+  }
+
+  .level-2::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--black);
+  }
+
+
+  /* LEVEL-3 STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .level-3-wrapper {
+    position: relative;
+    top: 34px;
+    padding-left: 20px;
+    border-left: 2px solid var(--black);
+  }
+
+  .level-3-wrapper::before {
     display: none;
-  }
-  ol.organizational-chart > li > ol > li:first-of-type:not(:only-of-type):after,
-  ol.organizational-chart > li > ol > li:last-of-type:not(:only-of-type):after {
-    height: 3px;
+    content: "";
+    position: absolute;
     top: 0;
-    width: 50%;
+    left: 10px;
+    width: 2px;
+    height: 100%;
+    background: var(--black);
   }
-  ol.organizational-chart
-    > li
-    > ol
-    > li:first-of-type:not(:only-of-type):after {
-    left: 50%;
+
+  .level-3-wrapper::after {
+    display: none;
+    content: "";
+    position: absolute;
+    left: 10px;
+    bottom: 0px;
+    width: calc(100% - 10px);
+    height: 2px;
+    background: var(--black);
   }
-  ol.organizational-chart > li > ol > li:last-of-type:not(:only-of-type):after {
-    left: 0;
+
+  .level-3-wrapper > li {
+    display: grid;
+    grid-column-gap: 20px;
+    grid-template-columns: auto auto;
   }
-  ol.organizational-chart > li > ol > li + li:not(:last-of-type):after {
-    height: 3px;
-    left: 0;
+
+  .level-3-wrapper > li:last-child {
+    margin-top: 80px;
+  }
+
+  .level-2-wrapper > li:last-child .level-3-wrapper {
+    top: -34px;
+  }
+
+  .level-3 {
+    background: var(--level-3);
+  }
+
+  .level-3::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--black);
+  }
+
+  .level-3::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--black);
+  }
+
+
+  /* LEVEL-4 STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  .level-4-wrapper {
+    position: relative;
+    top: 34px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    padding-left: 20px;
+  }
+
+  .level-4-wrapper::before {
+    content: "";
+    position: absolute;
     top: 0;
-    width: 100%;
+    left: 0;
+    width: 2px;
+    height: 50%;
+    background: var(--black);
   }
-}
 
-.division-name {
-  font-size: 20px;
-  color: rgb(78, 58, 58);
-}
+  .level-3-wrapper > li:last-child .level-4-wrapper {
+    top: -34px;
+  }
 
-.division-people {
-  font-size: 1.5em;
-  font-weight: 600;
-  color: rgb(63, 63, 63);
-}
+  .level-3-wrapper > li:last-child .level-4-wrapper::before {
+    top: auto;
+    bottom: 0;
+  }
 
-.division-people-small {
-  font-size: 1em;
-  font-weight: 600;
-  color: rgb(63, 63, 63);
-}
+  .level-4 {
+    background: var(--level-4);
+  }
 
-.division-position-description {
-  font-size: 16px;
-  font-style: italic;
-  margin-bottom: 10px;
-  color: rgb(119, 119, 119);
-}
+  .level-4::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--black);
+  }
+
+
+  /* MQ STYLES
+  –––––––––––––––––––––––––––––––––––––––––––––––––– */
+  @media screen and (max-width: 1650px) {
+    .rectangle {
+      width: 150px;
+    }
+  }
+
+  @media screen and (max-width: 1300px) {
+    body {
+      font-size: 16px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-size: revert;
+    }
+
+    .rectangle {
+      padding: 20px 10px;
+      width: auto;
+    }
+
+    .container {
+      display: block;
+    }
+
+    .level-1 {
+      margin-bottom: 20px;
+    }
+
+    .level-1::before,
+    .level-2::after,
+    .level-3::after {
+      display: none;
+    }
+
+    .level-2-wrapper::before,
+    .level-2-wrapper::after,
+    .level-3-wrapper::before,
+    .level-3-wrapper::after,
+    .level-2-wrapper > li,
+    .level-3-wrapper > li {
+      display: block;
+    }
+
+    .level-2-wrapper {
+      padding-left: 30px;
+      border-left: none;
+    }
+
+    .level-2-wrapper > li:last-child {
+      margin-top: 50px;
+    }
+
+    .level-2-wrapper > li:last-child .level-3-wrapper,
+    .level-3-wrapper > li:last-child .level-4-wrapper,
+    .level-3-wrapper,
+    .level-4-wrapper {
+      top: 0;
+    }
+
+    .level-3-wrapper {
+      padding: 20px 0 20px 30px;
+      border-left: none;
+    }
+
+    .level-3-wrapper > li:last-child {
+      margin-top: 50px;
+    }
+
+    .level-4-wrapper {
+      padding: 20px 0 0 30px;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .level-4-wrapper > li:first-child {
+      margin-bottom: 20px;
+    }
+
+    .level-4-wrapper::before {
+      left: 10px;
+      height: 100%;
+    }
+  }

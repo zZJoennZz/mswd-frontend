@@ -5,11 +5,14 @@ import {
     Row,
     Col,
     Table
-} from 'react-bootstrap'
+} from 'react-bootstrap';
+
+import { barangays } from 'select-philippines-address';
 
 const ApplicationFormSoloParent = ({ appData, appFiles }) => {
     let famCom = appData.fam_composition.split('\n');
     let [famComArr, setFamComArr] = React.useState(false);
+    let [brgyList, setBrgyList] = React.useState(false);
 
     useEffect(() => {
         const getFamCom = () => {
@@ -21,7 +24,13 @@ const ApplicationFormSoloParent = ({ appData, appFiles }) => {
             setFamComArr(allParts);
         }
         getFamCom();
-    }, [famCom])
+
+        barangays('031422').then((barangays) => {
+            setBrgyList(barangays)
+        });
+
+        // eslint-disable-next-line
+    }, [])
 
     return (
         <Container fluid style={{ border: "1px solid #000" }} className="p-4">
@@ -51,7 +60,7 @@ const ApplicationFormSoloParent = ({ appData, appFiles }) => {
             </Row>
             <Row className="mb-3">
                 <Col md={12}>
-                    <strong>Address:</strong> {appData.address}
+                    <strong>Address:</strong> {appData.houseno}, {appData.street}, { brgyList !== false ? brgyList.filter((brgy) => brgy.brgy_code === appData.barangay)[0].brgy_name : "" }, San Rafael, Bulacan
                 </Col>
             </Row>
             <Row className="mb-3">
