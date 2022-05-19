@@ -38,6 +38,10 @@ const Admin = () => {
     let [isLoading, setIsLoading] = useState(true);
     let [dashCtr, setDashCtr] = useState(false);
     let [currId, setCurrId] = useState(0);
+    let [currName, setCurrName] = useState({
+        'name' : '',
+        'last_name' : ''
+    });
 
     const checkToken = async () => {
         setIsLoading(true);
@@ -46,6 +50,10 @@ const Admin = () => {
             let res = await api.post("validate");
             if (res.data.success) {
                 setCurrId(res.data.id);
+                setCurrName({
+                    'name' : res.data.name,
+                    'last_name' : res.data.last_name,
+                });
                 setIsAuth(true);
             } else {
                 setCurrId(0);
@@ -96,7 +104,7 @@ const Admin = () => {
                 :   
                     isAuth ?
                         <>
-                            <AdminNavBar logOut={logOut} />
+                            <AdminNavBar currentUser={currName} logOut={logOut} />
                             <Container fluid>
                                 <Row>
                                     <Col as="nav" id="sidebar" md={3} lg={2} className="d-md-block bg-light sidebar">

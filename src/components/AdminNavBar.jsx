@@ -3,7 +3,7 @@ import {
     Dropdown
 } from 'react-bootstrap';
 
-const AdminNavBar = ({ logOut }) => {
+const AdminNavBar = ({ currentUser, logOut }) => {
 
     return (
         <nav className="navbar navbar-light bg-light p-3">
@@ -20,7 +20,7 @@ const AdminNavBar = ({ logOut }) => {
                 <div className="dropdown">
                     <Dropdown>
                         <Dropdown.Toggle variant="secondary" id="dropdownMenuButton">
-                            Hello, Admin!
+                            Hello, {currentUser.name}!
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
