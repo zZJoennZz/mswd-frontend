@@ -585,7 +585,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label>
+              <Form.Label>Status (Katayuan)</Form.Label>
               <Form.Select
                 required
                 name="status"
@@ -630,7 +630,10 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Highest Educational Attainment</Form.Label>
+              <Form.Label>
+                Highest Educational Attainment (Pinakamataas na tinapos sa
+                edukasyon)
+              </Form.Label>
               {/* <Form.Control required type="text" name="hea" id="hea" onChange={textOnChange} /> */}
               <Form.Select
                 required
@@ -649,7 +652,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Profession</Form.Label>
+              <Form.Label>Profession (Propesyon)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -663,7 +666,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Course</Form.Label>
+              <Form.Label>Course (Kurso)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -675,7 +678,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Skills</Form.Label>
+              <Form.Label>Skills (Mga kasanayan)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -689,7 +692,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Pensioner</Form.Label>
+              <Form.Label>Pensioner (Pensiyon)</Form.Label>
               <Form.Select
                 required
                 type="text"
@@ -733,7 +736,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>Ethnicity</Form.Label>
+              <Form.Label>Ethnicity (Etniko)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -745,7 +748,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>Organization</Form.Label>
+              <Form.Label>Organization (Organisasiyon)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -759,7 +762,9 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
         <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
-              <Form.Label>Health/Physical Condition</Form.Label>
+              <Form.Label>
+                Health/Physical Condition (Pisikal na kalagayan)
+              </Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -773,7 +778,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
         <Row>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>Contact No. Mobile</Form.Label>
+              <Form.Label>Contact No. Mobile (Numerong tatawagan)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -811,7 +816,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
         <Row>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>ID Shown</Form.Label>
+              <Form.Label>ID Shown (Uri ng ID)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -823,7 +828,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>Issued By</Form.Label>
+              <Form.Label>Issued By (Ibinigay ni/ng)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -835,7 +840,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>Photo</Form.Label>
+              <Form.Label>Photo (Litrato)</Form.Label>
               <Form.Select
                 required
                 type="text"
@@ -853,7 +858,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
         <Row>
           <Col md={5}>
             <Form.Group className="mb-3">
-              <Form.Label>Issued On</Form.Label>
+              <Form.Label>Issued On (Ibinigay sa)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -865,7 +870,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={7}>
             <Form.Group className="mb-3">
-              <Form.Label>Place of Issue</Form.Label>
+              <Form.Label>Place of Issue (Lugar ng pinagbigyan)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -879,7 +884,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Contact Person</Form.Label>
+              <Form.Label>Contact Person (Taong ugnayan)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -891,7 +896,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Relationship</Form.Label>
+              <Form.Label>Relationship (Relasypn sa taong ugnayan)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -917,7 +922,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Contact No.</Form.Label>
+              <Form.Label>Contact No. (Numerong tatawagan)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -1135,7 +1140,11 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
                     I hereby certify that the information given above are true
                     and correct. I further understand that any misinterpretation
                     that may have made will subject me to criminal and civil
-                    liabilities provided for by existing laws;
+                    liabilities provided for by existing laws; (Pinatototohanan
+                    ko na ang impormasyong ibinigay sa itaas ay totoo at tama.
+                    Nauunawaan ko pa na anumang maling kahulugan na maaaring
+                    nagpasailalim sa akin sa mga kriminal at pananagutan sa
+                    sibil na inilaan para sa umiiral na mga batas;)
                   </Form.Label>
                   <Form.Label
                     onClick={handleOpen}

@@ -1,6 +1,6 @@
 /* RESET STYLES & HELPER CLASSES
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  :root {
+  /* :root {
     --level-1: #8dccad;
     --level-2: #f5cc7f;
     --level-3: #7b9fe0;
@@ -40,7 +40,7 @@
 
   /* LEVEL-1 STYLES
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  .level-1 {
+  /* .level-1 {
     background: var(--level-1);
   }
 
@@ -53,12 +53,12 @@
     width: 20px;
     height: 2px;
     background: var(--black);
-  }
+  } */
 
 
   /* LEVEL-2 STYLES
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  .level-2-wrapper {
+  /* .level-2-wrapper {
     position: relative;
     padding-left: 20px;
     border-left: 2px solid var(--black);
@@ -123,12 +123,12 @@
     width: 20px;
     height: 2px;
     background: var(--black);
-  }
+  } */
 
 
   /* LEVEL-3 STYLES
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  .level-3-wrapper {
+  /* .level-3-wrapper {
     position: relative;
     top: 34px;
     padding-left: 20px;
@@ -195,12 +195,12 @@
     width: 20px;
     height: 2px;
     background: var(--black);
-  }
+  } */
 
 
   /* LEVEL-4 STYLES
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  .level-4-wrapper {
+  /* .level-4-wrapper {
     position: relative;
     top: 34px;
     display: grid;
@@ -241,18 +241,18 @@
     width: 20px;
     height: 2px;
     background: var(--black);
-  }
+  } */
 
 
   /* MQ STYLES
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  @media screen and (max-width: 1650px) {
+  /* @media screen and (max-width: 1650px) {
     .rectangle {
       width: 150px;
     }
-  }
+  }  */
 
-  @media screen and (max-width: 1300px) {
+  /* @media screen and (max-width: 1300px) {
     body {
       font-size: 16px;
     }
@@ -330,4 +330,39 @@
       left: 10px;
       height: 100%;
     }
+  } */
+
+  .org-img {
+    border-radius: 90%;
+    border: #fff solid 10px;
+    box-shadow: rgb(189, 216, 232) 0px 2px 7px;
+    height: 80px;
+    width: 80px;
   }
+
+  .org-person {
+    font-size: 19px;
+    font-weight: bold;
+  }
+
+  .org-position {
+    font-size: 16px;
+    font-style: italic;
+  }
+
+  .org-person-sm {
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  .org-position-sm {
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  .division-name {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px;
+  }
+  

@@ -622,7 +622,10 @@ const IdAppliSoloParent = ({ submitApplication }) => {
         <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
-              <Form.Label>Highest Educational Attainment</Form.Label>
+              <Form.Label>
+                Highest Educational Attainment (Pinakamataas na kalakip sa
+                edukasyon)
+              </Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -676,7 +679,7 @@ const IdAppliSoloParent = ({ submitApplication }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Contact Number</Form.Label>
+              <Form.Label>Contact Number (Numero na kokontakin)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -690,7 +693,10 @@ const IdAppliSoloParent = ({ submitApplication }) => {
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Contact person in case of emergency</Form.Label>
+              <Form.Label>
+                Contact person in case of emergency (Ang taong kontakin sa kaso
+                ng emergency)
+              </Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -702,7 +708,7 @@ const IdAppliSoloParent = ({ submitApplication }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Contact Number</Form.Label>
+              <Form.Label>Contact Number (Numero na kokontakin)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -721,7 +727,10 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                 SA BAHAY)
               </Form.Label>
               <div>
-                <small>Use form below to add each family members</small>
+                <small>
+                  Use form below to add each family members (Gamitin ang form sa
+                  ibaba para idagdag ang bawat miyembro ng pamilya)
+                </small>
               </div>
               <Row className="mb-3">
                 <Col lg={2} className="mb-sm-1">
@@ -811,7 +820,11 @@ const IdAppliSoloParent = ({ submitApplication }) => {
             >
               Clear Family Composition
             </Button>
-            <p>Include family members and other members of the household.</p>
+            <p>
+              Include family members and other members of the household. (Isama
+              ang mga miyembro ng pamilya at iba pang mga miyembro ng
+              sambayanan)
+            </p>
           </Col>
         </Row>
         <Row>
@@ -851,7 +864,9 @@ const IdAppliSoloParent = ({ submitApplication }) => {
         <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
-              <Form.Label>IV. Family Resources:</Form.Label>
+              <Form.Label>
+                IV. Family Resources: (Mga mapagkukunan ng pamilya)
+              </Form.Label>
               <Form.Control
                 required
                 as="textarea"
@@ -867,7 +882,8 @@ const IdAppliSoloParent = ({ submitApplication }) => {
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>
-                Picture in white background (1x1) PNG ONLY
+                Picture in white background (1x1) PNG ONLY (Larawan sa puting
+                background)
               </Form.Label>
               <Form.Control
                 required
@@ -881,7 +897,10 @@ const IdAppliSoloParent = ({ submitApplication }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Signature over printed name PNG ONLY</Form.Label>
+              <Form.Label>
+                Signature over printed name PNG ONLY (Lagda sa ibabaw ng
+                pangalan)
+              </Form.Label>
               <Form.Control
                 required
                 type="file"
@@ -940,7 +959,11 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                     I hereby certify that the information given above are true
                     and correct. I further understand that any misinterpretation
                     that may have made will subject me to criminal and civil
-                    liabilities provided for by existing laws;
+                    liabilities provided for by existing laws; (Pinatototohanan
+                    ko na ang impormasyong ibinigay sa itaas ay totoo at tama.
+                    Nauunawaan ko pa na anumang maling kahulugan na maaaring
+                    nagpasailalim sa akin sa mga kriminal at pananagutan sa
+                    sibil na inilaan para sa umiiral na mga batas;)
                   </Form.Label>
                   <Form.Label
                     onClick={handleOpen}

@@ -624,7 +624,9 @@ const IdAppliPwd = ({ submitApplication }) => {
         <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
-              <Form.Label>7. Contact Details</Form.Label>
+              <Form.Label>
+                7. Contact Details (Detalye ng pakikipag-ugnayan)
+              </Form.Label>
               <Row>
                 <Col md={3}>
                   <Form.Control
@@ -685,7 +687,7 @@ const IdAppliPwd = ({ submitApplication }) => {
           </Col>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>10. Civil Status</Form.Label>
+              <Form.Label>10. Civil Status (Katayuang sibil)</Form.Label>
               <Form.Select name="cs" id="cs" required onChange={textOnChange}>
                 <option value={0}>Select</option>
                 <option value={1}>Single</option>
@@ -700,7 +702,9 @@ const IdAppliPwd = ({ submitApplication }) => {
         <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
-              <Form.Label>11. Educational Attainment</Form.Label>
+              <Form.Label>
+                11. Educational Attainment (Tinapos sa edukasyon)
+              </Form.Label>
               <div>
                 {educ_attain.map((d) => (
                   <Form.Check
@@ -721,7 +725,9 @@ const IdAppliPwd = ({ submitApplication }) => {
         <Row>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>12. Employment Status</Form.Label>{" "}
+              <Form.Label>
+                12. Employment Status (Katayuan sa trabaho)
+              </Form.Label>
               <Form.Text>Please select if employed</Form.Text>
               <Form.Select name="es" id="es" required onChange={textOnChange}>
                 <option value={0}>Select</option>
@@ -732,7 +738,7 @@ const IdAppliPwd = ({ submitApplication }) => {
           </Col>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>13. Type of Employment</Form.Label>{" "}
+              <Form.Label>13. Type of Employment (Uri ng trabaho)</Form.Label>
               <Form.Text>Please select if employed</Form.Text>
               {frmData.es === "1" ? (
                 <Form.Select
@@ -752,7 +758,9 @@ const IdAppliPwd = ({ submitApplication }) => {
           </Col>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>14. Type of Employer</Form.Label>{" "}
+              <Form.Label>
+                14. Type of Employer (Uri ng pinagta-trabahuan)
+              </Form.Label>
               <Form.Text>Please select if employed</Form.Text>
               {frmData.es === "1" ? (
                 <Form.Select
@@ -864,7 +872,7 @@ const IdAppliPwd = ({ submitApplication }) => {
             </Row>
             <Row>
               <Form.Group className="mb-3">
-                <Form.Label>17. Blood Type</Form.Label>
+                <Form.Label>17. Blood Type (Uri ng iyong dugo)</Form.Label>
                 <Form.Select name="bt" id="bt" onChange={textOnChange}>
                   <option value={0}>Select</option>
                   <option value={1}>A+</option>
@@ -880,7 +888,10 @@ const IdAppliPwd = ({ submitApplication }) => {
             </Row>
             <Row>
               <Form.Group className="mb-3">
-                <Form.Label>18. Organization Information</Form.Label>
+                <Form.Label>
+                  18. Organization Information (Impormasyon tungkol sa
+                  organisasyon)
+                </Form.Label>
                 <Form.Control
                   required
                   className="mb-1"
@@ -996,7 +1007,9 @@ const IdAppliPwd = ({ submitApplication }) => {
               </Col>
             </Row>
             <Col md={12}>
-              <Form.Label>Guardian's Name</Form.Label>
+              <Form.Label>
+                Guardian's Name (Pangalan ng tagapangalaga)
+              </Form.Label>
             </Col>
             <Row className="mb-3">
               <Col md={4}>
@@ -1031,7 +1044,7 @@ const IdAppliPwd = ({ submitApplication }) => {
               </Col>
             </Row>
             <Col md={12}>
-              <Form.Label>20. Accomplished By</Form.Label>
+              <Form.Label>20. Accomplished By (Naisagawa ni)</Form.Label>
             </Col>
             <Row className="mb-3">
               <Col md={4}>
@@ -1066,7 +1079,9 @@ const IdAppliPwd = ({ submitApplication }) => {
               </Col>
             </Row>
             <Col md={12}>
-              <Form.Label>20a. Name of Reporting Unit</Form.Label>
+              <Form.Label>
+                20a. Name of Reporting Unit (Pangalan ng pag-uulat ng unit)
+              </Form.Label>
             </Col>
             <Row>
               <Col md={4}>
@@ -1105,7 +1120,9 @@ const IdAppliPwd = ({ submitApplication }) => {
         <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
-              <Form.Label>21. Registration Number</Form.Label>
+              <Form.Label>
+                21. Registration Number (Numero ng pagpaparehistro)
+              </Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -1120,7 +1137,8 @@ const IdAppliPwd = ({ submitApplication }) => {
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>
-                Picture in white background (1x1) PNG ONLY
+                Picture in white background (1x1) PNG ONLY (Larawan sa puting
+                background)
               </Form.Label>
               <Form.Control
                 required
@@ -1134,7 +1152,10 @@ const IdAppliPwd = ({ submitApplication }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Signature over printed name. PNG ONLY</Form.Label>
+              <Form.Label>
+                Signature over printed name. PNG ONLY (Lagda sa ibabaw ng
+                pangalan)
+              </Form.Label>
               <Form.Control
                 required
                 type="file"
@@ -1192,7 +1213,11 @@ const IdAppliPwd = ({ submitApplication }) => {
                     I hereby certify that the information given above are true
                     and correct. I further understand that any misinterpretation
                     that may have made will subject me to criminal and civil
-                    liabilities provided for by existing laws;
+                    liabilities provided for by existing laws; (Pinatototohanan
+                    ko na ang impormasyong ibinigay sa itaas ay totoo at tama.
+                    Nauunawaan ko pa na anumang maling kahulugan na maaaring
+                    nagpasailalim sa akin sa mga kriminal at pananagutan sa
+                    sibil na inilaan para sa umiiral na mga batas;)
                   </Form.Label>
                   <Form.Label
                     onClick={handleOpen}
