@@ -1,24 +1,24 @@
 import React from "react";
 
-import axios from "axios";
+// import axios from "axios";
 
 import "./orgchart.css";
 
 import { Container, Row, Col } from "react-bootstrap";
 
 const OrgChart = () => {
-  let [division, setDivision] = React.useState(false);
-  let [org, setOrg] = React.useState(false);
+  // let [division, setDivision] = React.useState(false);
+  // let [org, setOrg] = React.useState(false);
 
-  React.useEffect(() => {
-    const getData = async () => {
-      let divRes = await axios.get(`${process.env.REACT_APP_API}org/division`);
-      setDivision(divRes.data.data);
-      let orgRes = await axios.get(`${process.env.REACT_APP_API}org`);
-      setOrg(orgRes.data.data);
-    };
-    getData();
-  }, []);
+  // React.useEffect(() => {
+  //   const getData = async () => {
+  //     let divRes = await axios.get(`${process.env.REACT_APP_API}org/division`);
+  //     setDivision(divRes.data.data);
+  //     let orgRes = await axios.get(`${process.env.REACT_APP_API}org`);
+  //     setOrg(orgRes.data.data);
+  //   };
+  //   getData();
+  // }, []);
   return (
     <>
       {/* <div style={{ textAlign: 'left', paddingBottom: '20px' }}>
