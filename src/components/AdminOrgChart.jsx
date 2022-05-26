@@ -167,7 +167,6 @@ const AdminOrgChart = () => {
       style={{ maxHeight: "500px", overflow: "auto" }}
       fluid
     >
-      <h3>Organization</h3>
       {/* <Button onClick={openModal.bind(this, "new")} className="mb-3">
         Add New
       </Button> */}
@@ -261,9 +260,10 @@ const NewOrgChart = ({ textOnChange }) => {
             <Form.Select
               name="person_id"
               id="person_id"
+              defaultValue={0}
               onChange={textOnChange}
             >
-              <option disabled>Select</option>
+              <option value={0}>Select</option>
               {!personList
                 ? "Loading..."
                 : personList.map((d) => (
@@ -286,9 +286,10 @@ const NewOrgChart = ({ textOnChange }) => {
             <Form.Select
               name="position_id"
               id="position_id"
+              defaultValue={0}
               onChange={textOnChange}
             >
-              <option disabled>Select</option>
+              <option value={0}>Select</option>
               {!positionList
                 ? "Loading..."
                 : positionList.map((d) => (
@@ -308,8 +309,9 @@ const NewOrgChart = ({ textOnChange }) => {
               name="division_id"
               id="division_id"
               onChange={textOnChange}
+              defaultValue={0}
             >
-              <option disabled>Select</option>
+              <option value={0}>Select</option>
               {!divisionList
                 ? "Loading..."
                 : divisionList.map((d) => (

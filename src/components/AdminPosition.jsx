@@ -1,6 +1,5 @@
 import React from "react";
-//import { Link } from 'react-router-dom';
-import { Container, Table, Spinner, Form } from "react-bootstrap";
+import { Container, Table, Spinner, Form, Button } from "react-bootstrap";
 
 import axios from "axios";
 
@@ -181,9 +180,9 @@ const AdminPosition = () => {
       style={{ maxHeight: "500px", overflow: "auto" }}
       fluid
     >
-      <h3>Positions</h3>
-
-      {/* <Button onClick={openModal.bind(this, 'new')} className="mb-3">Add New</Button> */}
+      <Button onClick={openModal.bind(this, "new")} className="mb-3">
+        Add New
+      </Button>
       {!position ? (
         <div>
           <Spinner animation="border" />
@@ -249,6 +248,7 @@ const NewPosition = ({ textPosName, textPosDesc }) => {
           name="position_name"
           id="position_name"
           onChange={textPosName}
+          required
         />
       </Form.Group>
       <Form.Group className="mb-3">
@@ -258,6 +258,7 @@ const NewPosition = ({ textPosName, textPosDesc }) => {
           name="position_desc"
           id="position_desc"
           onChange={textPosDesc}
+          required
         />
       </Form.Group>
     </Form>
@@ -280,6 +281,7 @@ const EditPosition = ({
           name="position_name"
           id="position_name"
           onChange={textPosName}
+          required
         />
       </Form.Group>
       <Form.Group className="mb-3">
@@ -290,6 +292,7 @@ const EditPosition = ({
           name="position_desc"
           id="position_desc"
           onChange={textPosDesc}
+          required
         />
       </Form.Group>
     </Form>

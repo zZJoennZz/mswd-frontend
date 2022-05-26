@@ -72,6 +72,7 @@ const AdminLogin = ({ checkAuth }) => {
                       name="username"
                       id="username"
                       placeholder="Enter email"
+                      required
                     />
                   </Form.Group>
 
@@ -83,6 +84,7 @@ const AdminLogin = ({ checkAuth }) => {
                       name="password"
                       id="password"
                       placeholder="Password"
+                      required
                     />
                   </Form.Group>
 

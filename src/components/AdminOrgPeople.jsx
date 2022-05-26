@@ -261,8 +261,6 @@ const AdminOrgPeople = () => {
       style={{ maxHeight: "500px", overflow: "auto" }}
       fluid
     >
-      <h3>People</h3>
-
       <Button onClick={openModal.bind(this, "new")} className="mb-3">
         Add New
       </Button>
@@ -346,6 +344,7 @@ const NewPerson = ({ textOnChange, fileOnChange }) => {
               name="first_name"
               id="first_name"
               onChange={textOnChange}
+              required
             />
           </Form.Group>
         </Col>
@@ -357,6 +356,7 @@ const NewPerson = ({ textOnChange, fileOnChange }) => {
               name="middle_initial"
               id="middle_initial"
               onChange={textOnChange}
+              required
             />
           </Form.Group>
         </Col>
@@ -368,6 +368,7 @@ const NewPerson = ({ textOnChange, fileOnChange }) => {
               name="last_name"
               id="last_name"
               onChange={textOnChange}
+              required
             />
           </Form.Group>
         </Col>
@@ -402,6 +403,7 @@ const NewPerson = ({ textOnChange, fileOnChange }) => {
               name="birthday"
               id="birthday"
               onChange={textOnChange}
+              required
             />
           </Form.Group>
         </Col>
@@ -413,6 +415,7 @@ const NewPerson = ({ textOnChange, fileOnChange }) => {
               name="file"
               id="file"
               onChange={fileOnChange}
+              required
             />
           </Form.Group>
         </Col>

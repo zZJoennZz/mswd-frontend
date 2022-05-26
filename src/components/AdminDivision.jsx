@@ -145,8 +145,6 @@ const AdminDivision = () => {
 
   return (
     <Container style={{ maxHeight: "500px", overflow: "auto" }} fluid>
-      <h3>Divisions</h3>
-
       {/* <Button onClick={openModal.bind(this, 'new')} className="mb-3">Add New</Button> */}
       {!division ? (
         <div>
@@ -204,6 +202,7 @@ const NewDivision = ({ textOnCh }) => {
           name="division_name"
           id="division_name"
           onChange={textOnCh}
+          required
         />
       </Form.Group>
     </Form>
@@ -221,6 +220,7 @@ const EditDivision = ({ divName, textOnCh }) => {
           name="division_name"
           id="division_name"
           onChange={textOnCh}
+          required
         />
       </Form.Group>
     </Form>
