@@ -32,33 +32,33 @@ const AdminSettings = ({ userId }) => {
     }
   };
 
-  const onSubmitSaveUser = async (frmDat, userId) => {
-    let data = {
-      name: frmDat.name,
-      last_name: frmDat.last_name,
-      email: frmDat.email,
-      password: frmDat.password,
-    };
-    try {
-      await api
-        .put(`updatesingle/${userId}`, data)
-        .then((res) => {
-          setShowToast(true);
-          setToastMsg("Account changes successfully saved.");
-        })
-        .catch((err) => {
-          setShowToast(true);
-          setToastMsg(
-            "Something went wrong. User changes is not saved. Please refresh the page or contact website administrator."
-          );
-        });
-    } catch (error) {
-      setShowToast(true);
-      setToastMsg(
-        "Something went wrong. User changes is not saved. Please refresh the page or contact website administrator."
-      );
-    }
-  };
+  // const onSubmitSaveUser = async (frmDat, userId) => {
+  //   let data = {
+  //     name: frmDat.name,
+  //     last_name: frmDat.last_name,
+  //     email: frmDat.email,
+  //     password: frmDat.password,
+  //   };
+  //   try {
+  //     await api
+  //       .put(`updatesingle/${userId}`, data)
+  //       .then((res) => {
+  //         setShowToast(true);
+  //         setToastMsg("Account changes successfully saved.");
+  //       })
+  //       .catch((err) => {
+  //         setShowToast(true);
+  //         setToastMsg(
+  //           "Something went wrong. User changes is not saved. Please refresh the page or contact website administrator."
+  //         );
+  //       });
+  //   } catch (error) {
+  //     setShowToast(true);
+  //     setToastMsg(
+  //       "Something went wrong. User changes is not saved. Please refresh the page or contact website administrator."
+  //     );
+  //   }
+  // };
 
   const onSubmitAddNew = async (e) => {
     e.preventDefault();
@@ -178,10 +178,7 @@ const AdminSettings = ({ userId }) => {
                     ""
                   ) : (
                     <Tab.Pane eventKey="manage-user">
-                      <AdminUserList
-                        saveChanges={onSubmitSaveUser}
-                        usrList={userList}
-                      />
+                      <AdminUserList usrList={userList} />
                     </Tab.Pane>
                   )}
                 </Tab.Content>

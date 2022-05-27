@@ -20,6 +20,7 @@ import AdminFAQs from "./AdminFAQs";
 import AdminFAQNew from "./AdminFAQNew";
 import AdminFAQSingle from "./AdminFAQSingle";
 import AdminOrganization from "./AdminOrganization";
+import AdminEditUser from "../components/AdminEditUser";
 // import AdminDivision from './AdminDivision';
 
 import { Routes, Route } from "react-router-dom";
@@ -169,6 +170,11 @@ const Admin = () => {
                     exact
                     path="/organization"
                     element={<AdminOrganization />}
+                  />
+                  <Route
+                    exact
+                    path="/settings/user/:userId"
+                    element={<AdminEditUser />}
                   />
                 </Routes>
               </Col>

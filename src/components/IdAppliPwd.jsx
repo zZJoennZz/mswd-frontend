@@ -10,7 +10,7 @@ import {
   Modal,
 } from "react-bootstrap";
 
-import apifrm from "../api/apifrm";
+import axios from "axios";
 
 import { barangays } from "select-philippines-address";
 
@@ -147,7 +147,12 @@ const IdAppliPwd = ({ submitApplication }) => {
   const submitForm = async (e) => {
     setIsSubmit(true);
     e.preventDefault();
-
+    let headers = {
+      Authorization: localStorage.getItem("token"),
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Allow-Control-Allow-Origin": "*",
+    };
     //console.log(frmData);
     try {
       let formData = new FormData();
@@ -158,7 +163,11 @@ const IdAppliPwd = ({ submitApplication }) => {
         formData.append(`docs[${i}]`, docs[i]);
       }
 
-      let res = await apifrm.post("application/post", formData);
+      let res = await axios.post(
+        `${process.env.REACT_APP_API}application/post`,
+        formData,
+        { headers }
+      );
       submitApplication(res.data.application_id);
       setIsSubmit(false);
     } catch (error) {
