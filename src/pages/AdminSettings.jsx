@@ -139,7 +139,7 @@ const AdminSettings = ({ userId }) => {
             <Row>
               <Col sm={3}>
                 <Nav variant="pills" className="flex-column">
-                  {userId !== 4 ? (
+                  {userId !== 1 ? (
                     ""
                   ) : (
                     <Nav.Item style={{ cursor: "pointer" }}>
@@ -149,7 +149,7 @@ const AdminSettings = ({ userId }) => {
                   <Nav.Item style={{ cursor: "pointer" }}>
                     <Nav.Link eventKey="manage">Manage Account</Nav.Link>
                   </Nav.Item>
-                  {userId !== 4 ? (
+                  {userId !== 1 ? (
                     ""
                   ) : (
                     <Nav.Item style={{ cursor: "pointer" }}>
