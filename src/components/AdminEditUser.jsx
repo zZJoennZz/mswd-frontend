@@ -4,6 +4,7 @@ import { Row, Col, Form, Button, Container } from "react-bootstrap";
 import axios from "axios";
 
 const AdminEditUser = () => {
+  const [isShowPass, setIsShowPass] = React.useState(false);
   let { userId } = useParams();
   let [userDetail, setUserDetail] = React.useState({
     name: "",
@@ -112,10 +113,17 @@ const AdminEditUser = () => {
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>Password</Form.Label>{" "}
+                <span
+                  className="small text-primary"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setIsShowPass(!isShowPass)}
+                >
+                  {isShowPass ? "Hide password" : "Show password"}
+                </span>
                 <Form.Control
                   onChange={onChangeText}
-                  type="password"
+                  type={isShowPass ? "text" : "password"}
                   name="password"
                   id="password"
                 />

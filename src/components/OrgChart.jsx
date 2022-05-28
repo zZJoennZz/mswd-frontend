@@ -6,6 +6,8 @@ import "./orgchart.css";
 
 import { Container, Row, Col } from "react-bootstrap";
 
+import sanRafaelLogo from "../img/sanrafaellogo.png";
+
 const OrgChart = () => {
   let [division, setDivision] = React.useState(false);
   let [org, setOrg] = React.useState(false);
@@ -30,26 +32,40 @@ const OrgChart = () => {
     return (
       <>
         <Container className="text-center border pt-3 mb-5 rounded" fluid>
-          <Row>
+          <Row className="mb-5">
+            <Col lg={2}>
+              <img
+                src={sanRafaelLogo}
+                height={150}
+                width={150}
+                alt="San Rafael, Bulacan Logo"
+              />
+            </Col>
             <Col
-              lg={12}
+              className="mb-5"
+              lg={10}
               style={{
-                fontSize: "25px",
-                fontWeight: "600",
                 marginBottom: "20px",
               }}
             >
-              Organization
+              <div className="text-start pt-4">
+                <span style={{ fontSize: "2rem", fontWeight: "bold" }}>
+                  Organizational Chart
+                </span>
+                <br />
+                <span style={{ fontSize: "1.5rem" }}>
+                  Municipal Social Welfare and Development Office
+                </span>
+              </div>
             </Col>
           </Row>
           <Row>
             <Col lg={4} style={{ padding: "0 40px" }}>
               <Row className="border rounded border-primary p-3">
                 <Col lg={12} className="text-center">
-                  <div className="org-person">
-                    Hon. Cipriano D. Violago, Jr.P
+                  <div className="org-person pt-3 pb-3">
+                    Office of Senior Citizens Affair / FSCAP
                   </div>
-                  <div className="org-position">Municipal Mayor</div>
                 </Col>
               </Row>
             </Col>
@@ -68,7 +84,7 @@ const OrgChart = () => {
                     }
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person">
                     {org[0].first_name +
                       " " +
@@ -83,7 +99,15 @@ const OrgChart = () => {
                 </Col>
               </Row>
             </Col>
-            <Col lg={4}>test</Col>
+            <Col lg={4} style={{ padding: "0 40px" }}>
+              <Row className="border rounded border-primary p-3">
+                <Col lg={12} className="text-center">
+                  <div className="org-person pt-3 pb-3">
+                    Persons with Disability (PWD) Federation
+                  </div>
+                </Col>
+              </Row>
+            </Col>
           </Row>
           <Row className="mt-2 mb-2">
             <Col lg={12}>
@@ -105,7 +129,15 @@ const OrgChart = () => {
             </Col>
           </Row>
           <Row>
-            <Col lg={4}>test</Col>
+            <Col lg={4} style={{ padding: "0 40px" }}>
+              <Row className="border rounded border-primary p-3">
+                <Col lg={12} className="text-center">
+                  <div className="org-person pt-3 pb-3">
+                    Solo Parents Federation of San Rafael
+                  </div>
+                </Col>
+              </Row>
+            </Col>
             <Col lg={4}>
               <Row className="border pt-4 pb-4 rounded border-primary">
                 <Col lg={4}>
@@ -121,7 +153,7 @@ const OrgChart = () => {
                     }
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person">
                     {org[1].first_name +
                       " " +
@@ -158,7 +190,15 @@ const OrgChart = () => {
             </Col>
           </Row>
           <Row>
-            <Col lg={4}>test</Col>
+            <Col lg={4} style={{ padding: "0 40px" }}>
+              <Row className="border rounded border-primary p-3">
+                <Col lg={12} className="text-center">
+                  <div className="org-person pt-3 pb-3">
+                    Pag-asa Youth Association (PYA)
+                  </div>
+                </Col>
+              </Row>
+            </Col>
             <Col lg={4}>
               <Row className="border pt-4 pb-4 rounded border-primary">
                 <Col lg={4}>
@@ -174,7 +214,7 @@ const OrgChart = () => {
                     }
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person">
                     {org[2].first_name +
                       " " +
@@ -189,7 +229,15 @@ const OrgChart = () => {
                 </Col>
               </Row>
             </Col>
-            <Col lg={4}>test</Col>
+            <Col lg={4} style={{ padding: "0 40px" }}>
+              <Row className="border rounded border-primary p-3">
+                <Col lg={12} className="text-center">
+                  <div className="org-person pt-3 pb-3">
+                    Konsehong Pambayan Para sa Kababaihan (KPK)
+                  </div>
+                </Col>
+              </Row>
+            </Col>
           </Row>
           <Row>
             <Col lg={12}>
@@ -233,7 +281,7 @@ const OrgChart = () => {
                     }
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[3].first_name +
                       " " +
@@ -255,7 +303,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[4].first_name +
                       " " +
@@ -277,7 +325,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[5].first_name +
                       " " +
@@ -299,7 +347,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[6].first_name +
                       " " +
@@ -330,7 +378,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[7].first_name +
                       " " +
@@ -352,7 +400,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[8].first_name +
                       " " +
@@ -374,7 +422,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[9].first_name +
                       " " +
@@ -396,7 +444,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[10].first_name +
                       " " +
@@ -427,7 +475,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[11].first_name +
                       " " +
@@ -449,7 +497,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[12].first_name +
                       " " +
@@ -471,7 +519,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[13].first_name +
                       " " +
@@ -502,7 +550,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[14].first_name +
                       " " +
@@ -524,7 +572,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[15].first_name +
                       " " +
@@ -546,7 +594,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[16].first_name +
                       " " +
@@ -568,7 +616,7 @@ const OrgChart = () => {
                     alt="test"
                   />
                 </Col>
-                <Col lg={8} className="pt-2 text-start">
+                <Col lg={8} className="pt-2 text-center">
                   <div className="org-person-sm">
                     {org[17].first_name +
                       " " +

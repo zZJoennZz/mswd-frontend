@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import api from "../api/api";
 
 const AdminManageAcct = ({ saveChanges }) => {
+  const [isShowPass, setIsShowPass] = React.useState(false);
   let [userId, setUserId] = React.useState(0);
   let [userDets, setUserDets] = React.useState({
     name: "",
@@ -79,10 +80,17 @@ const AdminManageAcct = ({ saveChanges }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Password</Form.Label>{" "}
+              <span
+                className="small text-primary"
+                style={{ cursor: "pointer" }}
+                onClick={() => setIsShowPass(!isShowPass)}
+              >
+                {isShowPass ? "Hide password" : "Show password"}
+              </span>
               <Form.Control
                 defaultValue={userDets.password}
-                type="password"
+                type={isShowPass ? "text" : "password"}
                 name="password1"
                 id="password1"
                 onChange={onChangeField}

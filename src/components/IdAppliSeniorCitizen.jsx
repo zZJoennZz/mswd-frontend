@@ -130,7 +130,9 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
       setIsSubmit(false);
     } catch (error) {
       submitApplication("failed");
-      alert(error + ". Please contact your website administrator.");
+      alert(
+        "Something went wrong and your application isn't submitted. You might still have an existing application, if not, contact us."
+      );
       setIsSubmit(false);
     }
   };

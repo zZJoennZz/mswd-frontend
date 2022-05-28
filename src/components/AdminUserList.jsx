@@ -1,11 +1,38 @@
 import React from "react";
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
+import axios from "axios";
 
 const AdminManageAcct = ({ usrList }) => {
   const changeDateFormat = (dateToChange) => {
     let theDate = new Date(dateToChange);
     return theDate.toLocaleDateString("en-US");
   };
+
+  async function delUser(id) {
+    let a = window.confirm(
+      `Are you sure to delete this? You cannot revert this action.`
+    );
+
+    if (a) {
+      let headers = {
+        Authorization: localStorage.getItem("token"),
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Allow-Control-Allow-Origin": "*",
+      };
+      try {
+        axios
+          .delete(`${process.env.REACT_APP_API}delete_user/${id}`, { headers })
+          .then((res) => {
+            alert("Success!");
+            window.location.reload();
+          })
+          .catch((err) => alert(err));
+      } catch (error) {
+        alert(error);
+      }
+    }
+  }
 
   //   React.useEffect(() => {
   //     const getUser = async () => {
@@ -50,6 +77,7 @@ const AdminManageAcct = ({ usrList }) => {
                       <Button
                         variant="danger"
                         size="sm"
+                        onClick={delUser.bind(this, d.id)}
                         disabled={d.id === 1 ? true : false}
                       >
                         X

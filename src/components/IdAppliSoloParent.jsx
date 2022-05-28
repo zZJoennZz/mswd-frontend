@@ -58,7 +58,9 @@ const IdAppliSoloParent = ({ submitApplication }) => {
       setIsSubmit(false);
     } catch (error) {
       submitApplication("failed");
-      alert(error + ". Please contact your website administrator.");
+      alert(
+        "Something went wrong and your application isn't submitted. You might still have an existing application, if not, contact us."
+      );
       setIsSubmit(false);
     }
   };
@@ -458,6 +460,10 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                     Birth certificate of children{" "}
                     <em>(Birth certificate ng mga anak)</em>
                   </li>
+                  <li>
+                    Affidavit of loss (if lost ID) (Affidavit of loss (kung
+                    nawala ang ID))
+                  </li>
                 </ul>
               </Accordion.Body>
             </Accordion.Item>
@@ -466,6 +472,27 @@ const IdAppliSoloParent = ({ submitApplication }) => {
       </Card>
 
       <Form onSubmit={submitForm}>
+        <Row>
+          <Col className="mb-3" md={12}>
+            <Form.Label>Type:</Form.Label>{" "}
+            <Form.Check
+              inline
+              label="New"
+              name="group1"
+              type="radio"
+              id="inline-radio-1"
+              onClick={() => setFrmData({ ...frmData, appli_type: "new" })}
+            />
+            <Form.Check
+              inline
+              label="Loss"
+              name="group1"
+              type="radio"
+              id="inline-radio-2"
+              onClick={() => setFrmData({ ...frmData, appli_type: "loss" })}
+            />
+          </Col>
+        </Row>
         <Row>
           <Col md={3}>
             <Form.Group className="mb-3">

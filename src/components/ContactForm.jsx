@@ -19,6 +19,7 @@ const ContactForm = ({ prefix }) => {
 
   let [frmData, setFrmData] = React.useState({
     email_address: "",
+    contact_number: "",
     full_name: "",
     subject: "",
     message: "",
@@ -43,6 +44,7 @@ const ContactForm = ({ prefix }) => {
     setFrmSubmit(true);
     let formD = {
       email_address: frmData.email_address,
+      contact_number: frmData.contact_number,
       full_name: frmData.full_name,
       subject: subPrefix + " " + frmData.subject,
       message: frmData.message,
@@ -52,6 +54,7 @@ const ContactForm = ({ prefix }) => {
         alert("Your inquiry is submitted!");
         setFrmData({
           email_address: "",
+          contact_number: "",
           full_name: "",
           subject: "",
           message: "",
@@ -82,6 +85,18 @@ const ContactForm = ({ prefix }) => {
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Contact Number</Form.Label>
+          <Form.Control
+            required
+            value={frmData.contact_number}
+            type="text"
+            onChange={onChangeText}
+            name="contact_number"
+            id="contact_number"
+            placeholder="Enter contact number"
+          />
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Full Name</Form.Label>

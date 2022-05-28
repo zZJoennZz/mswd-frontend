@@ -10,6 +10,7 @@ import mswdLogo from "../img/mswdo-logo.png";
 
 //accepts argument if the user is logged
 const AdminLogin = ({ checkAuth }) => {
+  const [isShowPass, setIsShowPass] = React.useState(false);
   //initiate the state for the form values
   let [frmOnChange, setFrmOnChange] = useState({});
 
@@ -77,9 +78,16 @@ const AdminLogin = ({ checkAuth }) => {
                   </Form.Group>
 
                   <Form.Group className="mb-3">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label>Password</Form.Label>{" "}
+                    <span
+                      className="small text-primary"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => setIsShowPass(!isShowPass)}
+                    >
+                      {isShowPass ? "Hide password" : "Show password"}
+                    </span>
                     <Form.Control
-                      type="password"
+                      type={isShowPass ? "text" : "password"}
                       onChange={textOnChange}
                       name="password"
                       id="password"

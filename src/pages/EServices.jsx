@@ -26,6 +26,8 @@ import Apply from "../components/Apply";
 import UserHistory from "../components/UserHistory";
 
 const EServices = () => {
+  const [loginShowPass, setLoginShowPass] = React.useState(false);
+  const [registerShowPass, setRegisterShowPass] = React.useState(false);
   let [isLoading, setIsLoading] = React.useState(true);
   let [message, setMessage] = React.useState("");
   let [isAuth, setIsAuth] = React.useState(false);
@@ -1182,6 +1184,7 @@ const EServices = () => {
                         <Form.Group className="mb-3">
                           <Form.Label>Email address</Form.Label>
                           <Form.Control
+                            required
                             value={frmData.email}
                             autoComplete="current-username"
                             type="email"
@@ -1193,11 +1196,19 @@ const EServices = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                          <Form.Label>Password</Form.Label>
+                          <Form.Label>Password</Form.Label>{" "}
+                          <span
+                            className="small text-primary"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setLoginShowPass(!loginShowPass)}
+                          >
+                            {loginShowPass ? "Hide password" : "Show password"}
+                          </span>
                           <Form.Control
+                            required
                             value={frmData.password}
                             autoComplete="current-password"
-                            type="password"
+                            type={loginShowPass ? "text" : "password"}
                             id="password"
                             name="password"
                             placeholder="Password"
@@ -1229,6 +1240,7 @@ const EServices = () => {
                             type="text"
                             placeholder="Enter first name"
                             onChange={onChangeText}
+                            required
                           />
                         </Form.Group>
 
@@ -1242,6 +1254,7 @@ const EServices = () => {
                             type="text"
                             placeholder="Enter last name"
                             onChange={onChangeText}
+                            required
                           />
                         </Form.Group>
 
@@ -1257,18 +1270,31 @@ const EServices = () => {
                             type="email"
                             placeholder="Enter email"
                             onChange={onChangeText}
+                            required
                           />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                          <Form.Label>Password</Form.Label>
+                          <Form.Label>Password</Form.Label>{" "}
+                          <span
+                            className="small text-primary"
+                            style={{ cursor: "pointer" }}
+                            onClick={() =>
+                              setRegisterShowPass(!registerShowPass)
+                            }
+                          >
+                            {registerShowPass
+                              ? "Hide password"
+                              : "Show password"}
+                          </span>
                           <Form.Control
                             value={frmData.password}
                             id="password"
                             name="password"
-                            type="password"
+                            type={registerShowPass ? "text" : "password"}
                             placeholder="Password"
                             onChange={onChangeText}
+                            required
                           />
                         </Form.Group>
                         <Form.Group className="mb-3">
