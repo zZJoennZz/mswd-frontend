@@ -554,7 +554,6 @@ const IdAppliPwd = ({ submitApplication }) => {
                   </p>
                 </Form.Text>
                 <Form.Control
-                  required
                   type="text"
                   name="tod"
                   id="tod"
