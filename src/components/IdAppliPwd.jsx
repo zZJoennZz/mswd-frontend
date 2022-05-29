@@ -589,7 +589,6 @@ const IdAppliPwd = ({ submitApplication }) => {
                   </p>
                 </Form.Text>
                 <Form.Control
-                  required
                   type="text"
                   name="cod"
                   id="cod"
@@ -840,7 +839,6 @@ const IdAppliPwd = ({ submitApplication }) => {
                 <p>Others, please specify:</p>
               </Form.Text>
               <Form.Control
-                required
                 type="text"
                 name="occu"
                 id="occu"
@@ -1033,7 +1031,6 @@ const IdAppliPwd = ({ submitApplication }) => {
               </Col>
               <Col md={4}>
                 <Form.Control
-                  required
                   type="text"
                   name="mother_middle_name"
                   id="mother_middle_name"
