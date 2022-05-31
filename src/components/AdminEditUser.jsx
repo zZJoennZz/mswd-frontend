@@ -69,7 +69,7 @@ const AdminEditUser = () => {
         <Col md={12}>
           <a href="/admin/settings">{"<"} Back</a>
         </Col>
-        <Form onSubmit={onSubmitSave}>
+        <Form autoComplete="off" onSubmit={onSubmitSave}>
           <Row>
             <Col md={12}>
               <Form.Group className="mb-3">

@@ -5,7 +5,7 @@ const AdminAddUser = ({ userDets, onSubmitAdd, onChangeField }) => {
   const [isShowPass, setIsShowPass] = React.useState(false);
   return (
     <Container fluid>
-      <Form onSubmit={onSubmitAdd}>
+      <Form autoComplete="off" onSubmit={onSubmitAdd}>
         <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
