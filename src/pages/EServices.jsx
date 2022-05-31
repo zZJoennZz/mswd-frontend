@@ -172,6 +172,7 @@ const EServices = () => {
           localStorage.removeItem("token");
           localStorage.setItem("token", `Bearer ${res.data.token}`);
           setIsAuth(true);
+          window.location.reload();
         })
         .catch((err) => {
           alert("Email already in used!");
