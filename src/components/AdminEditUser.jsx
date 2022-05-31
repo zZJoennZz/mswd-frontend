@@ -70,6 +70,7 @@ const AdminEditUser = () => {
           <a href="/admin/settings">{"<"} Back</a>
         </Col>
         <Form autoComplete="off" onSubmit={onSubmitSave}>
+          <input type="hidden" value="prayer" />
           <Row>
             <Col md={12}>
               <Form.Group className="mb-3">
