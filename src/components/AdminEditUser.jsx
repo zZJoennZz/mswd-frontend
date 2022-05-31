@@ -108,8 +108,8 @@ const AdminEditUser = () => {
                   onChange={onChangeText}
                   defaultValue={userDetail.email}
                   type="email"
-                  name="email"
-                  id="email"
+                  name="email1"
+                  id="email1"
                   autoComplete="off"
                 />
               </Form.Group>
@@ -127,8 +127,8 @@ const AdminEditUser = () => {
                 <Form.Control
                   onChange={onChangeText}
                   type={isShowPass ? "text" : "password"}
-                  name="password"
-                  id="password"
+                  name="password1"
+                  id="password1"
                   autoComplete="off"
                 />
               </Form.Group>
