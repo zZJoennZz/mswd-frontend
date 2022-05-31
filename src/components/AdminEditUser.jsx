@@ -16,8 +16,8 @@ const AdminEditUser = () => {
   let [userDetail1, setUserDetail1] = React.useState({
     name: "",
     last_name: "",
-    email: "",
-    password: "",
+    email1: "",
+    password1: "",
   });
 
   const onChangeText = (e) =>
@@ -35,8 +35,8 @@ const AdminEditUser = () => {
 
     data.append("name", userDetail1.name);
     data.append("last_name", userDetail1.last_name);
-    data.append("email", userDetail1.email);
-    data.append("password", userDetail1.password);
+    data.append("email", userDetail1.email1);
+    data.append("password", userDetail1.password1);
 
     try {
       await axios
