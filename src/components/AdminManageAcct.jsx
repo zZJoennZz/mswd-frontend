@@ -46,6 +46,7 @@ const AdminManageAcct = ({ saveChanges }) => {
                 type="text"
                 name="name1"
                 id="name1"
+                autoComplete="off"
                 onChange={onChangeField}
               />
             </Form.Group>
@@ -60,6 +61,7 @@ const AdminManageAcct = ({ saveChanges }) => {
                 type="text"
                 name="last_name1"
                 id="last_name1"
+                autoComplete="off"
                 onChange={onChangeField}
               />
             </Form.Group>
@@ -74,6 +76,7 @@ const AdminManageAcct = ({ saveChanges }) => {
                 type="email"
                 name="email1"
                 id="email1"
+                autoComplete="off"
                 onChange={onChangeField}
               />
             </Form.Group>
@@ -93,6 +96,7 @@ const AdminManageAcct = ({ saveChanges }) => {
                 type={isShowPass ? "text" : "password"}
                 name="password1"
                 id="password1"
+                autoComplete="off"
                 onChange={onChangeField}
               />
             </Form.Group>

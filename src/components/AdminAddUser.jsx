@@ -18,6 +18,7 @@ const AdminAddUser = ({ userDets, onSubmitAdd, onChangeField }) => {
                 name="name"
                 id="name"
                 onChange={onChangeField}
+                autoComplete="off"
                 required
               />
             </Form.Group>
@@ -35,6 +36,7 @@ const AdminAddUser = ({ userDets, onSubmitAdd, onChangeField }) => {
                 name="last_name"
                 id="last_name"
                 onChange={onChangeField}
+                autoComplete="off"
                 required
               />
             </Form.Group>
@@ -52,6 +54,7 @@ const AdminAddUser = ({ userDets, onSubmitAdd, onChangeField }) => {
                 name="email"
                 id="email"
                 onChange={onChangeField}
+                autoComplete="off"
                 required
               />
             </Form.Group>
@@ -73,6 +76,7 @@ const AdminAddUser = ({ userDets, onSubmitAdd, onChangeField }) => {
                 type={isShowPass ? "text" : "password"}
                 name="password"
                 id="password"
+                autoComplete="off"
                 onChange={onChangeField}
                 required
               />

@@ -80,6 +80,7 @@ const AdminEditUser = () => {
                   type="text"
                   name="name"
                   id="name"
+                  autoComplete="off"
                 />
               </Form.Group>
             </Col>
@@ -94,6 +95,7 @@ const AdminEditUser = () => {
                   type="text"
                   name="last_name"
                   id="last_name"
+                  autoComplete="off"
                 />
               </Form.Group>
             </Col>
@@ -108,6 +110,7 @@ const AdminEditUser = () => {
                   type="email"
                   name="email"
                   id="email"
+                  autoComplete="off"
                 />
               </Form.Group>
             </Col>
@@ -126,6 +129,7 @@ const AdminEditUser = () => {
                   type={isShowPass ? "text" : "password"}
                   name="password"
                   id="password"
+                  autoComplete="off"
                 />
               </Form.Group>
             </Col>
