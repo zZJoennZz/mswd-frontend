@@ -17,6 +17,8 @@ import { sortByDesc } from "../fn/functions";
 const AdminApplications = () => {
   let [searchTxt, setSearchTxt] = React.useState("");
   let [applicationList, setApplicationList] = useState(false);
+  let [filterType, setFilterType] = useState("");
+  let [onlyShow, setOnlyShow] = useState("all");
 
   const deleteApp = async (appId) => {
     let a = window.confirm(
@@ -61,13 +63,72 @@ const AdminApplications = () => {
       <Row>
         <Col md={12}>
           <Form>
-            <Form.Group className="mb-3" controlId="frmSearch">
-              <Form.Control
-                type="text"
-                placeholder="Search"
-                onChange={(e) => setSearchTxt(e.target.value)}
-              />
-            </Form.Group>
+            <Row className="mb-3">
+              <Col md={12}>
+                <Form.Group className="mb-3" controlId="frmSearch">
+                  <Form.Control
+                    type="text"
+                    placeholder="Search"
+                    onChange={(e) => setSearchTxt(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={4}>
+                <div>Filter by:</div>
+                <Form.Check
+                  name="filter-by"
+                  onClick={(e) => setFilterType("both")}
+                  inline
+                  label="Both"
+                  type="radio"
+                />
+                <Form.Check
+                  name="filter-by"
+                  onClick={(e) => setFilterType("name")}
+                  inline
+                  label="Name"
+                  type="radio"
+                />
+                <Form.Check
+                  name="filter-by"
+                  onClick={(e) => setFilterType("appnum")}
+                  inline
+                  label="Application #"
+                  type="radio"
+                />
+              </Col>
+              <Col md={8}>
+                <div>Only show:</div>
+                <Form.Check
+                  onClick={(e) => setOnlyShow("all")}
+                  name="only-show"
+                  inline
+                  label="All"
+                  type="radio"
+                />
+                <Form.Check
+                  onClick={(e) => setOnlyShow(1)}
+                  name="only-show"
+                  inline
+                  label="Solo Parent"
+                  type="radio"
+                />
+                <Form.Check
+                  onClick={(e) => setOnlyShow(2)}
+                  name="only-show"
+                  inline
+                  label="Person with Disabilities"
+                  type="radio"
+                />
+                <Form.Check
+                  onClick={(e) => setOnlyShow(3)}
+                  name="only-show"
+                  inline
+                  label="Senior Citizen"
+                  type="radio"
+                />
+              </Col>
+            </Row>
           </Form>
           {!applicationList ? (
             <>
@@ -88,22 +149,51 @@ const AdminApplications = () => {
               <tbody>
                 {applicationList
                   .filter((appList) => {
-                    if (searchTxt === "") {
+                    if (searchTxt === "" && onlyShow === "all") {
                       return appList;
                     }
-                    let name =
-                      JSON.parse(appList.application_data).first_name +
-                      " " +
-                      JSON.parse(appList.application_data).middle_name +
-                      " " +
-                      JSON.parse(appList.application_data).last_name;
-                    return (
-                      name.includes(searchTxt) ||
-                      JSON.parse(
+
+                    let toReturn = false;
+
+                    if (onlyShow === "" || onlyShow === "all") {
+                      toReturn = true;
+                    } else {
+                      let currJson = JSON.parse(
                         appList.application_data
-                      ).email_address.includes(searchTxt) ||
-                      appList.application_id.includes(searchTxt)
-                    );
+                      ).appliType;
+                      if (currJson === onlyShow) {
+                        toReturn = true;
+                      }
+                    }
+
+                    if (toReturn) {
+                      if (filterType === "both") {
+                        let name =
+                          JSON.parse(appList.application_data).first_name +
+                          " " +
+                          JSON.parse(appList.application_data).middle_name +
+                          " " +
+                          JSON.parse(appList.application_data).last_name;
+                        toReturn =
+                          name.includes(searchTxt) ||
+                          JSON.parse(
+                            appList.application_data
+                          ).email_address.includes(searchTxt) ||
+                          appList.application_id.includes(searchTxt);
+                      } else if (filterType === "name") {
+                        let name =
+                          JSON.parse(appList.application_data).first_name +
+                          " " +
+                          JSON.parse(appList.application_data).middle_name +
+                          " " +
+                          JSON.parse(appList.application_data).last_name;
+                        toReturn = name.includes(searchTxt);
+                      } else {
+                        toReturn = appList.application_id.includes(searchTxt);
+                      }
+                    }
+
+                    return toReturn;
                   })
                   .map((d) => (
                     <tr key={d.id}>

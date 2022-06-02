@@ -7,6 +7,11 @@ const apifrm = axios.create({
         'Authorization' : localStorage.getItem('token'),
         'Content-Type' : 'multipart/form-data',
         'Allow-Control-Allow-Origin' : '*',
+    },
+    validateStatus: function validateStatus(status) {
+        let default_ = status >= 200 && status < 300;
+        let extra = status === 404;
+        return default_ || extra;
     }
 });
 
