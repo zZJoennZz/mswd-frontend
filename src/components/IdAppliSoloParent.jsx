@@ -53,14 +53,19 @@ const IdAppliSoloParent = ({ submitApplication }) => {
         formData.append(`docs[${i}]`, docs[i]);
       }
 
-      let res = await apifrm.post("application/post", formData);
-      submitApplication(res.data.application_id);
-      setIsSubmit(false);
+      await apifrm
+        .post("application/post", formData)
+        .then((res) => {
+          submitApplication(res.data.application_id);
+          setIsSubmit(false);
+        })
+        .catch((err) => {
+          submitApplication("failed");
+          alert(err.response.data.message);
+          setIsSubmit(false);
+        });
     } catch (error) {
       submitApplication("failed");
-      alert(
-        "Something went wrong and your application isn't submitted. You might still have an existing application, if not, contact us."
-      );
       setIsSubmit(false);
     }
   };
