@@ -66,7 +66,7 @@ const ApplicationFormSoloParent = ({ appData, appFiles, subDate }) => {
               "loading"
             ) : (
               <img
-                src={`https://${appFiles[0].image_url}`}
+                src={`${appFiles[0].image_url}`}
                 //src="https://www.salisburyut.com/wp-content/uploads/2020/09/avatar-1-768x768.jpeg"
                 alt="1x1 pic"
                 className="ct-img"
@@ -358,12 +358,10 @@ const ApplicationFormSoloParent = ({ appData, appFiles, subDate }) => {
             <Row style={{ margin: "0 0.5rem" }}>
               <Col xs={6}>
                 <Row>
-                  <Col
-                    xs={12}
-                    className="text-center"
-                    style={{ marginTop: "70px" }}
-                  >
-                    <div>{changeDateFormat(subDate)}</div>
+                  <Col xs={12} className="text-center">
+                    <div style={{ height: "40px", marginTop: "50px" }}>
+                      {changeDateFormat(subDate)}
+                    </div>
                     <div style={{ marginTop: "-20px" }}>_________________</div>
                   </Col>
                 </Row>
@@ -381,7 +379,7 @@ const ApplicationFormSoloParent = ({ appData, appFiles, subDate }) => {
                         "loading"
                       ) : (
                         <img
-                          src={`https://${appFiles[1].image_url}`}
+                          src={`${appFiles[1].image_url}`}
                           alt="signature"
                           height="90px"
                           width="300px"
