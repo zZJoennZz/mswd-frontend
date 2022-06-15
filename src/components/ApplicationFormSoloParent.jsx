@@ -4,6 +4,8 @@ import { Container, Row, Col, Table, Button } from "react-bootstrap";
 
 import { barangays } from "select-philippines-address";
 
+import "./adminsoloparentprint.css";
+
 import srbLogo from "../img/sanrafaellogo.png";
 
 const ApplicationFormSoloParent = ({ appData, appFiles, subDate }) => {
@@ -20,16 +22,16 @@ const ApplicationFormSoloParent = ({ appData, appFiles, subDate }) => {
     const getFamCom = () => {
       let holder,
         allParts = "";
-      for (let i = 0; i < famCom.length; i++) {
-        holder = famCom[i].split(",");
+      for (const element of famCom) {
+        holder = element.split(",");
         allParts += `<tr><td>${holder[0]}</td><td>${holder[1]}</td><td>${holder[2]}</td><td>${holder[3]}</td><td>${holder[4]}</td><td>${holder[5]}</td></tr>`;
       }
       setFamComArr(allParts);
     };
     getFamCom();
 
-    barangays("031422").then((barangays) => {
-      setBrgyList(barangays);
+    barangays("031422").then((brngys) => {
+      setBrgyList(brngys);
     });
 
     // eslint-disable-next-line

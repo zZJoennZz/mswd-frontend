@@ -203,18 +203,21 @@ const AdminSingleApplication = () => {
                 appFiles={appliFiles}
                 subDate={appliData.created_at}
                 appData={JSON.parse(appliData.application_data)}
+                appId={appId}
               />
             ) : JSON.parse(appliData.application_data).appliType === 2 ? (
               <ApplicationFormPwd
                 appFiles={appliFiles}
                 subDate={appliData.created_at}
                 appData={JSON.parse(appliData.application_data)}
+                appId={appId}
               />
             ) : JSON.parse(appliData.application_data).appliType === 3 ? (
               <ApplicationFormSeniorCitizen
                 appFiles={appliFiles}
                 subDate={appliData.created_at}
                 appData={JSON.parse(appliData.application_data)}
+                appId={appId}
               />
             ) : (
               ""

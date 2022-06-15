@@ -1,14 +1,26 @@
 .paper-size {
   font-size: 12pt;
   width: 8.5in;
-  height: 14in;
+  /* height: 14in; */
   display: none;
+}
+
+.paper-size1 {
+  font-size: 12pt;
+  width: 8.5in;
+  /* height: 14in; */
+  display: block;
 }
 
 .form-logo {
   width: 6.86rem;
   height: 6.85rem;
   margin-bottom: 1rem;
+}
+
+.form-logo1 {
+  width: 5.86rem;
+  height: 5.85rem;
 }
 
 .form-title {
@@ -43,8 +55,21 @@
   border: 1px solid #000;
 }
 
+.ct-img1 {
+  height: 1in;
+  width: 1in;
+  margin-top: 4rem;
+  margin-right: 2rem;
+  float: right;
+  font-family: "Times New Roman", Times, serif;
+}
+
 .form-body {
   font-family: "Times New Roman" !important;
+}
+
+.form-calibri {
+  font-family: Calibri, sans-serif !important;
 }
 
 @media print {

@@ -14,12 +14,47 @@ import apifrm from "../api/apifrm";
 
 import { barangays } from "select-philippines-address";
 
+import "./adminsoloparentprint.css";
+
 const IdAppliPwd = ({ submitApplication }) => {
-  let [frmData, setFrmData] = useState({ appliType: 2, cod: "" });
+  let [frmData, setFrmData] = useState({
+    appliType: 2,
+    cod: "",
+    suffix: "",
+    congenital: false,
+    acquiredC: false,
+    conge1: false,
+    conge2: false,
+    conge3: false,
+    tod1: false,
+    tod2: false,
+    tod3: false,
+    tod4: false,
+    tod5: false,
+    tod6: false,
+    tod7: false,
+    tod8: false,
+    tod9: false,
+    tod10: false,
+    acqC1: false,
+    acqC2: false,
+    acqC3: false,
+    pdnum: "",
+    proc_off_last_name: "",
+    proc_off_first_name: "",
+    proc_off_middle_name: "",
+    appr_off_last_name: "",
+    appr_off_first_name: "",
+    appr_off_middle_name: "",
+    encoder_last_name: "",
+    encoder_first_name: "",
+    encoder_middle_name: "",
+    reporting_unit: "",
+    control_no: "",
+  });
   let [pic, setPic] = useState(false);
   let [sig, setSig] = useState(false);
   let [docs, setDocs] = useState(false);
-  //let [isMulti, setIsMulti] = useState(true);
   let [agreeCheck, setAgreeCheck] = useState(true);
   let [isSubmit, setIsSubmit] = useState(false);
   let [brgyList, setBrgyList] = useState(false);
@@ -30,73 +65,96 @@ const IdAppliPwd = ({ submitApplication }) => {
   const handleOpen = () => setShow(true);
 
   let disabilities = [
-    { id: 1, name: "Mental/Intellectual" },
-    { id: 2, name: "Hearing Disability" },
-    { id: 3, name: "Psychosocial Disability" },
-    { id: 4, name: "Visual Disability" },
-    { id: 5, name: "Speech Disability" },
-    { id: 6, name: "Learning Disability" },
-    { id: 7, name: "Orthopedic (Musculoskeletal) Disability" },
+    { id: 1, name: "Deaf or Hard of Hearing (Bingi o Hirap sa Pandinig)" },
+    {
+      id: 2,
+      name: "Intellectual Disability (Kapansanan sa intelektwal at pag-unlad)",
+    },
+    { id: 3, name: "Learning Disability (Kapansanan sa Pagkatuto)" },
+    { id: 4, name: "Mental Disability (Mental na kapansanan)" },
+    {
+      id: 5,
+      name: "Physical Disability (Orthopedic) (Pisikal na Kapansanan (Orthopedic))",
+    },
+    { id: 6, name: "Psychosocial Disability (Sikolohikal na Kapansanan)" },
+    {
+      id: 7,
+      name: "Speech and Language Impairment (Kawalan ng kakayahang magsalita at makarinig)",
+    },
+    { id: 8, name: "Visual Disability (Biswal na Kapansanan)" },
+    { id: 9, name: "Cancer(RA11215) (Kanser)" },
+    { id: 10, name: "Rare Disease(RA10747) (Bihirang Sakit)" },
   ];
 
-  let causes = [
+  let congenital = [
     {
       id: 1,
-      name: "Congenital/inborn",
+      name: "ADHD",
     },
     {
       id: 2,
-      name: "Illness",
+      name: "Cerebral Palsy",
     },
     {
       id: 3,
-      name: "Congenitel/inborn",
+      name: "Down Syndrome",
+    },
+  ];
+
+  let acquiredC = [
+    {
+      id: 1,
+      name: "Chronic Illness",
+    },
+    {
+      id: 2,
+      name: "Cebebral Palsy",
+    },
+    {
+      id: 3,
+      name: "Injury",
     },
   ];
 
   let educ_attain = [
     {
       id: 1,
-      name: "Elementary Undergraduate",
+      name: "None (Wala)",
     },
     {
       id: 2,
-      name: "Elementary Graduate",
+      name: "Kindergarten",
     },
     {
       id: 3,
-      name: "High School Undergraduate",
+      name: "Elementary (Elementarya)",
     },
     {
       id: 4,
-      name: "High School Graduate",
+      name: "Junior High School",
     },
     {
       id: 5,
-      name: "College Undergraduate",
+      name: "Senior High School",
     },
     {
       id: 6,
-      name: "College Graduate",
+      name: "College (Kolehiyo)",
     },
     {
       id: 7,
-      name: "Post Graduate",
+      name: "Vocational (Bokasyonal)",
     },
     {
       id: 8,
-      name: "Vocational",
-    },
-    {
-      id: 9,
-      name: "None",
+      name: "Post Graduate",
     },
   ];
 
   let occupation = [
     {
       id: 1,
-      name: "Officials of Government and Special Interest Organizations, Corporate Executives, Managers, Managing Proprietors and Supervisors",
+      name: "Managers",
     },
     {
       id: 2,
@@ -108,39 +166,31 @@ const IdAppliPwd = ({ submitApplication }) => {
     },
     {
       id: 4,
-      name: "Clerks",
+      name: "Clerical Support Workers",
     },
     {
       id: 5,
-      name: "Service Workers, and Shop, and Market Sales",
+      name: "Service and Sales Workers",
     },
     {
       id: 6,
-      name: "Workers",
+      name: "Skilled Agricultural, Forestry and Fishery Workers",
     },
     {
       id: 7,
-      name: "Farmers, Forestry Workers, and Fisherman",
+      name: "Craft and Related Trade Workers",
     },
     {
       id: 8,
-      name: "Trades, and Related Workers",
+      name: "Plant and Machine Operators and Assemblers",
     },
     {
       id: 9,
-      name: "Plant, and Machine Operators, and Assemblers",
+      name: "Elementary Occupations",
     },
     {
       id: 10,
-      name: "Laborers",
-    },
-    {
-      id: 11,
-      name: "Unskilled Workers",
-    },
-    {
-      id: 12,
-      name: "Not Applicable",
+      name: "Armed Forces Occupations",
     },
   ];
 
@@ -148,7 +198,6 @@ const IdAppliPwd = ({ submitApplication }) => {
     setIsSubmit(true);
     e.preventDefault();
 
-    //console.log(frmData);
     try {
       let formData = new FormData();
       formData.append("application_data", JSON.stringify(frmData));
@@ -196,29 +245,22 @@ const IdAppliPwd = ({ submitApplication }) => {
 
   const dateToday = () => {
     let currTime = new Date();
-    var currDate =
+    return (
       currTime.getMonth() +
       1 +
       "/" +
       currTime.getDate() +
       "/" +
-      currTime.getFullYear();
-    return currDate;
+      currTime.getFullYear()
+    );
   };
-
-  // const testBtn = (e) => {
-  //     let lines = frmData.fam_composition.split('\n');
-  //     for (let i = 0; i < lines.length; i++) {
-  //         console.log(lines[i]);
-  //     }
-  // }
 
   React.useEffect(() => {
     let isMounted = true;
 
-    barangays("031422").then((barangays) => {
+    barangays("031422").then((brgys) => {
       if (isMounted) {
-        setBrgyList(barangays);
+        setBrgyList(brgys);
       }
     });
 
@@ -453,7 +495,7 @@ const IdAppliPwd = ({ submitApplication }) => {
             <Form.Label>Type:</Form.Label>{" "}
             <Form.Check
               inline
-              label="New"
+              label="New (Bago)"
               name="group1"
               type="radio"
               id="inline-radio-1"
@@ -467,32 +509,28 @@ const IdAppliPwd = ({ submitApplication }) => {
               id="inline-radio-2"
               onClick={() => setFrmData({ ...frmData, appli_type: "loss" })}
             />
+            <Form.Check
+              inline
+              label="Renew"
+              name="group1"
+              type="radio"
+              id="inline-radio-2"
+              onClick={() => setFrmData({ ...frmData, appli_type: "renew" })}
+            />
           </Col>
         </Row>
         <Row>
-          <Col md={6}>
+          <Col md={12}>
             <Form.Group className="mb-3">
-              <Form.Label>1. PWD Number</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="pwd_number"
-                id="pwd_number"
-                onChange={textOnChange}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>2. Date</Form.Label>
+              <Form.Label>Date</Form.Label>
               <p>{dateToday()}</p>
             </Form.Group>
           </Col>
         </Row>
         <Row>
-          <Col md={4}>
+          <Col md={3}>
             <Form.Group className="mb-3">
-              <Form.Label>3. First Name (Pangalan)</Form.Label>
+              <Form.Label>First Name (Pangalan)</Form.Label>
               <Form.Control
                 required
                 type="text"
@@ -502,7 +540,7 @@ const IdAppliPwd = ({ submitApplication }) => {
               />
             </Form.Group>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <Form.Group className="mb-3">
               <Form.Label>Middle Name (Gitnang pangalan)</Form.Label>
               <Form.Control
@@ -514,7 +552,7 @@ const IdAppliPwd = ({ submitApplication }) => {
               />
             </Form.Group>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <Form.Group className="mb-3">
               <Form.Label>Last Name (Apelyido)</Form.Label>
               <Form.Control
@@ -526,37 +564,169 @@ const IdAppliPwd = ({ submitApplication }) => {
               />
             </Form.Group>
           </Col>
+          <Col md={3}>
+            <Form.Group className="mb-3">
+              <Form.Label>Suffix (Hulapi)</Form.Label>
+              <Form.Control
+                type="text"
+                name="suffix"
+                id="suffix"
+                onChange={textOnChange}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={4}>
+            <Form.Group className="mb-3">
+              <Form.Label>Date of Birth (Petsa ng Kapanganakan)</Form.Label>
+              <Form.Control
+                required
+                type="date"
+                name="dob"
+                id="dob"
+                onChange={textOnChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col md={4}>
+            <Form.Group className="mb-3">
+              <Form.Label>Sex (Kasarian)</Form.Label>
+              <Form.Select name="sex" id="sex" required onChange={textOnChange}>
+                <option>Select</option>
+                <option value={1}>Male (Lalaki)</option>
+                <option value={2}>Female (Babae)</option>
+              </Form.Select>
+            </Form.Group>
+          </Col>
+          <Col md={4}>
+            <Form.Group className="mb-3">
+              <Form.Label>Civil Status (Katayuang sibil)</Form.Label>
+              <Form.Select name="cs" id="cs" required onChange={textOnChange}>
+                <option value={0}>Select</option>
+                <option value={1}>Single</option>
+                <option value={2}>Married</option>
+                <option value={3}>Widow/er</option>
+                <option value={4}>Separated</option>
+                <option value={5}>Cohabitation(Live-in)</option>
+              </Form.Select>
+            </Form.Group>
+          </Col>
         </Row>
         <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
-              <Form.Label>
-                4. Type of Disability (Klase ng kapansanan)
-              </Form.Label>
+              <Form.Label>Type of Disability (Uri ng kapansanan)</Form.Label>
               <div>
-                {disabilities.map((m) => (
-                  <Form.Check
-                    inline
-                    type="radio"
-                    key={"tod" + m.id}
-                    id={"tod" + m.id}
-                    name="tod"
-                    label={m.name}
-                    value={m.id}
-                    onChange={textOnChange}
-                  />
-                ))}
-
-                <Form.Text>
-                  <p className="mt-4">
-                    If Multiple Disabilities, please specify instead:
-                  </p>
-                </Form.Text>
-                <Form.Control
-                  type="text"
-                  name="tod"
-                  id="tod"
-                  onChange={textOnChange}
+                <Form.Check
+                  inline
+                  type="checkbox"
+                  key={"tod" + disabilities[0].id}
+                  id={"tod" + disabilities[0].id}
+                  name={"tod" + disabilities[0].id}
+                  label={disabilities[0].name}
+                  onChange={() =>
+                    setFrmData({ ...frmData, tod1: !frmData.tod1 })
+                  }
+                />
+                <Form.Check
+                  inline
+                  type="checkbox"
+                  key={"tod" + disabilities[1].id}
+                  id={"tod" + disabilities[1].id}
+                  name={"tod" + disabilities[1].id}
+                  label={disabilities[1].name}
+                  onChange={() =>
+                    setFrmData({ ...frmData, tod2: !frmData.tod2 })
+                  }
+                />
+                <Form.Check
+                  inline
+                  type="checkbox"
+                  key={"tod" + disabilities[2].id}
+                  id={"tod" + disabilities[2].id}
+                  name={"tod" + disabilities[2].id}
+                  label={disabilities[2].name}
+                  onChange={() =>
+                    setFrmData({ ...frmData, tod3: !frmData.tod3 })
+                  }
+                />
+                <Form.Check
+                  inline
+                  type="checkbox"
+                  key={"tod" + disabilities[3].id}
+                  id={"tod" + disabilities[3].id}
+                  name={"tod" + disabilities[3].id}
+                  label={disabilities[3].name}
+                  onChange={() =>
+                    setFrmData({ ...frmData, tod4: !frmData.tod4 })
+                  }
+                />
+                <Form.Check
+                  inline
+                  type="checkbox"
+                  key={"tod" + disabilities[4].id}
+                  id={"tod" + disabilities[4].id}
+                  name={"tod" + disabilities[4].id}
+                  label={disabilities[4].name}
+                  onChange={() =>
+                    setFrmData({ ...frmData, tod5: !frmData.tod5 })
+                  }
+                />
+                <Form.Check
+                  inline
+                  type="checkbox"
+                  key={"tod" + disabilities[5].id}
+                  id={"tod" + disabilities[5].id}
+                  name={"tod" + disabilities[5].id}
+                  label={disabilities[5].name}
+                  onChange={() =>
+                    setFrmData({ ...frmData, tod6: !frmData.tod6 })
+                  }
+                />
+                <Form.Check
+                  inline
+                  type="checkbox"
+                  key={"tod" + disabilities[6].id}
+                  id={"tod" + disabilities[6].id}
+                  name={"tod" + disabilities[6].id}
+                  label={disabilities[6].name}
+                  onChange={() =>
+                    setFrmData({ ...frmData, tod7: !frmData.tod7 })
+                  }
+                />
+                <Form.Check
+                  inline
+                  type="checkbox"
+                  key={"tod" + disabilities[7].id}
+                  id={"tod" + disabilities[7].id}
+                  name={"tod" + disabilities[7].id}
+                  label={disabilities[7].name}
+                  onChange={() =>
+                    setFrmData({ ...frmData, tod8: !frmData.tod8 })
+                  }
+                />
+                <Form.Check
+                  inline
+                  type="checkbox"
+                  key={"tod" + disabilities[8].id}
+                  id={"tod" + disabilities[8].id}
+                  name={"tod" + disabilities[8].id}
+                  label={disabilities[8].name}
+                  onChange={() =>
+                    setFrmData({ ...frmData, tod9: !frmData.tod9 })
+                  }
+                />
+                <Form.Check
+                  inline
+                  type="checkbox"
+                  key={"tod" + disabilities[9].id}
+                  id={"tod" + disabilities[9].id}
+                  name={"tod" + disabilities[9].id}
+                  label={disabilities[9].name}
+                  onChange={() =>
+                    setFrmData({ ...frmData, tod10: !frmData.tod10 })
+                  }
                 />
               </div>
             </Form.Group>
@@ -566,43 +736,156 @@ const IdAppliPwd = ({ submitApplication }) => {
           <Col md={12}>
             <Form.Group className="mb-3">
               <Form.Label>
-                5. Causes of Disability (Sanhi ng kapansanan)
+                Causes of Disability (Dahilan ng kapansanan)
               </Form.Label>
-              <div>
-                {causes.map((d) => (
+              <Row>
+                <Col md={6}>
                   <Form.Check
-                    inline
-                    type="radio"
-                    value={d.id}
-                    key={d.id}
-                    id={"cod" + d.id}
-                    name="cod"
-                    label={d.name}
-                    onChange={textOnChange}
+                    checked={frmData.congenital}
+                    type="checkbox"
+                    id="congenital"
+                    name="congenital"
+                    label="Congenital / Inborn (Taglay mula sa kapanganakan)"
+                    onChange={() =>
+                      setFrmData({
+                        ...frmData,
+                        congenital: !frmData.congenital,
+                      })
+                    }
                   />
-                ))}
-                <Form.Text>
-                  <p className="mt-4">
-                    If Multiple Causes, please specify instead:
-                  </p>
-                </Form.Text>
-                <Form.Control
-                  type="text"
-                  name="cod"
-                  id="cod"
-                  onChange={textOnChange}
-                />
-              </div>
+                  <div className="ms-3">
+                    <Form.Check
+                      disabled={!frmData.congenital}
+                      type="checkbox"
+                      id={"conge" + congenital[0].id}
+                      name={"conge" + congenital[0].id}
+                      label={congenital[0].name}
+                      value={frmData.conge1}
+                      onChange={() =>
+                        setFrmData({
+                          ...frmData,
+                          conge1: !frmData.conge1,
+                        })
+                      }
+                    />
+                    <Form.Check
+                      disabled={!frmData.congenital}
+                      type="checkbox"
+                      id={"conge" + congenital[1].id}
+                      name={"conge" + congenital[1].id}
+                      label={congenital[1].name}
+                      value={frmData.conge2}
+                      onChange={() =>
+                        setFrmData({
+                          ...frmData,
+                          conge2: !frmData.conge2,
+                        })
+                      }
+                    />
+                    <Form.Check
+                      disabled={!frmData.congenital}
+                      type="checkbox"
+                      id={"conge" + congenital[2].id}
+                      name={"conge" + congenital[2].id}
+                      label={congenital[2].name}
+                      value={frmData.conge3}
+                      onChange={() =>
+                        setFrmData({
+                          ...frmData,
+                          conge3: !frmData.conge3,
+                        })
+                      }
+                    />
+                    <Form.Label>Others, Specify: (Iba pa, tukuyin)</Form.Label>
+                    <Form.Control
+                      disabled={!frmData.congenital}
+                      type="text"
+                      name="congeothers"
+                      id="congeothers"
+                      onChange={textOnChange}
+                    />
+                  </div>
+                </Col>
+                <Col md={6}>
+                  <Form.Check
+                    checked={frmData.acquiredC}
+                    type="checkbox"
+                    id="acquiredC"
+                    name="acquiredC"
+                    label="Acquired (Namana)"
+                    onChange={() =>
+                      setFrmData({
+                        ...frmData,
+                        acquiredC: !frmData.acquiredC,
+                      })
+                    }
+                  />
+                  <div className="ms-3">
+                    <Form.Check
+                      disabled={!frmData.acquiredC}
+                      type="checkbox"
+                      id={"acqC" + acquiredC[0].id}
+                      name={"acqC" + acquiredC[0].id}
+                      label={acquiredC[0].name}
+                      value={frmData.acqC1}
+                      onChange={() =>
+                        setFrmData({
+                          ...frmData,
+                          acqC1: !frmData.acqC1,
+                        })
+                      }
+                    />
+                    <Form.Check
+                      disabled={!frmData.acquiredC}
+                      type="checkbox"
+                      id={"acqC" + acquiredC[1].id}
+                      name={"acqC" + acquiredC[1].id}
+                      label={acquiredC[1].name}
+                      value={frmData.acqC2}
+                      onChange={() =>
+                        setFrmData({
+                          ...frmData,
+                          acqC2: !frmData.acqC2,
+                        })
+                      }
+                    />
+                    <Form.Check
+                      disabled={!frmData.acquiredC}
+                      type="checkbox"
+                      id={"acqC" + acquiredC[2].id}
+                      name={"acqC" + acquiredC[2].id}
+                      label={acquiredC[2].name}
+                      value={frmData.acqC3}
+                      onChange={() =>
+                        setFrmData({
+                          ...frmData,
+                          acqC3: !frmData.acqC3,
+                        })
+                      }
+                    />
+                    <Form.Label>Others, Specify: (Iba pa, tukuyin)</Form.Label>
+                    <Form.Control
+                      disabled={!frmData.acquiredC}
+                      type="text"
+                      name="acqCothers"
+                      id="acqCothers"
+                      onChange={textOnChange}
+                    />
+                  </div>
+                </Col>
+              </Row>
             </Form.Group>
           </Col>
         </Row>
         <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
-              <Form.Label>6. Address (Tirahan)</Form.Label>
+              <Form.Label>Address (Tirahan)</Form.Label>
               <Row className="mb-3">
-                <Col md={3}>
-                  <Form.Label>House No.</Form.Label>
+                <Col md={4}>
+                  <Form.Label>
+                    House No. and Street (Numero ng bahay at kalye)
+                  </Form.Label>
                   <Form.Control
                     required
                     type="text"
@@ -612,18 +895,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                     onChange={textOnChange}
                   />
                 </Col>
-                <Col md={3}>
-                  <Form.Label>Street or Sitio</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    name="street"
-                    id="street"
-                    placeholder="Street or Sitio"
-                    onChange={textOnChange}
-                  />
-                </Col>
-                <Col md={3}>
+                <Col md={4}>
                   <Form.Label>Barangay</Form.Label>
                   <Form.Select
                     required
@@ -641,12 +913,14 @@ const IdAppliPwd = ({ submitApplication }) => {
                       : ""}
                   </Form.Select>
                 </Col>
-                <Col md={3}>
-                  <Form.Label>City and Province</Form.Label>
+                <Col md={4}>
+                  <Form.Label>
+                    Municipal, Province, and Region (Munisipalidad, Lalawigan,
+                    at Rehiyon)
+                  </Form.Label>
                   <Form.Control
-                    required
                     type="text"
-                    value="San Rafael, Bulacan"
+                    value="San Rafael, Bulacan, Region III"
                     readOnly
                   />
                 </Col>
@@ -658,16 +932,16 @@ const IdAppliPwd = ({ submitApplication }) => {
           <Col md={12}>
             <Form.Group className="mb-3">
               <Form.Label>
-                7. Contact Details (Detalye ng pakikipag-ugnayan)
+                Contact Details (Detalye ng pakikipag-ugnayan)
               </Form.Label>
               <Row>
                 <Col md={3}>
                   <Form.Control
                     required
                     type="text"
-                    placeholder="Tel No."
-                    name="tel_no"
-                    id="tel_no"
+                    placeholder="Landline No. (Numero sa landline)"
+                    name="landline_no"
+                    id="landline_no"
                     onChange={textOnChange}
                   />
                 </Col>
@@ -696,47 +970,10 @@ const IdAppliPwd = ({ submitApplication }) => {
           </Col>
         </Row>
         <Row>
-          <Col md={4}>
-            <Form.Group className="mb-3">
-              <Form.Label>8. Date of Birth (Kaarawan)</Form.Label>
-              <Form.Control
-                required
-                type="date"
-                name="dob"
-                id="dob"
-                onChange={textOnChange}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={4}>
-            <Form.Group className="mb-3">
-              <Form.Label>9. Sex (Kasarian)</Form.Label>
-              <Form.Select name="sex" id="sex" required onChange={textOnChange}>
-                <option>Select</option>
-                <option value={1}>Male</option>
-                <option value={2}>Female</option>
-              </Form.Select>
-            </Form.Group>
-          </Col>
-          <Col md={4}>
-            <Form.Group className="mb-3">
-              <Form.Label>10. Civil Status (Katayuang sibil)</Form.Label>
-              <Form.Select name="cs" id="cs" required onChange={textOnChange}>
-                <option value={0}>Select</option>
-                <option value={1}>Single</option>
-                <option value={2}>Married</option>
-                <option value={3}>Widow/er</option>
-                <option value={4}>Separated</option>
-                <option value={5}>Co-habitation(Live-in)</option>
-              </Form.Select>
-            </Form.Group>
-          </Col>
-        </Row>
-        <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
               <Form.Label>
-                11. Educational Attainment (Tinapos sa edukasyon)
+                Educational Attainment (Antas ng Pinagaralan)
               </Form.Label>
               <div>
                 {educ_attain.map((d) => (
@@ -758,20 +995,19 @@ const IdAppliPwd = ({ submitApplication }) => {
         <Row>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>
-                12. Employment Status (Katayuan sa trabaho)
-              </Form.Label>
+              <Form.Label>Employment Status (Katayuan sa trabaho)</Form.Label>
               <Form.Text>Please select if employed</Form.Text>
               <Form.Select name="es" id="es" required onChange={textOnChange}>
                 <option value={0}>Select</option>
-                <option value={1}>Employed</option>
-                <option value={2}>Unemployed</option>
+                <option value={1}>Employed (May trabaho)</option>
+                <option value={2}>Unemployed (Walang trabaho)</option>
+                <option value={3}>Self-employed</option>
               </Form.Select>
             </Form.Group>
           </Col>
           <Col md={4}>
             <Form.Group className="mb-3">
-              <Form.Label>13. Type of Employment (Uri ng trabaho)</Form.Label>
+              <Form.Label>Category of Employment</Form.Label>
               <Form.Text>Please select if employed</Form.Text>
               {frmData.es === "1" ? (
                 <Form.Select
@@ -781,8 +1017,8 @@ const IdAppliPwd = ({ submitApplication }) => {
                   onChange={textOnChange}
                 >
                   <option value={0}>Select</option>
-                  <option value={1}>Private</option>
-                  <option value={2}>Government</option>
+                  <option value={1}>Private (Pribado)</option>
+                  <option value={2}>Government (Pamahalaan)</option>
                 </Form.Select>
               ) : (
                 ""
@@ -792,7 +1028,7 @@ const IdAppliPwd = ({ submitApplication }) => {
           <Col md={4}>
             <Form.Group className="mb-3">
               <Form.Label>
-                14. Type of Employer (Uri ng pinagta-trabahuan)
+                Types of employment (Uri ng pinagta-trabahuan)
               </Form.Label>
               <Form.Text>Please select if employed</Form.Text>
               {frmData.es === "1" ? (
@@ -803,12 +1039,11 @@ const IdAppliPwd = ({ submitApplication }) => {
                   onChange={textOnChange}
                 >
                   <option value={0}>Select</option>
-                  <option value={1}>Permanent</option>
-                  <option value={2}>Regular</option>
-                  <option value={3}>Contractual</option>
-                  <option value={4}>Casual</option>
-                  <option value={5}>Self-Employed</option>
-                  <option value={6}>Seasonal</option>
+                  <option value={1}>
+                    Permanent/Regular (Permanente/Regular)
+                  </option>
+                  <option value={6}>Seasonal (Pana-panahon)</option>
+                  <option value={4}>Casual (Kaswal)</option>
                   <option value={7}>Emergency</option>
                 </Form.Select>
               ) : (
@@ -820,7 +1055,7 @@ const IdAppliPwd = ({ submitApplication }) => {
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>15. Occupation</Form.Label>{" "}
+              <Form.Label>Occupation</Form.Label>{" "}
               <Form.Text>Select one</Form.Text>
               {occupation.map((m) => (
                 <Form.Check
@@ -834,7 +1069,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                 />
               ))}
               <Form.Text>
-                <p>Others, please specify:</p>
+                <p>Others, please specify: (Iba pa, tukuyin)</p>
               </Form.Text>
               <Form.Control
                 type="text"
@@ -847,7 +1082,49 @@ const IdAppliPwd = ({ submitApplication }) => {
           <Col md={6}>
             <Row>
               <Form.Group className="mb-3">
-                <Form.Label>16. ID Reference No.</Form.Label>
+                <Form.Label>
+                  Organization Information (Impormasyon ng organisasyon)
+                </Form.Label>
+                <Form.Control
+                  required
+                  className="mb-1"
+                  type="text"
+                  name="orgaff"
+                  id="orgaff"
+                  placeholder="Organization Affiliated (Kaakibat na organisasyon)"
+                  onChange={textOnChange}
+                />
+                <Form.Control
+                  required
+                  className="mb-1"
+                  type="text"
+                  name="conper"
+                  id="conper"
+                  placeholder="Contact Person"
+                  onChange={textOnChange}
+                />
+                <Form.Control
+                  required
+                  className="mb-1"
+                  type="text"
+                  name="offadd"
+                  id="offadd"
+                  placeholder="Office Address (Address ng opisina)"
+                  onChange={textOnChange}
+                />
+                <Form.Control
+                  required
+                  type="text"
+                  name="telno"
+                  id="telno"
+                  placeholder="Tel No."
+                  onChange={textOnChange}
+                />
+              </Form.Group>
+            </Row>
+            <Row>
+              <Form.Group className="mb-3">
+                <Form.Label>ID Reference No.</Form.Label>
                 <Form.Control
                   required
                   className="mb-1"
@@ -879,84 +1156,18 @@ const IdAppliPwd = ({ submitApplication }) => {
                   required
                   className="mb-1"
                   type="text"
+                  name="psnno"
+                  id="psnno"
+                  placeholder="PSN No."
+                  onChange={textOnChange}
+                />
+                <Form.Control
+                  required
+                  className="mb-1"
+                  type="text"
                   name="philhealth"
                   id="philhealth"
                   placeholder="PhilHealth No."
-                  onChange={textOnChange}
-                />
-                <Form.Check
-                  type="radio"
-                  id="ph-type-1"
-                  name="phtype"
-                  label="PhilHealth Member"
-                  value={0}
-                  onChange={textOnChange}
-                />
-                <Form.Check
-                  type="radio"
-                  id="ph-type-2"
-                  name="phtype"
-                  label="PhilHealth Member Dependent"
-                  value={1}
-                  onChange={textOnChange}
-                />
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group className="mb-3">
-                <Form.Label>17. Blood Type (Uri ng iyong dugo)</Form.Label>
-                <Form.Select name="bt" id="bt" onChange={textOnChange}>
-                  <option value={0}>Select</option>
-                  <option value={1}>A+</option>
-                  <option value={2}>A-</option>
-                  <option value={3}>B+</option>
-                  <option value={4}>B-</option>
-                  <option value={5}>AB+</option>
-                  <option value={6}>AB-</option>
-                  <option value={7}>O+</option>
-                  <option value={8}>O-</option>
-                </Form.Select>
-              </Form.Group>
-            </Row>
-            <Row>
-              <Form.Group className="mb-3">
-                <Form.Label>
-                  18. Organization Information (Impormasyon tungkol sa
-                  organisasyon)
-                </Form.Label>
-                <Form.Control
-                  required
-                  className="mb-1"
-                  type="text"
-                  name="orgaff"
-                  id="orgaff"
-                  placeholder="Organization Affiliated"
-                  onChange={textOnChange}
-                />
-                <Form.Control
-                  required
-                  className="mb-1"
-                  type="text"
-                  name="conper"
-                  id="conper"
-                  placeholder="Contact Person"
-                  onChange={textOnChange}
-                />
-                <Form.Control
-                  required
-                  className="mb-1"
-                  type="text"
-                  name="offadd"
-                  id="offadd"
-                  placeholder="Office Address"
-                  onChange={textOnChange}
-                />
-                <Form.Control
-                  required
-                  type="text"
-                  name="telno"
-                  id="telno"
-                  placeholder="Tel No."
                   onChange={textOnChange}
                 />
               </Form.Group>
@@ -966,7 +1177,7 @@ const IdAppliPwd = ({ submitApplication }) => {
         <Row>
           <Form.Group className="mb-3">
             <Col md={12}>
-              <Form.Label>19. Family Background</Form.Label>
+              <Form.Label>Family Background (Background ng pamilya)</Form.Label>
             </Col>
             <Col md={12}>
               <Form.Label>Father's Name (Pangalan ng tatay)</Form.Label>
@@ -978,7 +1189,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                   type="text"
                   name="father_last_name"
                   id="father_last_name"
-                  placeholder="Last Name"
+                  placeholder="Last Name (Apelyido)"
                   onChange={textOnChange}
                 />
               </Col>
@@ -988,17 +1199,16 @@ const IdAppliPwd = ({ submitApplication }) => {
                   type="text"
                   name="father_first_name"
                   id="father_first_name"
-                  placeholder="First Name"
+                  placeholder="First Name (Pangalan)"
                   onChange={textOnChange}
                 />
               </Col>
               <Col md={4}>
                 <Form.Control
-                  required
                   type="text"
                   name="father_middle_name"
                   id="father_middle_name"
-                  placeholder="Middle Name"
+                  placeholder="Middle Name (Gitnang pangalan)"
                   onChange={textOnChange}
                 />
               </Col>
@@ -1013,7 +1223,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                   type="text"
                   name="mother_last_name"
                   id="mother_last_name"
-                  placeholder="Last Name"
+                  placeholder="Last Name (Apelyido)"
                   onChange={textOnChange}
                 />
               </Col>
@@ -1023,7 +1233,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                   type="text"
                   name="mother_first_name"
                   id="mother_first_name"
-                  placeholder="First Name"
+                  placeholder="First Name (Pangalan)"
                   onChange={textOnChange}
                 />
               </Col>
@@ -1032,7 +1242,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                   type="text"
                   name="mother_middle_name"
                   id="mother_middle_name"
-                  placeholder="Middle Name (Optional)"
+                  placeholder="Middle Name (Gitnang pangalan)"
                   onChange={textOnChange}
                 />
               </Col>
@@ -1049,7 +1259,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                   type="text"
                   name="guardian_last_name"
                   id="guardian_last_name"
-                  placeholder="Last Name"
+                  placeholder="Last Name (Apelyido)"
                   onChange={textOnChange}
                 />
               </Col>
@@ -1059,26 +1269,51 @@ const IdAppliPwd = ({ submitApplication }) => {
                   type="text"
                   name="guardian_first_name"
                   id="guardian_first_name"
-                  placeholder="First Name"
+                  placeholder="First Name (Pangalan)"
                   onChange={textOnChange}
                 />
               </Col>
               <Col md={4}>
                 <Form.Control
-                  required
                   type="text"
                   name="guardian_middle_name"
                   id="guardian_middle_name"
-                  placeholder="Middle Name"
+                  placeholder="Middle Name (Gitnang pangalan)"
                   onChange={textOnChange}
                 />
               </Col>
             </Row>
             <Col md={12}>
-              <Form.Label>20. Accomplished By (Naisagawa ni)</Form.Label>
+              <Form.Label>Accomplished By (Naisagawa ni)</Form.Label>
             </Col>
             <Row className="mb-3">
-              <Col md={4}>
+              <Col md={3}>
+                <Form.Check
+                  type="radio"
+                  id="applicant"
+                  name="accomBy"
+                  label="Applicant"
+                  value={1}
+                  onChange={textOnChange}
+                />
+                <Form.Check
+                  type="radio"
+                  id="guardian"
+                  name="accomBy"
+                  label="Guardian"
+                  value={2}
+                  onChange={textOnChange}
+                />
+                <Form.Check
+                  type="radio"
+                  id="representative"
+                  name="accomBy"
+                  label="Representative"
+                  value={3}
+                  onChange={textOnChange}
+                />
+              </Col>
+              <Col md={3}>
                 <Form.Control
                   required
                   type="text"
@@ -1088,7 +1323,7 @@ const IdAppliPwd = ({ submitApplication }) => {
                   onChange={textOnChange}
                 />
               </Col>
-              <Col md={4}>
+              <Col md={3}>
                 <Form.Control
                   required
                   type="text"
@@ -1098,9 +1333,8 @@ const IdAppliPwd = ({ submitApplication }) => {
                   onChange={textOnChange}
                 />
               </Col>
-              <Col md={4}>
+              <Col md={3}>
                 <Form.Control
-                  required
                   type="text"
                   name="accom_middle_name"
                   id="accom_middle_name"
@@ -1111,7 +1345,8 @@ const IdAppliPwd = ({ submitApplication }) => {
             </Row>
             <Col md={12}>
               <Form.Label>
-                20a. Name of Reporting Unit (Pangalan ng pag-uulat ng unit)
+                Name of Certifying Physician (Pangalan ng Nagpapatunay na
+                doktor)
               </Form.Label>
             </Col>
             <Row>
@@ -1119,8 +1354,8 @@ const IdAppliPwd = ({ submitApplication }) => {
                 <Form.Control
                   required
                   type="text"
-                  name="nrepu_last_name"
-                  id="nrepu_last_name"
+                  name="cert_ph_last_name"
+                  id="cert_ph_last_name"
                   placeholder="Last Name"
                   onChange={textOnChange}
                 />
@@ -1129,8 +1364,8 @@ const IdAppliPwd = ({ submitApplication }) => {
                 <Form.Control
                   required
                   type="text"
-                  name="nrepu_first_name"
-                  id="nrepu_first_name"
+                  name="cert_ph_first_name"
+                  id="cert_ph_first_name"
                   placeholder="First Name"
                   onChange={textOnChange}
                 />
@@ -1139,8 +1374,8 @@ const IdAppliPwd = ({ submitApplication }) => {
                 <Form.Control
                   required
                   type="text"
-                  name="nrepu_middle_name"
-                  id="nrepu_middle_name"
+                  name="cert_ph_middle_name"
+                  id="cert_ph_middle_name"
                   placeholder="Middle Name"
                   onChange={textOnChange}
                 />
@@ -1151,14 +1386,12 @@ const IdAppliPwd = ({ submitApplication }) => {
         <Row>
           <Col md={12}>
             <Form.Group className="mb-3">
-              <Form.Label>
-                21. Registration Number (Numero ng pagpaparehistro)
-              </Form.Label>
+              <Form.Label>License No. (Numero ng lisensya)</Form.Label>
               <Form.Control
                 required
                 type="text"
-                name="reg_num"
-                id="reg_num"
+                name="lic_no"
+                id="lic_no"
                 onChange={textOnChange}
               />
             </Form.Group>

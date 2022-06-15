@@ -1,5 +1,4 @@
 import React from "react";
-import "./adminsoloparentprint.css";
 
 const AdminSoloParentForPrint = () => {
   return (
