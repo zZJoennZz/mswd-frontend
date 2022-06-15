@@ -930,8 +930,8 @@ const IdAppliSoloParent = ({ submitApplication }) => {
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>
-                Signature over printed name PNG ONLY (Lagda sa ibabaw ng
-                pangalan)
+                Signature / thumbmark Over printed name (Lagda / thumbmark Sa
+                ibabaw ng naka-print na Pangalan) PNG ONLY
               </Form.Label>
               <Form.Control
                 required

@@ -15,7 +15,7 @@ import { barangays } from "select-philippines-address";
 import apifrm from "../api/apifrm";
 
 const IdAppliSeniorCitizen = ({ submitApplication }) => {
-  let [frmData, setFrmData] = useState({ appliType: 3 });
+  let [frmData, setFrmData] = useState({ appliType: 3, oscaId: 0 });
   let [pic, setPic] = useState(false);
   let [sig, setSig] = useState(false);
   let [docs, setDocs] = useState(false);
@@ -115,6 +115,11 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
   const submitForm = async (e) => {
     setIsSubmit(true);
     e.preventDefault();
+    if (frmData.age) {
+      if (frmData.age < 60) {
+        window.alert("Only 60 years old and above allowed!");
+      }
+    }
     //
     try {
       let formData = new FormData();
@@ -125,8 +130,17 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
         formData.append(`docs[${i}]`, docs[i]);
       }
 
-      let res = await apifrm.post("application/post", formData);
-      submitApplication(res.data.application_id);
+      await apifrm
+        .post("application/post", formData)
+        .then((res) => {
+          submitApplication(res.data.application_id);
+          setIsSubmit(false);
+        })
+        .catch((err) => {
+          submitApplication("failed");
+          alert(err.response.data.message);
+          setIsSubmit(false);
+        });
       setIsSubmit(false);
     } catch (error) {
       submitApplication("failed");
@@ -166,13 +180,6 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
       isMounted = false;
     };
   }, []);
-
-  // const testBtn = (e) => {
-  //     let lines = frmData.fam_composition.split('\n');
-  //     for (let i = 0; i < lines.length; i++) {
-  //         console.log(lines[i]);
-  //     }
-  // }
 
   return (
     <div>
@@ -416,17 +423,24 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
 
       <Form onSubmit={submitForm}>
         <Row>
-          <Col md={12}>
-            <Form.Group className="mb-3">
-              <Form.Label>OSCA ID NO.</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="osca_id"
-                id="osca_id"
-                onChange={textOnChange}
-              />
-            </Form.Group>
+          <Col className="mb-3" md={12}>
+            <Form.Label>Type:</Form.Label>{" "}
+            <Form.Check
+              inline
+              label="New"
+              name="group1"
+              type="radio"
+              id="inline-radio-1"
+              onClick={() => setFrmData({ ...frmData, appli_type: "new" })}
+            />
+            <Form.Check
+              inline
+              label="Loss"
+              name="group1"
+              type="radio"
+              id="inline-radio-2"
+              onClick={() => setFrmData({ ...frmData, appli_type: "loss" })}
+            />
           </Col>
         </Row>
         <Row>
@@ -578,9 +592,10 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
               <Form.Label>Age (Edad)</Form.Label>
               <Form.Control
                 required
-                type="text"
+                type="number"
                 name="age"
                 id="age"
+                min="60"
                 onChange={textOnChange}
               />
             </Form.Group>
@@ -1084,7 +1099,10 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Signature over printed name PNG ONLY</Form.Label>
+              <Form.Label>
+                Signature (Use Pentel Pen) (Lagda (Gumamit ng Pentel Pen)) PNG
+                ONLY
+              </Form.Label>
               <Form.Control
                 required
                 type="file"

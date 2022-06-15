@@ -9,6 +9,7 @@ import {
   Table,
   Badge,
   Form,
+  Card,
 } from "react-bootstrap";
 
 import api from "../api/api";
@@ -54,6 +55,76 @@ const AdminApplications = () => {
     return theDate.toLocaleDateString("en-US");
   };
 
+  let filteredApps = !applicationList
+    ? {}
+    : applicationList.filter((appList) => {
+        if (searchTxt === "" && onlyShow === "all") {
+          return appList;
+        }
+
+        let toReturn = false;
+
+        if (onlyShow === "" || onlyShow === "all") {
+          toReturn = true;
+        } else {
+          let currJson = JSON.parse(appList.application_data).appliType;
+          if (currJson === onlyShow) {
+            toReturn = true;
+          }
+        }
+
+        if (toReturn) {
+          if (filterType === "both") {
+            let name =
+              JSON.parse(appList.application_data).first_name +
+              " " +
+              JSON.parse(appList.application_data).middle_name +
+              " " +
+              JSON.parse(appList.application_data).last_name;
+            toReturn =
+              name.includes(searchTxt) ||
+              JSON.parse(appList.application_data).email_address.includes(
+                searchTxt
+              ) ||
+              appList.application_id.includes(searchTxt);
+          } else if (filterType === "name") {
+            let name =
+              JSON.parse(appList.application_data).first_name +
+              " " +
+              JSON.parse(appList.application_data).middle_name +
+              " " +
+              JSON.parse(appList.application_data).last_name;
+            toReturn = name.includes(searchTxt);
+          } else {
+            toReturn = appList.application_id.includes(searchTxt);
+          }
+        }
+
+        return toReturn;
+      });
+
+  const kFormatter = (num, digits) => {
+    const lookup = [
+      { value: 1, symbol: "" },
+      { value: 1e3, symbol: "k" },
+      { value: 1e6, symbol: "M" },
+      { value: 1e9, symbol: "G" },
+      { value: 1e12, symbol: "T" },
+      { value: 1e15, symbol: "P" },
+      { value: 1e18, symbol: "E" },
+    ];
+    const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var item = lookup
+      .slice()
+      .reverse()
+      .find(function (item) {
+        return num >= item.value;
+      });
+    return item
+      ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol
+      : "0";
+  };
+
   return (
     <Container fluid>
       <Breadcrumb>
@@ -77,21 +148,21 @@ const AdminApplications = () => {
                 <div>Filter by:</div>
                 <Form.Check
                   name="filter-by"
-                  onClick={(e) => setFilterType("both")}
+                  onClick={() => setFilterType("both")}
                   inline
                   label="Both"
                   type="radio"
                 />
                 <Form.Check
                   name="filter-by"
-                  onClick={(e) => setFilterType("name")}
+                  onClick={() => setFilterType("name")}
                   inline
                   label="Name"
                   type="radio"
                 />
                 <Form.Check
                   name="filter-by"
-                  onClick={(e) => setFilterType("appnum")}
+                  onClick={() => setFilterType("appnum")}
                   inline
                   label="Application #"
                   type="radio"
@@ -100,28 +171,28 @@ const AdminApplications = () => {
               <Col md={8}>
                 <div>Only show:</div>
                 <Form.Check
-                  onClick={(e) => setOnlyShow("all")}
+                  onClick={() => setOnlyShow("all")}
                   name="only-show"
                   inline
                   label="All"
                   type="radio"
                 />
                 <Form.Check
-                  onClick={(e) => setOnlyShow(1)}
+                  onClick={() => setOnlyShow(1)}
                   name="only-show"
                   inline
                   label="Solo Parent"
                   type="radio"
                 />
                 <Form.Check
-                  onClick={(e) => setOnlyShow(2)}
+                  onClick={() => setOnlyShow(2)}
                   name="only-show"
                   inline
                   label="Person with Disabilities"
                   type="radio"
                 />
                 <Form.Check
-                  onClick={(e) => setOnlyShow(3)}
+                  onClick={() => setOnlyShow(3)}
                   name="only-show"
                   inline
                   label="Senior Citizen"
@@ -130,6 +201,62 @@ const AdminApplications = () => {
               </Col>
             </Row>
           </Form>
+          <Row>
+            <Col md={6} lg={3}>
+              <Card
+                className="mb-3"
+                border="warning"
+                style={{ minHeight: "160px" }}
+              >
+                <Card.Header as="h5">Processing</Card.Header>
+                <Card.Body>
+                  <Card.Title>
+                    {!applicationList
+                      ? ""
+                      : kFormatter(
+                          filteredApps.filter((app) => app.status === 0).length
+                        )}
+                  </Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col md={6} lg={3}>
+              <Card
+                className="mb-3"
+                border="success"
+                style={{ minHeight: "160px" }}
+              >
+                <Card.Header as="h5">Completed</Card.Header>
+                <Card.Body>
+                  <Card.Title>
+                    {!applicationList
+                      ? ""
+                      : kFormatter(
+                          filteredApps.filter((app) => app.status === 3).length
+                        )}
+                  </Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col md={6} lg={3}>
+              <Card
+                className="mb-3"
+                border="danger"
+                style={{ minHeight: "160px" }}
+              >
+                <Card.Header as="h5">Denied</Card.Header>
+                <Card.Body>
+                  <Card.Title>
+                    {!applicationList
+                      ? ""
+                      : kFormatter(
+                          filteredApps.filter((app) => app.status === 2).length
+                        )}
+                  </Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
           {!applicationList ? (
             <>
               <Spinner animation="border" size="sm" /> Fetching data...
@@ -147,99 +274,51 @@ const AdminApplications = () => {
                 </tr>
               </thead>
               <tbody>
-                {applicationList
-                  .filter((appList) => {
-                    if (searchTxt === "" && onlyShow === "all") {
-                      return appList;
-                    }
-
-                    let toReturn = false;
-
-                    if (onlyShow === "" || onlyShow === "all") {
-                      toReturn = true;
-                    } else {
-                      let currJson = JSON.parse(
-                        appList.application_data
-                      ).appliType;
-                      if (currJson === onlyShow) {
-                        toReturn = true;
-                      }
-                    }
-
-                    if (toReturn) {
-                      if (filterType === "both") {
-                        let name =
-                          JSON.parse(appList.application_data).first_name +
-                          " " +
-                          JSON.parse(appList.application_data).middle_name +
-                          " " +
-                          JSON.parse(appList.application_data).last_name;
-                        toReturn =
-                          name.includes(searchTxt) ||
-                          JSON.parse(
-                            appList.application_data
-                          ).email_address.includes(searchTxt) ||
-                          appList.application_id.includes(searchTxt);
-                      } else if (filterType === "name") {
-                        let name =
-                          JSON.parse(appList.application_data).first_name +
-                          " " +
-                          JSON.parse(appList.application_data).middle_name +
-                          " " +
-                          JSON.parse(appList.application_data).last_name;
-                        toReturn = name.includes(searchTxt);
-                      } else {
-                        toReturn = appList.application_id.includes(searchTxt);
-                      }
-                    }
-
-                    return toReturn;
-                  })
-                  .map((d) => (
-                    <tr key={d.id}>
-                      <td>
-                        <Link to={`/admin/applications/${d.id}`}>
-                          {d.application_id}
-                        </Link>
-                      </td>
-                      <td>
-                        {JSON.parse(d.application_data).first_name +
-                          " " +
-                          JSON.parse(d.application_data).middle_name +
-                          " " +
-                          JSON.parse(d.application_data).last_name}
-                      </td>
-                      <td>
-                        {JSON.parse(d.application_data).appliType === 1
-                          ? "Solo Parent"
-                          : JSON.parse(d.application_data).appliType === 2
-                          ? "PWD"
-                          : JSON.parse(d.application_data).appliType === 3
-                          ? "Senior Citizen"
-                          : ""}
-                      </td>
-                      <td>
-                        {d.status === 0 ? (
-                          <Badge bg="warning">Processing</Badge>
-                        ) : d.status === 2 ? (
-                          <Badge bg="danger">Denied</Badge>
-                        ) : (
-                          <Badge bg="success">Completed</Badge>
-                        )}
-                      </td>
-                      <td>{changeDateFormat(d.created_at)}</td>
-                      <td>
-                        {changeDateFormat(d.updated_at)}{" "}
-                        <Badge
-                          onClick={deleteApp.bind(this, d.id)}
-                          bg="danger"
-                          style={{ cursor: "pointer", float: "right" }}
-                        >
-                          X
-                        </Badge>
-                      </td>
-                    </tr>
-                  ))}
+                {filteredApps.map((d) => (
+                  <tr key={d.id}>
+                    <td>
+                      <Link to={`/admin/applications/${d.id}`}>
+                        {d.application_id}
+                      </Link>
+                    </td>
+                    <td>
+                      {JSON.parse(d.application_data).first_name +
+                        " " +
+                        JSON.parse(d.application_data).middle_name +
+                        " " +
+                        JSON.parse(d.application_data).last_name}
+                    </td>
+                    <td>
+                      {JSON.parse(d.application_data).appliType === 1
+                        ? "Solo Parent"
+                        : JSON.parse(d.application_data).appliType === 2
+                        ? "PWD"
+                        : JSON.parse(d.application_data).appliType === 3
+                        ? "Senior Citizen"
+                        : ""}
+                    </td>
+                    <td>
+                      {d.status === 0 ? (
+                        <Badge bg="warning">Processing</Badge>
+                      ) : d.status === 2 ? (
+                        <Badge bg="danger">Denied</Badge>
+                      ) : (
+                        <Badge bg="success">Completed</Badge>
+                      )}
+                    </td>
+                    <td>{changeDateFormat(d.created_at)}</td>
+                    <td>
+                      {changeDateFormat(d.updated_at)}{" "}
+                      <Badge
+                        onClick={deleteApp.bind(this, d.id)}
+                        bg="danger"
+                        style={{ cursor: "pointer", float: "right" }}
+                      >
+                        X
+                      </Badge>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </Table>
           )}

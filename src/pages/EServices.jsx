@@ -26,6 +26,7 @@ import Apply from "../components/Apply";
 import UserHistory from "../components/UserHistory";
 
 const EServices = () => {
+  const [isShowPass, setIsShowPass] = React.useState(false);
   const [loginShowPass, setLoginShowPass] = React.useState(false);
   const [registerShowPass, setRegisterShowPass] = React.useState(false);
   let [isLoading, setIsLoading] = React.useState(true);
@@ -1591,12 +1592,21 @@ const EServices = () => {
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                      <Form.Label>Password</Form.Label>
+                      <Form.Label>
+                        Password{" "}
+                        <span
+                          className="small text-primary"
+                          style={{ cursor: "pointer" }}
+                          onClick={() => setIsShowPass(!isShowPass)}
+                        >
+                          {isShowPass ? "Hide password" : "Show password"}
+                        </span>
+                      </Form.Label>
                       <Form.Control
                         id="password"
                         name="password"
                         autoComplete="current-password"
-                        type="password"
+                        type={isShowPass ? "text" : "password"}
                         placeholder="Password"
                         onChange={onChangeText}
                       />
