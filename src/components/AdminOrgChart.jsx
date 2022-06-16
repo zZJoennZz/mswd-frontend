@@ -2,7 +2,15 @@ import React from "react";
 
 import axios from "axios";
 
-import { Container, Table, Spinner, Form, Row, Col } from "react-bootstrap";
+import {
+  Container,
+  Table,
+  Spinner,
+  Form,
+  Row,
+  Col,
+  Button,
+} from "react-bootstrap";
 
 import { sortByDesc } from "../fn/functions";
 
@@ -167,9 +175,9 @@ const AdminOrgChart = () => {
       style={{ maxHeight: "500px", overflow: "auto" }}
       fluid
     >
-      {/* <Button onClick={openModal.bind(this, "new")} className="mb-3">
+      <Button onClick={openModal.bind(this, "new")} className="mb-3">
         Add New
-      </Button> */}
+      </Button>
       {!orgChart ? (
         <div>
           <Spinner animation="border" />

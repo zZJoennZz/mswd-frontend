@@ -134,15 +134,6 @@ const AdminOrgPeople = () => {
       "Allow-Control-Allow-Origin": "*",
     };
 
-    // let data = {
-    //   first_name: fName,
-    //   middle_initial: mInitial,
-    //   last_name: lName,
-    //   suffix: nSuffix,
-    //   gender: gender,
-    //   birthday: birthday,
-    // };
-
     let data = new FormData();
 
     data.append("first_name", fName);
