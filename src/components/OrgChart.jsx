@@ -1,12 +1,8 @@
 import React from "react";
-
+import { Row, Col } from "react-bootstrap";
 import axios from "axios";
 
 import "./orgchart.css";
-
-import { Container, Row, Col } from "react-bootstrap";
-
-import sanRafaelLogo from "../img/sanrafaellogo.png";
 
 const OrgChart = () => {
   let [division, setDivision] = React.useState(false);
@@ -21,621 +17,187 @@ const OrgChart = () => {
     };
     getData();
   }, []);
-  if (
-    division.length <= 0 ||
-    org.length <= 0 ||
-    division === false ||
-    org === false
-  ) {
-    return <>Loading...</>;
-  } else {
-    return (
-      <>
-        <Container className="text-center border pt-3 mb-5 rounded" fluid>
-          <Row className="mb-5">
-            <Col lg={2}>
-              <img
-                src={sanRafaelLogo}
-                height={150}
-                width={150}
-                alt="San Rafael, Bulacan Logo"
-              />
-            </Col>
-            <Col
-              className="mb-5"
-              lg={10}
-              style={{
-                marginBottom: "20px",
-              }}
-            >
-              <div className="text-start pt-4">
-                <span style={{ fontSize: "2rem", fontWeight: "bold" }}>
-                  Organizational Chart
-                </span>
-                <br />
-                <span style={{ fontSize: "1.5rem" }}>
-                  Municipal Social Welfare and Development Office
-                </span>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={4} style={{ padding: "0 40px" }}>
-              <Row className="border rounded border-primary p-3">
-                <Col lg={12} className="text-center">
-                  <div className="org-person pt-3 pb-3">
-                    Office of Senior Citizens Affair / FSCAP
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg={4}>
-              <Row className="border pt-4 pb-4 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src={org[0].img_path}
-                    className="org-img"
-                    alt={
-                      org[0].first_name +
-                      " " +
-                      org[0].middle_initial +
-                      " " +
-                      org[0].last_name
-                    }
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person">
-                    {org[0].first_name +
-                      " " +
-                      org[0].middle_initial +
-                      " " +
-                      org[0].last_name}{" "}
-                    {org[0].suffix === "N/A" || org[0].suffix === null
-                      ? ""
-                      : org[0].suffix}
-                  </div>
-                  <div className="org-position">{org[0].position_name}</div>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg={4} style={{ padding: "0 40px" }}>
-              <Row className="border rounded border-primary p-3">
-                <Col lg={12} className="text-center">
-                  <div className="org-person pt-3 pb-3">
-                    Persons with Disability (PWD) Federation
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row className="mt-2 mb-2">
-            <Col lg={12}>
+  return (
+    <div style={{ textAlign: "left", paddingBottom: "20px" }}>
+      <h2 style={{ textAlign: "center" }} className="mt-5 mb-3">
+        Organization Chart
+      </h2>
+      <ol className="organizational-chart">
+        <li>
+          {!division || !org ? (
+            "Loading..."
+          ) : (
+            <>
               <div>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="bi bi-arrow-down"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
-                  />
-                </svg>
+                <Row>
+                  <Col md={4}>
+                    <Row>
+                      <Col>
+                        <div
+                          className="border rounded bg-white p-4 mb-3 side-org"
+                          style={{
+                            fontSize: "1.5rem",
+                            fontWeight: "600",
+                            color: "gray",
+                          }}
+                        >
+                          OFFICE OF SENIOR CITIZEN AFFAIR / FSCAP
+                        </div>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <div
+                          className="border rounded bg-white p-4 mb-3"
+                          style={{
+                            fontSize: "1.5rem",
+                            fontWeight: "600",
+                            color: "gray",
+                          }}
+                        >
+                          SOLO PARENTS FEDERATION OF SAN RAFAEL
+                        </div>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <div
+                          className="border rounded bg-white p-4"
+                          style={{
+                            fontSize: "1.5rem",
+                            fontWeight: "600",
+                            color: "gray",
+                          }}
+                        >
+                          PAG-ASA YOUTH ASSOCIATION (PYA)
+                        </div>
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col md={4}>
+                    <div className="division-name">
+                      {
+                        division.filter((d) => d.sub_division_of === 0)[0]
+                          .division_name
+                      }
+                    </div>
+
+                    <div className="division-people">
+                      {org
+                        .filter(
+                          (e) =>
+                            e.division_id ===
+                            division.filter((d) => d.sub_division_of === 0)[0]
+                              .id
+                        )
+                        .map((d) => (
+                          <div
+                            key={d.id}
+                            className="bg-white border rounded mb-3 p-3"
+                          >
+                            <div className="mt-3">
+                              <img
+                                src={d.img_path}
+                                alt={
+                                  d.first_name +
+                                  ` ` +
+                                  d.middle_initial +
+                                  ` ` +
+                                  d.last_name
+                                }
+                                className="org-img"
+                              />
+                            </div>
+                            <span className="division-people">
+                              {d.first_name +
+                                " " +
+                                d.middle_initial +
+                                " " +
+                                d.last_name}
+                            </span>
+                            <div className="division-position-description">
+                              {d.position_name}
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </Col>
+                  <Col md={4}>
+                    <Row>
+                      <Col>
+                        <div className="border rounded bg-white p-4 mb-3 side-org">
+                          PERSONS WITH DISABILITY (PWD) FEDERATION
+                        </div>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <div
+                          className="border rounded bg-white p-4"
+                          style={{
+                            fontSize: "1.5rem",
+                            fontWeight: "600",
+                            color: "gray",
+                          }}
+                        >
+                          KONSEHONG PAMBAYAN PARA SA KABABAIHAN (KPK)
+                        </div>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
               </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={4} style={{ padding: "0 40px" }}>
-              <Row className="border rounded border-primary p-3">
-                <Col lg={12} className="text-center">
-                  <div className="org-person pt-3 pb-3">
-                    Solo Parents Federation of San Rafael
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg={4}>
-              <Row className="border pt-4 pb-4 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src={org[1].img_path}
-                    className="org-img"
-                    alt={
-                      org[1].first_name +
-                      " " +
-                      org[1].middle_initial +
-                      " " +
-                      org[1].last_name
-                    }
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person">
-                    {org[1].first_name +
-                      " " +
-                      org[1].middle_initial +
-                      " " +
-                      org[1].last_name}{" "}
-                    {org[1].suffix === "N/A" || org[1].suffix === null
-                      ? ""
-                      : org[1].suffix}
-                  </div>
-                  <div className="org-position">{org[1].position_name}</div>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg={4}></Col>
-          </Row>
-          <Row>
-            <Col lg={12}>
-              <div className="mt-2 mb-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="bi bi-arrow-down"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
-                  />
-                </svg>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={4} style={{ padding: "0 40px" }}>
-              <Row className="border rounded border-primary p-3">
-                <Col lg={12} className="text-center">
-                  <div className="org-person pt-3 pb-3">
-                    Pag-asa Youth Association (PYA)
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg={4}>
-              <Row className="border pt-4 pb-4 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src={org[2].img_path}
-                    className="org-img"
-                    alt={
-                      org[2].first_name +
-                      " " +
-                      org[2].middle_initial +
-                      " " +
-                      org[2].last_name
-                    }
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person">
-                    {org[2].first_name +
-                      " " +
-                      org[2].middle_initial +
-                      " " +
-                      org[2].last_name}{" "}
-                    {org[2].suffix === "N/A" || org[2].suffix === null
-                      ? ""
-                      : org[2].suffix}
-                  </div>
-                  <div className="org-position">{org[2].position_name}</div>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg={4} style={{ padding: "0 40px" }}>
-              <Row className="border rounded border-primary p-3">
-                <Col lg={12} className="text-center">
-                  <div className="org-person pt-3 pb-3">
-                    Konsehong Pambayan Para sa Kababaihan (KPK)
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={12}>
-              <div className="mt-2 mb-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="bi bi-arrow-down"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"
-                  />
-                </svg>
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={3} className="p-3">
-              <Row>
-                <Col lg={12}>
-                  <div className="division-name bg-primary text-white rounded-top">
-                    {division[1].division_name}
-                  </div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src={org[3].img_path}
-                    className="org-img"
-                    alt={
-                      org[3].first_name +
-                      " " +
-                      org[3].middle_initial +
-                      " " +
-                      org[3].last_name
-                    }
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[3].first_name +
-                      " " +
-                      org[3].middle_initial +
-                      " " +
-                      org[3].last_name}{" "}
-                    {org[3].suffix === "N/A" || org[3].suffix === null
-                      ? ""
-                      : org[3].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[3].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[4].first_name +
-                      " " +
-                      org[4].middle_initial +
-                      " " +
-                      org[4].last_name}{" "}
-                    {org[4].suffix === "N/A" || org[4].suffix === null
-                      ? ""
-                      : org[4].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[4].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[5].first_name +
-                      " " +
-                      org[5].middle_initial +
-                      " " +
-                      org[5].last_name}{" "}
-                    {org[5].suffix === "N/A" || org[5].suffix === null
-                      ? ""
-                      : org[5].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[5].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[6].first_name +
-                      " " +
-                      org[6].middle_initial +
-                      " " +
-                      org[6].last_name}{" "}
-                    {org[6].suffix === "N/A" || org[6].suffix === null
-                      ? ""
-                      : org[6].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[6].position_name}</div>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg={3} className="p-3">
-              <Row>
-                <Col lg={12}>
-                  <div className="division-name bg-primary text-white rounded-top">
-                    {division[2].division_name}
-                  </div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[7].first_name +
-                      " " +
-                      org[7].middle_initial +
-                      " " +
-                      org[7].last_name}{" "}
-                    {org[7].suffix === "N/A" || org[7].suffix === null
-                      ? ""
-                      : org[7].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[7].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[8].first_name +
-                      " " +
-                      org[8].middle_initial +
-                      " " +
-                      org[8].last_name}{" "}
-                    {org[8].suffix === "N/A" || org[8].suffix === null
-                      ? ""
-                      : org[8].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[8].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[9].first_name +
-                      " " +
-                      org[9].middle_initial +
-                      " " +
-                      org[9].last_name}{" "}
-                    {org[9].suffix === "N/A" || org[9].suffix === null
-                      ? ""
-                      : org[9].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[9].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[10].first_name +
-                      " " +
-                      org[10].middle_initial +
-                      " " +
-                      org[10].last_name}{" "}
-                    {org[10].suffix === "N/A" || org[10].suffix === null
-                      ? ""
-                      : org[10].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[10].position_name}</div>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg={3} className="p-3">
-              <Row>
-                <Col lg={12}>
-                  <div className="division-name bg-primary text-white rounded-top">
-                    {division[3].division_name}
-                  </div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[11].first_name +
-                      " " +
-                      org[11].middle_initial +
-                      " " +
-                      org[1].last_name}{" "}
-                    {org[11].suffix === "N/A" || org[11].suffix === null
-                      ? ""
-                      : org[11].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[11].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[12].first_name +
-                      " " +
-                      org[12].middle_initial +
-                      " " +
-                      org[12].last_name}{" "}
-                    {org[12].suffix === "N/A" || org[12].suffix === null
-                      ? ""
-                      : org[12].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[12].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[13].first_name +
-                      " " +
-                      org[13].middle_initial +
-                      " " +
-                      org[13].last_name}{" "}
-                    {org[13].suffix === "N/A" || org[13].suffix === null
-                      ? ""
-                      : org[13].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[13].position_name}</div>
-                </Col>
-              </Row>
-            </Col>
-            <Col lg={3} className="p-3">
-              <Row>
-                <Col lg={12}>
-                  <div className="division-name bg-primary text-white rounded-top">
-                    {division[4].division_name}
-                  </div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[14].first_name +
-                      " " +
-                      org[14].middle_initial +
-                      " " +
-                      org[14].last_name}{" "}
-                    {org[14].suffix === "N/A" || org[14].suffix === null
-                      ? ""
-                      : org[14].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[14].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[15].first_name +
-                      " " +
-                      org[15].middle_initial +
-                      " " +
-                      org[15].last_name}{" "}
-                    {org[15].suffix === "N/A" || org[15].suffix === null
-                      ? ""
-                      : org[15].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[15].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[16].first_name +
-                      " " +
-                      org[16].middle_initial +
-                      " " +
-                      org[16].last_name}{" "}
-                    {org[16].suffix === "N/A" || org[16].suffix === null
-                      ? ""
-                      : org[16].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[16].position_name}</div>
-                </Col>
-              </Row>
-              <Row className="border mb-3 pt-2 pb-2 rounded border-primary">
-                <Col lg={4}>
-                  <img
-                    src="https://minervastrategies.com/wp-content/uploads/2016/03/default-avatar.jpg"
-                    className="org-img"
-                    alt="test"
-                  />
-                </Col>
-                <Col lg={8} className="pt-2 text-center">
-                  <div className="org-person-sm">
-                    {org[17].first_name +
-                      " " +
-                      org[17].middle_initial +
-                      " " +
-                      org[17].last_name}{" "}
-                    {org[17].suffix === "N/A" || org[17].suffix === null
-                      ? ""
-                      : org[17].suffix}
-                  </div>
-                  <div className="org-position-sm">{org[17].position_name}</div>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Container>
-      </>
-    );
-  }
+              <ol>
+                {division
+                  .filter((d) => d.sub_division_of !== 0)
+                  .map((e) => (
+                    <li key={e.id}>
+                      <div>
+                        <div className="division-name">{e.division_name}</div>
+                        <div className="division-people mt-4">
+                          {org
+                            .filter((o) => o.division_id === e.id)
+                            .map((x) => (
+                              <div
+                                key={x.id}
+                                className="mb-5 border rounded bg-white"
+                              >
+                                <div className="mt-3">
+                                  <img
+                                    src={x.img_path}
+                                    alt={
+                                      x.first_name +
+                                      ` ` +
+                                      x.middle_initial +
+                                      ` ` +
+                                      x.last_name
+                                    }
+                                    className="org-img"
+                                  />
+                                </div>
+                                <span className="division-people-small">
+                                  {x.first_name +
+                                    " " +
+                                    x.middle_initial +
+                                    " " +
+                                    x.last_name}
+                                </span>
+                                <div className="division-position-description">
+                                  {x.position_name}
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+              </ol>
+            </>
+          )}
+        </li>
+      </ol>
+    </div>
+  );
 };
 
 export default OrgChart;

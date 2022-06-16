@@ -256,6 +256,28 @@ const AdminApplications = () => {
                 </Card.Body>
               </Card>
             </Col>
+            <Col md={6} lg={3}>
+              <Card
+                className="mb-3"
+                border="secondary"
+                style={{ minHeight: "160px" }}
+              >
+                <Card.Header as="h5">Renew (for PWD)</Card.Header>
+                <Card.Body>
+                  <Card.Title>
+                    {!applicationList
+                      ? ""
+                      : kFormatter(
+                          filteredApps.filter(
+                            (app) =>
+                              JSON.parse(app.application_data).appli_type ===
+                              "renew"
+                          ).length
+                        )}
+                  </Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
           </Row>
           {!applicationList ? (
             <>

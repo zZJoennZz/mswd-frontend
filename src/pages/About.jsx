@@ -87,7 +87,7 @@ const About = () => {
           </Card.Body>
         </Card>
       </Container>
-      <Container fluid>
+      <Container>
         <Row>
           <Col md={12}>
             <OrgChart />

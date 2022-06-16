@@ -584,7 +584,7 @@ const ApplicationFormSeniorCitizen = ({ appData, appFiles, appId }) => {
                 <Row>
                   <Col xs={6}>Contact No. Mobile:</Col>
                   <Col xs={6} style={{ borderBottom: "1px solid #000" }}>
-                    {appData.religion}
+                    {appData.mobileno}
                   </Col>
                 </Row>
               </Col>
@@ -592,7 +592,7 @@ const ApplicationFormSeniorCitizen = ({ appData, appFiles, appId }) => {
                 <Row>
                   <Col xs={4}>Landline:</Col>
                   <Col xs={8} style={{ borderBottom: "1px solid #000" }}>
-                    {appData.ethnicity}
+                    {appData.landline}
                   </Col>
                 </Row>
               </Col>
@@ -600,7 +600,7 @@ const ApplicationFormSeniorCitizen = ({ appData, appFiles, appId }) => {
                 <Row>
                   <Col xs={3}>Email:</Col>
                   <Col xs={9} style={{ borderBottom: "1px solid #000" }}>
-                    {appData.organization}
+                    {appData.email_address}
                   </Col>
                 </Row>
               </Col>
