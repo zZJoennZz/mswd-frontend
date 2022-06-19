@@ -1054,30 +1054,34 @@ const IdAppliPwd = ({ submitApplication }) => {
         </Row>
         <Row>
           <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>Occupation</Form.Label>{" "}
-              <Form.Text>Select one</Form.Text>
-              {occupation.map((m) => (
-                <Form.Check
-                  type="radio"
-                  key={"occu" + m.id}
-                  id={"occu" + m.id}
+            {frmData.es === "1" ? (
+              <Form.Group className="mb-3">
+                <Form.Label>Occupation</Form.Label>{" "}
+                <Form.Text>Select one</Form.Text>
+                {occupation.map((m) => (
+                  <Form.Check
+                    type="radio"
+                    key={"occu" + m.id}
+                    id={"occu" + m.id}
+                    name="occu"
+                    label={m.name}
+                    value={m.id}
+                    onChange={textOnChange}
+                  />
+                ))}
+                <Form.Text>
+                  <p>Others, please specify: (Iba pa, tukuyin)</p>
+                </Form.Text>
+                <Form.Control
+                  type="text"
                   name="occu"
-                  label={m.name}
-                  value={m.id}
+                  id="occu"
                   onChange={textOnChange}
                 />
-              ))}
-              <Form.Text>
-                <p>Others, please specify: (Iba pa, tukuyin)</p>
-              </Form.Text>
-              <Form.Control
-                type="text"
-                name="occu"
-                id="occu"
-                onChange={textOnChange}
-              />
-            </Form.Group>
+              </Form.Group>
+            ) : (
+              ""
+            )}
           </Col>
           <Col md={6}>
             <Row>
