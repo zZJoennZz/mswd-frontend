@@ -124,34 +124,34 @@ const AdminPosition = () => {
     }
   };
 
-  //   const delPosition = async (posId) => {
-  //     let headers = {
-  //       Authorization: localStorage.getItem("token"),
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       "Allow-Control-Allow-Origin": "*",
-  //     };
-  //     let a = window.confirm("Are you sure to delete this position?");
-  //     if (a) {
-  //       try {
-  //         await axios
-  //           .delete(`${process.env.REACT_APP_API}org/position/delete/${posId}`, {
-  //             headers: headers,
-  //           })
-  //           .then((res) => {
-  //             setToastMsg("Position successfully deleted");
-  //             setShowToast(true);
-  //           })
-  //           .catch((error) => {
-  //             setToastMsg(error);
-  //             setShowToast(true);
-  //           });
-  //       } catch (error) {
-  //         setToastMsg(error);
-  //         setShowToast(true);
-  //       }
-  //     }
-  //   };
+  const delPosition = async (posId) => {
+    let headers = {
+      Authorization: localStorage.getItem("token"),
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Allow-Control-Allow-Origin": "*",
+    };
+    let a = window.confirm("Are you sure to delete this position?");
+    if (a) {
+      try {
+        await axios
+          .delete(`${process.env.REACT_APP_API}org/position/delete/${posId}`, {
+            headers: headers,
+          })
+          .then((res) => {
+            setToastMsg("Position successfully deleted");
+            setShowToast(true);
+          })
+          .catch((error) => {
+            setToastMsg("You cannot delete USED position");
+            setShowToast(true);
+          });
+      } catch (error) {
+        setToastMsg("You cannot delete USED position");
+        setShowToast(true);
+      }
+    }
+  };
 
   React.useEffect(() => {
     const getDivision = async () => {
@@ -214,7 +214,17 @@ const AdminPosition = () => {
                 </td>
                 <td>{d.position_desc}</td>
                 <td>{changeDateFormat(d.created_at)}</td>
-                <td>{changeDateFormat(d.updated_at)}</td>
+                <td>
+                  {changeDateFormat(d.updated_at)}{" "}
+                  <Button
+                    onClick={delPosition.bind(this, d.id)}
+                    style={{ float: "right" }}
+                    variant="danger"
+                    size="sm"
+                  >
+                    X
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
