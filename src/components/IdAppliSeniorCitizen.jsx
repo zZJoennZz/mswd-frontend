@@ -112,6 +112,23 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
     { id: 5, name: "PhD" },
   ];
 
+  const getAge = (dob) => {
+    const getDob = new Date(dob);
+    const monthDiff = Date.now() - getDob.getTime();
+    const ageDt = new Date(monthDiff);
+    const getYear = ageDt.getUTCFullYear();
+
+    return Math.abs(getYear - 1970);
+  };
+
+  const forDobAndAge = (e) => {
+    setFrmData({
+      ...frmData,
+      [e.target.name]: e.target.value,
+      age: getAge(e.target.value),
+    });
+  };
+
   const submitForm = async (e) => {
     setIsSubmit(true);
     e.preventDefault();
@@ -133,20 +150,16 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
       await apifrm
         .post("application/post", formData)
         .then((res) => {
-          submitApplication(res.data.application_id);
+          submitApplication(res.data.application_id, "");
           setIsSubmit(false);
         })
         .catch((err) => {
-          submitApplication("failed");
-          alert(err.response.data.message);
+          submitApplication("failed", err.response.data.message);
           setIsSubmit(false);
         });
       setIsSubmit(false);
     } catch (error) {
-      submitApplication("failed");
-      alert(
-        "Something went wrong and your application isn't submitted. You might still have an existing application, if not, contact us."
-      );
+      submitApplication("failed", error);
       setIsSubmit(false);
     }
   };
@@ -592,11 +605,12 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
               <Form.Label>Age (Edad)</Form.Label>
               <Form.Control
                 required
+                readOnly
                 type="number"
                 name="age"
                 id="age"
                 min="60"
-                onChange={textOnChange}
+                value={getAge(frmData.dob)}
               />
             </Form.Group>
           </Col>
@@ -627,7 +641,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
                 type="date"
                 name="dob"
                 id="dob"
-                onChange={textOnChange}
+                onChange={forDobAndAge}
               />
             </Form.Group>
           </Col>

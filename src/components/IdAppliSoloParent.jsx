@@ -56,16 +56,15 @@ const IdAppliSoloParent = ({ submitApplication }) => {
       await apifrm
         .post("application/post", formData)
         .then((res) => {
-          submitApplication(res.data.application_id);
+          submitApplication(res.data.application_id, "");
           setIsSubmit(false);
         })
         .catch((err) => {
-          submitApplication("failed");
-          alert(err.response.data.message);
+          submitApplication("failed", err.response.data.message);
           setIsSubmit(false);
         });
     } catch (error) {
-      submitApplication("failed");
+      submitApplication("failed", error);
       setIsSubmit(false);
     }
   };
@@ -133,19 +132,29 @@ const IdAppliSoloParent = ({ submitApplication }) => {
     setFrmData({ ...frmData, fam_composition: famComRef.current.value });
   };
 
-  // const testBtn = (e) => {
-  //     let lines = frmData.fam_composition.split('\n');
-  //     for (let i = 0; i < lines.length; i++) {
-  //         console.log(lines[i]);
-  //     }
-  // }
+  const getAge = (dob) => {
+    const getDob = new Date(dob);
+    const monthDiff = Date.now() - getDob.getTime();
+    const ageDt = new Date(monthDiff);
+    const getYear = ageDt.getUTCFullYear();
+
+    return Math.abs(getYear - 1970);
+  };
+
+  const forDobAndAge = (e) => {
+    setFrmData({
+      ...frmData,
+      [e.target.name]: e.target.value,
+      age: getAge(e.target.value),
+    });
+  };
 
   React.useEffect(() => {
     let isMounted = true;
 
-    barangays("031422").then((barangays) => {
+    barangays("031422").then((brgy) => {
       if (isMounted) {
-        setBrgyList(barangays);
+        setBrgyList(brgy);
       }
     });
 
@@ -540,10 +549,11 @@ const IdAppliSoloParent = ({ submitApplication }) => {
               <Form.Label>Age (Edad)</Form.Label>
               <Form.Control
                 required
+                readOnly
+                value={getAge(frmData.dob)}
                 type="text"
                 name="age"
                 id="age"
-                onChange={textOnChange}
               />
             </Form.Group>
           </Col>
@@ -567,7 +577,7 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                 type="date"
                 name="dob"
                 id="dob"
-                onChange={textOnChange}
+                onChange={forDobAndAge}
               />
             </Form.Group>
           </Col>

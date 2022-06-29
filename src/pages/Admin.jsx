@@ -20,6 +20,7 @@ import AdminFAQs from "./AdminFAQs";
 import AdminFAQNew from "./AdminFAQNew";
 import AdminFAQSingle from "./AdminFAQSingle";
 import AdminOrganization from "./AdminOrganization";
+import AdminReports from "./AdminReports";
 import AdminEditUser from "../components/AdminEditUser";
 // import AdminDivision from './AdminDivision';
 
@@ -176,6 +177,7 @@ const Admin = () => {
                     path="/settings/user/:userId"
                     element={<AdminEditUser />}
                   />
+                  <Route exact path="/reports" element={<AdminReports />} />
                 </Routes>
               </Col>
             </Row>

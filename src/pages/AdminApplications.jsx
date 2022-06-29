@@ -67,8 +67,12 @@ const AdminApplications = () => {
         if (onlyShow === "" || onlyShow === "all") {
           toReturn = true;
         } else {
-          let currJson = JSON.parse(appList.application_data).appliType;
-          if (currJson === onlyShow) {
+          let currJson = JSON.parse(appList.application_data);
+          if (currJson.appliType === onlyShow) {
+            toReturn = true;
+          }
+
+          if (currJson.appli_type === onlyShow) {
             toReturn = true;
           }
         }
@@ -144,7 +148,7 @@ const AdminApplications = () => {
                   />
                 </Form.Group>
               </Col>
-              <Col md={4}>
+              <Col>
                 <div>Filter by:</div>
                 <Form.Check
                   name="filter-by"
@@ -168,7 +172,7 @@ const AdminApplications = () => {
                   type="radio"
                 />
               </Col>
-              <Col md={8}>
+              <Col>
                 <div>Only show:</div>
                 <Form.Check
                   onClick={() => setOnlyShow("all")}
@@ -196,6 +200,13 @@ const AdminApplications = () => {
                   name="only-show"
                   inline
                   label="Senior Citizen"
+                  type="radio"
+                />
+                <Form.Check
+                  onClick={() => setOnlyShow("loss")}
+                  name="only-show"
+                  inline
+                  label="Loss"
                   type="radio"
                 />
               </Col>

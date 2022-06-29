@@ -210,19 +210,15 @@ const IdAppliPwd = ({ submitApplication }) => {
       await apifrm
         .post("application/post", formData)
         .then((res) => {
-          submitApplication(res.data.application_id);
+          submitApplication(res.data.application_id, "");
           setIsSubmit(false);
         })
         .catch((err) => {
-          submitApplication("failed");
-          alert(err.response.data.message);
+          submitApplication("failed", err.response.data.message);
           setIsSubmit(false);
         });
     } catch (error) {
-      submitApplication("failed");
-      alert(
-        "Something went wrong and your application isn't submitted. You might still have an existing application, if not, contact us."
-      );
+      submitApplication("failed", error);
       setIsSubmit(false);
     }
   };
@@ -1056,8 +1052,7 @@ const IdAppliPwd = ({ submitApplication }) => {
           <Col md={6}>
             {frmData.es === "1" ? (
               <Form.Group className="mb-3">
-                <Form.Label>Occupation</Form.Label>{" "}
-                <Form.Text>Select one</Form.Text>
+                <Form.Label>Work</Form.Label> <Form.Text>Select one</Form.Text>
                 {occupation.map((m) => (
                   <Form.Check
                     type="radio"

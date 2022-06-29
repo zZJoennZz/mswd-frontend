@@ -7,12 +7,15 @@ import IdAppliSeniorCitizen from "../components/IdAppliSeniorCitizen";
 
 const Apply = (props) => {
   let [frmResult, setFrmResult] = useState("");
+  let [frmMsg, setFrmMsg] = useState("");
 
-  const submitForm = (result) => {
+  const submitForm = (result, msg) => {
     try {
       setFrmResult(result);
+      setFrmMsg(msg);
     } catch (e) {
       setFrmResult("failed");
+      setFrmMsg(msg);
     }
   };
 
@@ -48,8 +51,7 @@ const Apply = (props) => {
         </Alert>
       ) : (
         <Alert variant="danger">
-          Something went wrong and your application isn't submitted. You might
-          still have an existing application, if not, contact us at{" "}
+          {frmMsg}. Please contact us at{" "}
           <Alert.Link href="/contact-us">here</Alert.Link>.
         </Alert>
       )}
