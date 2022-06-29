@@ -125,39 +125,44 @@ const AdminOrgChart = () => {
     }
   };
 
-  // const delEntry = async (orgId) => {
-  //   let a = window.confirm(
-  //     "Are you sure to delete this record? You cannot undo this."
-  //   );
-  //   if (a) {
-  //     let headers = {
-  //       Authorization: localStorage.getItem("token"),
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       "Allow-Control-Allow-Origin": "*",
-  //     };
-  //     try {
-  //       await axios
-  //         .delete(`${process.env.REACT_APP_API}org/chart/delete/${orgId}`, {
-  //           headers: headers,
-  //         })
-  //         .then((res) => {
-  //           setToastMsg(res.data.message);
-  //           setShowToast(true);
-  //           handleClose();
-  //         })
-  //         .catch((error) => {
-  //           setToastMsg(error);
-  //           setShowToast(true);
-  //           handleClose();
-  //         });
-  //     } catch (error) {
-  //       setToastMsg(error);
-  //       setShowToast(true);
-  //       handleClose();
-  //     }
-  //   }
-  // };
+  const changeDateFormat = (dateToChange) => {
+    let theDate = new Date(dateToChange);
+    return theDate.toLocaleDateString("en-US");
+  };
+
+  const delEntry = async (selOrgId) => {
+    let a = window.confirm(
+      "Are you sure to delete this record? You cannot undo this."
+    );
+    if (a) {
+      let headers = {
+        Authorization: localStorage.getItem("token"),
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Allow-Control-Allow-Origin": "*",
+      };
+      try {
+        await axios
+          .delete(`${process.env.REACT_APP_API}org/chart/delete/${selOrgId}`, {
+            headers: headers,
+          })
+          .then((res) => {
+            setToastMsg(res.data.message);
+            setShowToast(true);
+            handleClose();
+          })
+          .catch((error) => {
+            setToastMsg(error);
+            setShowToast(true);
+            handleClose();
+          });
+      } catch (error) {
+        setToastMsg(error);
+        setShowToast(true);
+        handleClose();
+      }
+    }
+  };
 
   React.useEffect(() => {
     const getOrgChart = async () => {
@@ -189,6 +194,8 @@ const AdminOrgChart = () => {
               <th>Name</th>
               <th>Position</th>
               <th>Division</th>
+              <th width="15%">Created At</th>
+              <th width="15%">Updated At</th>
             </tr>
           </thead>
           <tbody>
@@ -202,6 +209,18 @@ const AdminOrgChart = () => {
                 </td>
                 <td>{d.position_name}</td>
                 <td>{d.division_name}</td>
+                <td>{changeDateFormat(d.created_at)}</td>
+                <td>
+                  {changeDateFormat(d.updated_at)}{" "}
+                  <Button
+                    onClick={delEntry.bind(this, d.id)}
+                    style={{ float: "right" }}
+                    variant="danger"
+                    size="sm"
+                  >
+                    X
+                  </Button>
+                </td>
               </tr>
             ))}
           </tbody>
