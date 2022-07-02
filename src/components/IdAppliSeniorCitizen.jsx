@@ -741,7 +741,7 @@ const IdAppliSeniorCitizen = ({ submitApplication }) => {
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Work (Trabaho)</Form.Label>
+              <Form.Label>Occupation (Trabaho)</Form.Label>
               <Form.Control
                 required
                 type="text"

@@ -12,6 +12,13 @@
   display: block;
 }
 
+.paper-size2 {
+  font-size: 12pt;
+  /* width: 8.5in; */
+  /* height: 14in; */
+  display: block;
+}
+
 .form-logo {
   width: 6.86rem;
   height: 6.85rem;
@@ -77,10 +84,12 @@
     visibility: hidden;
   }
   .paper-size,
-  .paper-size * {
+  .paper-size,
+  .paper-size2 * {
     visibility: visible;
   }
-  .paper-size {
+  .paper-size,
+  .paper-size2 {
     display: block !important;
     position: absolute;
     top: 0;

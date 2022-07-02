@@ -72,9 +72,9 @@ const AdminApplications = () => {
             toReturn = true;
           }
 
-          if (currJson.appli_type === onlyShow) {
-            toReturn = true;
-          }
+          // if (currJson.appli_type === onlyShow) {
+          //   toReturn = true;
+          // }
         }
 
         if (toReturn) {
@@ -202,18 +202,18 @@ const AdminApplications = () => {
                   label="Senior Citizen"
                   type="radio"
                 />
-                <Form.Check
+                {/* <Form.Check
                   onClick={() => setOnlyShow("loss")}
                   name="only-show"
                   inline
                   label="Loss"
                   type="radio"
-                />
+                /> */}
               </Col>
             </Row>
           </Form>
           <Row>
-            <Col md={6} lg={3}>
+            <Col>
               <Card
                 className="mb-3"
                 border="warning"
@@ -231,7 +231,7 @@ const AdminApplications = () => {
                 </Card.Body>
               </Card>
             </Col>
-            <Col md={6} lg={3}>
+            <Col>
               <Card
                 className="mb-3"
                 border="success"
@@ -249,7 +249,7 @@ const AdminApplications = () => {
                 </Card.Body>
               </Card>
             </Col>
-            <Col md={6} lg={3}>
+            <Col>
               <Card
                 className="mb-3"
                 border="danger"
@@ -267,7 +267,7 @@ const AdminApplications = () => {
                 </Card.Body>
               </Card>
             </Col>
-            <Col md={6} lg={3}>
+            <Col>
               <Card
                 className="mb-3"
                 border="secondary"
@@ -283,6 +283,28 @@ const AdminApplications = () => {
                             (app) =>
                               JSON.parse(app.application_data).appli_type ===
                               "renew"
+                          ).length
+                        )}
+                  </Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col>
+              <Card
+                className="mb-3"
+                border="info"
+                style={{ minHeight: "160px" }}
+              >
+                <Card.Header as="h5">Loss</Card.Header>
+                <Card.Body>
+                  <Card.Title>
+                    {!applicationList
+                      ? ""
+                      : kFormatter(
+                          filteredApps.filter(
+                            (app) =>
+                              JSON.parse(app.application_data).appli_type ===
+                              "loss"
                           ).length
                         )}
                   </Card.Title>
