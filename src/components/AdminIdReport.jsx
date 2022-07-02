@@ -260,188 +260,193 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
         {!allApps ? (
           <Col>Please put date range.</Col>
         ) : (
-          <Col md={12} className="paper-size2">
-            <h2>
-              Report for {dateFrom} - {dateTo}
-            </h2>
-            <Table size="sm" striped responsive bordered>
-              <thead>
-                <tr>
-                  <th rowSpan={3}>Barangay</th>
-                  <th colSpan={13} className="text-center">
-                    {repType === 1 ? "Solo Parents" : ""}
-                    {repType === 2 ? "Persons with Disabilities" : ""}
-                    {repType === 3 ? "Senior Citizen" : ""} (
-                    {repCat === "new" ? "New" : ""}
-                    {repCat === "loss" ? "Loss" : ""}
-                    {repCat === "renew" ? "Renew" : ""}
-                    {repStatus === 0 ? "Processing" : ""}
-                    {repStatus === 2 ? "Denied" : ""} Applications)
-                  </th>
-                </tr>
-                <tr className="text-center">
-                  <th>(0 - 9)</th>
-                  <th>(10 - 19)</th>
-                  <th>(20 - 29)</th>
-                  <th>(30 - 39)</th>
-                  <th>(40 - 49)</th>
-                  <th>(50 - 59)</th>
-                  <th>(60 - 69)</th>
-                  <th>(70 - 79)</th>
-                  <th>(80 - 89)</th>
-                  <th>(90 - 99)</th>
-                  <th>(100 +)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {!brgyList ? (
+          <>
+            <Button onClick={() => window.print()}>Print</Button>
+            <Col md={12} className="paper-size2">
+              <h2>
+                Report for {dateFrom} - {dateTo}
+              </h2>
+              <Table size="sm" striped responsive bordered>
+                <thead>
                   <tr>
-                    <td colSpan={2}>Loading...</td>
+                    <th rowSpan={3}>Barangay</th>
+                    <th colSpan={13} className="text-center">
+                      {repType === 1 ? "Solo Parents" : ""}
+                      {repType === 2 ? "Persons with Disabilities" : ""}
+                      {repType === 3 ? "Senior Citizen" : ""} (
+                      {repCat === "new" ? "New" : ""}
+                      {repCat === "loss" ? "Loss" : ""}
+                      {repCat === "renew" ? "Renew" : ""}
+                      {repStatus === 0 ? "Processing" : ""}
+                      {repStatus === 2 ? "Denied" : ""} Applications)
+                    </th>
                   </tr>
-                ) : (
-                  brgyList.map((brgy) => {
-                    return (
-                      <tr key={brgy.brgy_code}>
-                        <th>{brgy.brgy_name}</th>
-                        <td className="text-center">
-                          {repData(0, 9, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repData(10, 19, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repData(20, 29, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repData(30, 39, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repData(40, 49, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repData(50, 59, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repData(60, 69, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repData(70, 79, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repData(80, 89, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repData(90, 99, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repData(100, 1000, brgy.brgy_code).length}
-                        </td>
-                      </tr>
-                    );
-                  })
-                )}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Total (each age bracket)</th>
-                  <td className="text-center">{repData(0, 9, "all").length}</td>
-                  <td className="text-center">
-                    {repData(10, 19, "all").length}
-                  </td>
-                  <td className="text-center">
-                    {repData(20, 29, "all").length}
-                  </td>
-                  <td className="text-center">
-                    {repData(30, 39, "all").length}
-                  </td>
-                  <td className="text-center">
-                    {repData(40, 49, "all").length}
-                  </td>
-                  <td className="text-center">
-                    {repData(50, 59, "all").length}
-                  </td>
-                  <td className="text-center">
-                    {repData(60, 69, "all").length}
-                  </td>
-                  <td className="text-center">
-                    {repData(70, 79, "all").length}
-                  </td>
-                  <td className="text-center">
-                    {repData(80, 89, "all").length}
-                  </td>
-                  <td className="text-center">
-                    {repData(90, 99, "all").length}
-                  </td>
-                  <td className="text-center">
-                    {repData(100, 1000, "all").length}
-                  </td>
-                </tr>
-                <tr>
-                  <th>Grand Total</th>
-                  <td colSpan={12} className="text-center">
-                    {repData("all", "all", "all").length}
-                  </td>
-                </tr>
-              </tfoot>
-            </Table>
-            <Table size="sm" striped responsive bordered>
-              <thead>
-                <tr>
-                  <th rowSpan={3}>Barangay</th>
-                  <th colSpan={13} className="text-center">
-                    {repType === 1 ? "Solo Parents" : ""}
-                    {repType === 2 ? "Persons with Disabilities" : ""}
-                    {repType === 3 ? "Senior Citizen" : ""} (
-                    {repCat === "new" ? "New" : ""}
-                    {repCat === "loss" ? "Loss" : ""}
-                    {repCat === "renew" ? "Renew" : ""} Applications)
-                  </th>
-                </tr>
-                <tr className="text-center">
-                  <th>Male</th>
-                  <th>Female</th>
-                </tr>
-              </thead>
-              <tbody>
-                {!brgyList ? (
+                  <tr className="text-center">
+                    <th>(0 - 9)</th>
+                    <th>(10 - 19)</th>
+                    <th>(20 - 29)</th>
+                    <th>(30 - 39)</th>
+                    <th>(40 - 49)</th>
+                    <th>(50 - 59)</th>
+                    <th>(60 - 69)</th>
+                    <th>(70 - 79)</th>
+                    <th>(80 - 89)</th>
+                    <th>(90 - 99)</th>
+                    <th>(100 +)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {!brgyList ? (
+                    <tr>
+                      <td colSpan={2}>Loading...</td>
+                    </tr>
+                  ) : (
+                    brgyList.map((brgy) => {
+                      return (
+                        <tr key={brgy.brgy_code}>
+                          <th>{brgy.brgy_name}</th>
+                          <td className="text-center">
+                            {repData(0, 9, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repData(10, 19, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repData(20, 29, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repData(30, 39, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repData(40, 49, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repData(50, 59, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repData(60, 69, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repData(70, 79, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repData(80, 89, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repData(90, 99, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repData(100, 1000, brgy.brgy_code).length}
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
+                </tbody>
+                <tfoot>
                   <tr>
-                    <td colSpan={2}>Loading...</td>
+                    <th>Total (each age bracket)</th>
+                    <td className="text-center">
+                      {repData(0, 9, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repData(10, 19, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repData(20, 29, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repData(30, 39, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repData(40, 49, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repData(50, 59, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repData(60, 69, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repData(70, 79, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repData(80, 89, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repData(90, 99, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repData(100, 1000, "all").length}
+                    </td>
                   </tr>
-                ) : (
-                  brgyList.map((brgy) => {
-                    return (
-                      <tr key={brgy.brgy_code}>
-                        <th>{brgy.brgy_name}</th>
-                        <td className="text-center">
-                          {repDataByGender(1, brgy.brgy_code).length}
-                        </td>
-                        <td className="text-center">
-                          {repDataByGender(2, brgy.brgy_code).length}
-                        </td>
-                      </tr>
-                    );
-                  })
-                )}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th>Total (each gender)</th>
-                  <td className="text-center">
-                    {repDataByGender(1, "all").length}
-                  </td>
-                  <td className="text-center">
-                    {repDataByGender(2, "all").length}
-                  </td>
-                </tr>
-                <tr>
-                  <th>Grand Total</th>
-                  <td colSpan={2} className="text-center">
-                    {repDataByGender("all", "all").length}
-                  </td>
-                </tr>
-              </tfoot>
-            </Table>
-          </Col>
+                  <tr>
+                    <th>Grand Total</th>
+                    <td colSpan={12} className="text-center">
+                      {repData("all", "all", "all").length}
+                    </td>
+                  </tr>
+                </tfoot>
+              </Table>
+              <Table size="sm" striped responsive bordered>
+                <thead>
+                  <tr>
+                    <th rowSpan={3}>Barangay</th>
+                    <th colSpan={13} className="text-center">
+                      {repType === 1 ? "Solo Parents" : ""}
+                      {repType === 2 ? "Persons with Disabilities" : ""}
+                      {repType === 3 ? "Senior Citizen" : ""} (
+                      {repCat === "new" ? "New" : ""}
+                      {repCat === "loss" ? "Loss" : ""}
+                      {repCat === "renew" ? "Renew" : ""} Applications)
+                    </th>
+                  </tr>
+                  <tr className="text-center">
+                    <th>Male</th>
+                    <th>Female</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {!brgyList ? (
+                    <tr>
+                      <td colSpan={2}>Loading...</td>
+                    </tr>
+                  ) : (
+                    brgyList.map((brgy) => {
+                      return (
+                        <tr key={brgy.brgy_code}>
+                          <th>{brgy.brgy_name}</th>
+                          <td className="text-center">
+                            {repDataByGender(1, brgy.brgy_code).length}
+                          </td>
+                          <td className="text-center">
+                            {repDataByGender(2, brgy.brgy_code).length}
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Total (each gender)</th>
+                    <td className="text-center">
+                      {repDataByGender(1, "all").length}
+                    </td>
+                    <td className="text-center">
+                      {repDataByGender(2, "all").length}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Grand Total</th>
+                    <td colSpan={2} className="text-center">
+                      {repDataByGender("all", "all").length}
+                    </td>
+                  </tr>
+                </tfoot>
+              </Table>
+            </Col>
+          </>
         )}
       </Row>
     </div>
