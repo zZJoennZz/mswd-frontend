@@ -192,7 +192,7 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
             if (
               parseInt(dSex) === parseInt(gender) &&
               appType === parseInt(repType) &&
-              appliType === repCat &&
+              appliType === "" &&
               parseInt(brgy) === parseInt(dBrgy) &&
               repStatus === appProcess
             ) {
@@ -202,7 +202,7 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
             if (
               parseInt(dSex) === parseInt(gender) &&
               appType === parseInt(repType) &&
-              appliType === repCat &&
+              appliType === "" &&
               brgy === "all" &&
               repStatus === appProcess
             ) {
@@ -212,7 +212,7 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
             if (
               gender === "all" &&
               appType === parseInt(repType) &&
-              appliType === repCat &&
+              appliType === "" &&
               brgy === "all" &&
               repStatus === appProcess
             ) {
@@ -261,7 +261,11 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
           <Col>Please put date range.</Col>
         ) : (
           <>
-            <Button onClick={() => window.print()}>Print</Button>
+            <Col md={12}>
+              <Button className="float-end" onClick={() => window.print()}>
+                Print
+              </Button>
+            </Col>
             <Col md={12} className="paper-size2">
               <h2>
                 Report for {dateFrom} - {dateTo}
