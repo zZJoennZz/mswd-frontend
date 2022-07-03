@@ -84,11 +84,13 @@
     visibility: hidden;
   }
   .paper-size,
-  .paper-size,
+  .paper-size *,
+  .paper-size2,
   .paper-size2 * {
-    visibility: visible;
+    visibility: visible !important;
   }
   .paper-size,
+  .paper-size1,
   .paper-size2 {
     display: block !important;
     position: absolute;

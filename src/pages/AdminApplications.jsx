@@ -344,13 +344,36 @@ const AdminApplications = () => {
                         JSON.parse(d.application_data).last_name}
                     </td>
                     <td>
-                      {JSON.parse(d.application_data).appliType === 1
-                        ? "Solo Parent"
-                        : JSON.parse(d.application_data).appliType === 2
-                        ? "PWD"
-                        : JSON.parse(d.application_data).appliType === 3
-                        ? "Senior Citizen"
-                        : ""}
+                      {JSON.parse(d.application_data).appliType === 1 ? (
+                        <>
+                          Solo Parent (
+                          {JSON.parse(d.application_data).appli_type === "new"
+                            ? "NEW"
+                            : "LOSS"}
+                          )
+                        </>
+                      ) : JSON.parse(d.application_data).appliType === 2 ? (
+                        <>
+                          PWD (
+                          {JSON.parse(d.application_data).appli_type === "new"
+                            ? "NEW"
+                            : JSON.parse(d.application_data).appli_type ===
+                              "renew"
+                            ? "RENEW"
+                            : "LOSS"}
+                          )
+                        </>
+                      ) : JSON.parse(d.application_data).appliType === 3 ? (
+                        <>
+                          Senior Citizen (
+                          {JSON.parse(d.application_data).appli_type === "new"
+                            ? "NEW"
+                            : "LOSS"}
+                          )
+                        </>
+                      ) : (
+                        ""
+                      )}
                     </td>
                     <td>
                       {d.status === 0 ? (
