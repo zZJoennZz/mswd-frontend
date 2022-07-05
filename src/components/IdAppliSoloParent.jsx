@@ -550,7 +550,7 @@ const IdAppliSoloParent = ({ submitApplication }) => {
               <Form.Control
                 required
                 readOnly
-                value={getAge(frmData.dob)}
+                value={getAge(frmData.dob) || 0}
                 type="text"
                 name="age"
                 id="age"
