@@ -261,29 +261,36 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
           <Col>Please put date range.</Col>
         ) : (
           <>
-            <Col md={12}>
+            <Col md={12} className="mb-3">
               <Button className="float-end" onClick={() => window.print()}>
                 Print
               </Button>
             </Col>
             <Col md={12} className="paper-size2">
-              <h2>
-                Report for {dateFrom} - {dateTo}
-              </h2>
               <Table size="sm" striped responsive bordered>
                 <thead>
                   <tr>
-                    <th rowSpan={3}>Barangay</th>
-                    <th colSpan={13} className="text-center">
-                      {repType === 1 ? "Solo Parents" : ""}
-                      {repType === 2 ? "Persons with Disabilities" : ""}
-                      {repType === 3 ? "Senior Citizen" : ""} (
-                      {repCat === "new" ? "New" : ""}
-                      {repCat === "loss" ? "Loss" : ""}
-                      {repCat === "renew" ? "Renew" : ""}
-                      {repStatus === 0 ? "Processing" : ""}
-                      {repStatus === 2 ? "Denied" : ""} Applications)
+                    <th rowSpan={3} width="20%">
+                      Barangay
                     </th>
+                    <th colSpan={13} className="text-center">
+                      <div>
+                        Report of {repType === 1 ? "Solo Parents" : ""}
+                        {repType === 2 ? "Persons with Disabilities" : ""}
+                        {repType === 3 ? "Senior Citizen" : ""} (
+                        {repCat === "new" ? "New" : ""}
+                        {repCat === "loss" ? "Loss" : ""}
+                        {repCat === "renew" ? "Renew" : ""}
+                        {repStatus === 0 ? "Processing" : ""}
+                        {repStatus === 2 ? "Denied" : ""} Applicants)
+                      </div>
+                      <div>
+                        from the month of {dateFrom} to {dateTo}
+                      </div>
+                    </th>
+                  </tr>
+                  <tr className="text-center">
+                    <th colSpan={12}>Age</th>
                   </tr>
                   <tr className="text-center">
                     <th>(0 - 9)</th>
@@ -349,7 +356,16 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Total (each age bracket)</th>
+                    <th>
+                      Total No. of {repCat === "new" ? "new" : ""}
+                      {repCat === "loss" ? "loss" : ""}
+                      {repCat === "renew" ? "renew" : ""}
+                      {repStatus === 0 ? "processing" : ""}
+                      {repStatus === 2 ? "denied" : ""} applicant for{" "}
+                      {repType === 1 ? "Solo Parents" : ""}
+                      {repType === 2 ? "Persons with Disabilities" : ""}
+                      {repType === 3 ? "Senior Citizen" : ""} (by age bracket)
+                    </th>
                     <td className="text-center">
                       {repData(0, 9, "all").length}
                     </td>
@@ -395,15 +411,27 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
               <Table size="sm" striped responsive bordered>
                 <thead>
                   <tr>
-                    <th rowSpan={3}>Barangay</th>
-                    <th colSpan={13} className="text-center">
-                      {repType === 1 ? "Solo Parents" : ""}
-                      {repType === 2 ? "Persons with Disabilities" : ""}
-                      {repType === 3 ? "Senior Citizen" : ""} (
-                      {repCat === "new" ? "New" : ""}
-                      {repCat === "loss" ? "Loss" : ""}
-                      {repCat === "renew" ? "Renew" : ""} Applications)
+                    <th rowSpan={3} width="20%">
+                      Barangay
                     </th>
+                    <th colSpan={13} className="text-center">
+                      <div>
+                        Report of {repType === 1 ? "Solo Parents" : ""}
+                        {repType === 2 ? "Persons with Disabilities" : ""}
+                        {repType === 3 ? "Senior Citizen" : ""} (
+                        {repCat === "new" ? "New" : ""}
+                        {repCat === "loss" ? "Loss" : ""}
+                        {repCat === "renew" ? "Renew" : ""}
+                        {repStatus === 0 ? "Processing" : ""}
+                        {repStatus === 2 ? "Denied" : ""} Applicants)
+                      </div>
+                      <div>
+                        from the month of {dateFrom} to {dateTo}
+                      </div>
+                    </th>
+                  </tr>
+                  <tr className="text-center">
+                    <th colSpan={2}>Gender</th>
                   </tr>
                   <tr className="text-center">
                     <th>Male</th>
@@ -433,7 +461,16 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Total (each gender)</th>
+                    <th>
+                      Total No. of {repCat === "new" ? "new" : ""}
+                      {repCat === "loss" ? "loss" : ""}
+                      {repCat === "renew" ? "renew" : ""}
+                      {repStatus === 0 ? "processing" : ""}
+                      {repStatus === 2 ? "denied" : ""} applicant for{" "}
+                      {repType === 1 ? "Solo Parents" : ""}
+                      {repType === 2 ? "Persons with Disabilities" : ""}
+                      {repType === 3 ? "Senior Citizen" : ""} (by gender)
+                    </th>
                     <td className="text-center">
                       {repDataByGender(1, "all").length}
                     </td>
