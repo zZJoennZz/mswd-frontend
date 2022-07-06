@@ -185,7 +185,7 @@ const Home = () => {
     <div>
       <div
         style={{
-          background: `linear-gradient(0deg, rgba(25, 25, 25, 0.8), rgba(58, 58, 58, 0.5)), url('${bannerImg}'), #000`,
+          background: `#000`,
           backgroundPosition: "bottom",
           color: "#fff",
           backgroundSize: "cover",
