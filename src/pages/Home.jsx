@@ -185,7 +185,7 @@ const Home = () => {
     <div>
       <div
         style={{
-          background: `#000`,
+          background: `url('${bannerImg}'), #000`,
           backgroundPosition: "bottom",
           color: "#fff",
           backgroundSize: "cover",
