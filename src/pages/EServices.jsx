@@ -1300,7 +1300,10 @@ const EServices = () => {
                             {brgyList &&
                               brgyList.map((brgy) => {
                                 return (
-                                  <option value={brgy.brgy_code}>
+                                  <option
+                                    key={brgy.brgy_code}
+                                    value={brgy.brgy_code}
+                                  >
                                     {brgy.brgy_name}
                                   </option>
                                 );
@@ -1309,8 +1312,12 @@ const EServices = () => {
                         </Form.Group>
 
                         <div className="mb-3">
-                          <div>Municipality</div>
-                          <div>San Rafael, Bulacan</div>
+                          <div>Municipality and Province</div>
+                          <Form.Control
+                            type="text"
+                            value="San Rafael, Bulacan"
+                            readOnly
+                          />
                         </div>
 
                         <Form.Group className="mb-3">
@@ -1655,6 +1662,7 @@ const EServices = () => {
                           brgyList.map((brgy) => {
                             return (
                               <option
+                                key={brgy.brgy_code}
                                 value={brgy.brgy_code}
                                 selected={
                                   currentBrgy === brgy.brgy_code ? true : false
@@ -1668,8 +1676,12 @@ const EServices = () => {
                     </Form.Group>
 
                     <div className="mb-3">
-                      <div>Municipality</div>
-                      <div>San Rafael, Bulacan</div>
+                      <div>Municipality and Province</div>
+                      <Form.Control
+                        type="text"
+                        value="San Rafael, Bulacan"
+                        readOnly
+                      />
                     </div>
 
                     <Form.Group className="mb-3">
