@@ -1308,6 +1308,11 @@ const EServices = () => {
                           </Form.Select>
                         </Form.Group>
 
+                        <div className="mb-3">
+                          <div>Municipality</div>
+                          <div>San Rafael, Bulacan</div>
+                        </div>
+
                         <Form.Group className="mb-3">
                           <Form.Label>Email address</Form.Label>
                           <div className="float-end fst-italic">
