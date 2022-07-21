@@ -15,6 +15,8 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
+import { barangays } from "select-philippines-address";
+
 //images
 import spImg from "../img/solo-parent-icon.jpg";
 import pwdImg from "../img/pwd-icon.png";
@@ -35,15 +37,19 @@ const EServices = () => {
   let [currentUser, setCurrentUser] = React.useState("");
   let [currentLastName, setCurrentLastName] = React.useState("");
   let [currentEmail, setCurrentEmail] = React.useState("");
+  let [currentAddress, setCurrentAddress] = React.useState("");
+  let [currentBrgy, setCurrentBrgy] = React.useState("");
   let [formMode, setFormMode] = React.useState(0);
   let [frmData, setFrmData] = React.useState({
     name: "",
     last_name: "",
     email: "",
     password: "",
+    address: "",
   });
   let [selectedIdType, setSelectedIdType] = React.useState(0);
   let [agreeCheck, setAgreeCheck] = React.useState(false);
+  let [brgyList, setBrgyList] = React.useState([]);
 
   let [show, setShow] = React.useState(false);
 
@@ -202,6 +208,8 @@ const EServices = () => {
           setCurrentUser(res.data.name);
           setCurrentLastName(res.data.last_name);
           setCurrentEmail(res.data.email);
+          setCurrentAddress(res.data.address);
+          setCurrentBrgy(res.data.barangay);
         })
         .catch((err) => {
           setMessage("You need to login!");
@@ -209,6 +217,10 @@ const EServices = () => {
         });
       setIsLoading(false);
     };
+
+    barangays("031422").then((brgy) => {
+      setBrgyList(brgy);
+    });
 
     validateUser();
   }, [isAuth]);
@@ -1261,6 +1273,42 @@ const EServices = () => {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
+                          <Form.Label>House No. & Street</Form.Label>
+                          <div className="float-end fst-italic">
+                            (Numero ng tirahan at kalsada)
+                          </div>
+                          <Form.Control
+                            value={frmData.address}
+                            id="address"
+                            name="address"
+                            type="text"
+                            placeholder="Enter house no. & street"
+                            onChange={onChangeText}
+                            required
+                          />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                          <Form.Label>Barangay</Form.Label>
+                          <Form.Select
+                            name="barangay"
+                            id="barangay"
+                            onChange={onChangeText}
+                            required
+                          >
+                            <option value="">Select</option>
+                            {brgyList &&
+                              brgyList.map((brgy) => {
+                                return (
+                                  <option value={brgy.brgy_code}>
+                                    {brgy.brgy_name}
+                                  </option>
+                                );
+                              })}
+                          </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
                           <Form.Label>Email address</Form.Label>
                           <div className="float-end fst-italic">
                             (Valid Email Only)
@@ -1576,6 +1624,42 @@ const EServices = () => {
                         placeholder="Full name"
                         onChange={onChangeText}
                       />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
+                      <Form.Label>House No. & Street</Form.Label>
+                      <Form.Control
+                        defaultValue={currentAddress}
+                        id="address"
+                        name="address"
+                        type="text"
+                        placeholder="Address"
+                        onChange={onChangeText}
+                      />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
+                      <Form.Label>Barangay</Form.Label>
+                      <Form.Select
+                        id="barangay"
+                        name="barangay"
+                        onChange={onChangeText}
+                      >
+                        <option value="">Select</option>
+                        {brgyList &&
+                          brgyList.map((brgy) => {
+                            return (
+                              <option
+                                value={brgy.brgy_code}
+                                selected={
+                                  currentBrgy === brgy.brgy_code ? true : false
+                                }
+                              >
+                                {brgy.brgy_name}
+                              </option>
+                            );
+                          })}
+                      </Form.Select>
                     </Form.Group>
 
                     <Form.Group className="mb-3">

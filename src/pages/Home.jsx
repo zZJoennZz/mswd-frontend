@@ -12,6 +12,7 @@ import {
 
 import mswdoLogo from "../img/MSWDO Logo.png";
 import foiphLogo from "../img/foiph.png";
+import dswdReg3Logo from "../img/LOGOFOIII-scaled.jpg";
 
 import api from "../api/api";
 
@@ -241,6 +242,19 @@ const Home = () => {
                       src={foiphLogo}
                       width={200}
                       alt="Freedom of Information Philippines Logo"
+                    />
+                  </a>
+                </div>
+                <div>
+                  <a
+                    href="https://fo3.dswd.gov.ph/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src={dswdReg3Logo}
+                      width={200}
+                      alt="DSWD Region 3 Logo"
                     />
                   </a>
                 </div>
