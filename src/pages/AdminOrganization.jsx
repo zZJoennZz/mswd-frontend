@@ -23,7 +23,7 @@ const AdminOrganization = () => {
       </Breadcrumb>
       <Row>
         <Col md={12}>
-          <h3 className="mb-3">Organization Chart</h3>
+          <h3 className="mb-3">Organizational Chart</h3>
           <ButtonGroup className="mb-4">
             <Button variant="primary" href="#divisions">
               Manage Divisions

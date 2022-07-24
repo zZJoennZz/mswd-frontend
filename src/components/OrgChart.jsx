@@ -20,7 +20,7 @@ const OrgChart = () => {
   return (
     <div style={{ textAlign: "left", paddingBottom: "20px" }}>
       <h2 style={{ textAlign: "center" }} className="mt-5 mb-3">
-        Organization Chart
+        Organizational Chart
       </h2>
       <ol className="organizational-chart">
         <li>
