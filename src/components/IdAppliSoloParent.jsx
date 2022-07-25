@@ -876,12 +876,39 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                 II. Classification/Circumstances of Being a Solo Parent
               </Form.Label>
               <Form.Text> Dahilan ng pagiging solo parent</Form.Text>
+              <Form.Select
+                name="solo_parent_classification"
+                id="solo_parent_classification"
+                className="mb-2"
+                onChange={textOnChange}
+              >
+                <option value="Orphan (Living with Relatives)">
+                  Orphan (Living with Relatives)
+                </option>
+                <option value="WIDOW">WIDOW</option>
+                <option value="WINDOW/ER">WINDOW/ER</option>
+                <option value="Born out of Wedlock">Born out of Wedlock</option>
+                <option value="Separated">Separated</option>
+                <option value="Anulled">Anulled</option>
+                <option value="Serving sentence for a criminal conviction">
+                  Serving sentence for a criminal conviction
+                </option>
+                <option value="Physical or mental incapacity of the spouse">
+                  Physical or mental incapacity of the spouse
+                </option>
+                <option value="Other">Other</option>
+              </Form.Select>
               <Form.Control
-                required
                 as="textarea"
                 name="solo_parent_classification"
                 id="solo_parent_classification"
                 onChange={textOnChange}
+                style={{
+                  display:
+                    frmData.solo_parent_classification !== "Other"
+                      ? "none"
+                      : "",
+                }}
                 rows={2}
               ></Form.Control>
             </Form.Group>
@@ -892,6 +919,17 @@ const IdAppliSoloParent = ({ submitApplication }) => {
             <Form.Group className="mb-3">
               <Form.Label>III. Needs/Problems of Solo Parents:</Form.Label>
               <Form.Text> Mga pangangailangan bilang solo parent</Form.Text>
+              <Form.Select
+                name="needs_of_solo_parents"
+                id="needs_of_solo_parents"
+                className="mb-2"
+                onChange={textOnChange}
+              >
+                <option value="Scholarship">Scholarship</option>
+                <option value="Medical">Medical</option>
+                <option value="Livelihood">Livelihood</option>
+                <option value="Other">Other</option>
+              </Form.Select>
               <Form.Control
                 required
                 as="textarea"
@@ -899,6 +937,10 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                 id="needs_of_solo_parents"
                 onChange={textOnChange}
                 rows={2}
+                style={{
+                  display:
+                    frmData.needs_of_solo_parents !== "Other" ? "none" : "",
+                }}
               ></Form.Control>
             </Form.Group>
           </Col>
@@ -909,6 +951,17 @@ const IdAppliSoloParent = ({ submitApplication }) => {
               <Form.Label>
                 IV. Family Resources: (Mga mapagkukunan ng pamilya)
               </Form.Label>
+              <Form.Select
+                name="family_resources"
+                id="family_resources"
+                className="mb-2"
+                onChange={textOnChange}
+              >
+                <option value="Self employed">Self employed</option>
+                <option value="Employed">Employed</option>
+                <option value="Entrepreneur">Entrepreneur</option>
+                <option value="Other">Other</option>
+              </Form.Select>
               <Form.Control
                 required
                 as="textarea"
@@ -916,6 +969,9 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                 id="family_resources"
                 onChange={textOnChange}
                 rows={2}
+                style={{
+                  display: frmData.family_resources !== "Other" ? "none" : "",
+                }}
               ></Form.Control>
             </Form.Group>
           </Col>
