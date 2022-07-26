@@ -19,6 +19,8 @@ const IdAppliSoloParent = ({ submitApplication }) => {
   let [pic, setPic] = useState(false);
   let [sig, setSig] = useState(false);
   let [docs, setDocs] = useState(false);
+  let [dCert, setDCert] = useState(false);
+  let [birthCert, setBirthCert] = useState(false);
   let [agreeCheck, setAgreeCheck] = useState(true);
   let [fcHolder, setFcHolder] = useState({
     fc_name: "",
@@ -36,6 +38,8 @@ const IdAppliSoloParent = ({ submitApplication }) => {
   const handleClose = () => setShow(false);
   const handleOpen = () => setShow(true);
 
+  const handleDCert = (e) => setDCert(e.target.files);
+
   //let [famComp, setFamComp] = useState("");
 
   const famComRef = useRef("");
@@ -49,8 +53,24 @@ const IdAppliSoloParent = ({ submitApplication }) => {
       formData.append("application_data", JSON.stringify(frmData));
       formData.append("application_pic", pic[0]);
       formData.append("application_sig", sig[0]);
-      for (let i = 0; i < docs.length; i++) {
-        formData.append(`docs[${i}]`, docs[i]);
+      // for (let i = 0; i < birthCert.length + 2; i++) {
+      //   if (birthCert.length < i) {
+      //     formData.append(`docs[${i}]`, birthCert[i]);
+      //   } else if (birthCert.length === i) {
+      //     formData.append(`docs[${i}]`, docs[0]);
+      //   } else if (birthCert.length + 1 === i) {
+      //     formData.append(`docs[${i}]`, dCert[0]);
+      //   }
+      // }
+
+      for (let i = 0; i < birthCert.length + 2; i++) {
+        if (birthCert.length === i) {
+          formData.append(`docs[${i}]`, docs[0]);
+        } else if (birthCert.length + 1 === i) {
+          formData.append(`docs[${i}]`, dCert[0]);
+        } else if (i < birthCert.length + 2) {
+          formData.append(`docs[${i}]`, birthCert[i]);
+        }
       }
 
       await apifrm
@@ -931,7 +951,6 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                 <option value="Other">Other</option>
               </Form.Select>
               <Form.Control
-                required
                 as="textarea"
                 name="needs_of_solo_parents"
                 id="needs_of_solo_parents"
@@ -963,7 +982,6 @@ const IdAppliSoloParent = ({ submitApplication }) => {
                 <option value="Other">Other</option>
               </Form.Select>
               <Form.Control
-                required
                 as="textarea"
                 name="family_resources"
                 id="family_resources"
@@ -1013,29 +1031,55 @@ const IdAppliSoloParent = ({ submitApplication }) => {
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3">
-              <Form.Label>Documents</Form.Label>
-              <div className="mb-1">
-                <small>
-                  Solo parent certificate mula sa barangay kung hiwalay, death
-                  certificate kung balo/biyuda, and birth certificate ng mga
-                  anak. (
-                  <a
-                    href="https://i.ibb.co/wyhLcD5/drag-and-select.gif"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    You can multiple select files.
-                  </a>
-                  ) PDF Only
-                </small>
-              </div>
+              <Form.Label>
+                Solo parent certificate from the barangay (if separate) (Solo
+                parent certificate mula sa barangay (kung hiwalay)) PDF Only
+              </Form.Label>
               <Form.Control
-                required
                 type="file"
                 name="docs"
                 id="docs"
                 accept="application/pdf"
                 onChange={docsOnChange}
+              />
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Label>
+              Death certificate if widow / widower (Death certificate kung balo
+              / biyuda) PDF Only
+            </Form.Label>
+            <Form.Control
+              type="file"
+              name="dcert"
+              id="dcert"
+              accept="application/pdf"
+              onChange={handleDCert}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6}>
+            <Form.Group className="mb-3">
+              <Form.Label>
+                Birth certificate of children (Birth certificate ng mga anak)
+                PDF Only. Press shift and click on your documents to multiple
+                select them or combine them into 1 PDF file using{" "}
+                <a
+                  href="https://www.google.com/search?q=combine+PDF&sxsrf=ALiCzsbcK8VqtsZRh2DK7jdZ9Ac0XvgpXw%3A1658858483704&source=hp&ei=8yvgYpWUKI33-Qb66b7QDw&iflsig=AJiK0e8AAAAAYuA6A0u62xF68YIMEk6L2FPMBx8eCfa6&ved=0ahUKEwjV2Zq1kZf5AhWNe94KHfq0D_oQ4dUDCAc&uact=5&oq=combine+PDF&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATIICAAQgAQQsQMyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEOgQIIxAnOhEILhCABBCxAxCDARDHARDRAzoICC4QsQMQgwE6EQguEIAEELEDEMcBENEDENQCOg4ILhCABBCxAxCDARDUAjoLCC4QgAQQxwEQ0QM6DgguEIAEELEDEMcBENEDUABYrQlg_QpoAHAAeACAAUuIAYEGkgECMTGYAQCgAQE&sclient=gws-wiz"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  PDF Combiner
+                </a>
+                .
+              </Form.Label>
+              <Form.Control
+                type="file"
+                name="docs"
+                id="docs"
+                accept="application/pdf"
+                onChange={(e) => setBirthCert(e.target.files)}
                 multiple
               />
             </Form.Group>

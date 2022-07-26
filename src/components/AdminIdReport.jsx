@@ -278,7 +278,7 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                         Report of {repType === 1 ? "Solo Parents" : ""}
                         {repType === 2 ? "Persons with Disabilities" : ""}
                         {repType === 3 ? "Senior Citizen" : ""} (
-                        {repCat === "new" ? "New" : ""}
+                        {repCat === "new" ? "Approved" : ""}
                         {repCat === "loss" ? "Loss" : ""}
                         {repCat === "renew" ? "Renew" : ""}
                         {repStatus === 0 ? "Processing" : ""}
@@ -357,7 +357,7 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                 <tfoot>
                   <tr>
                     <th>
-                      Total No. of {repCat === "new" ? "new" : ""}
+                      Total No. of {repCat === "new" ? "Approved" : ""}
                       {repCat === "loss" ? "loss" : ""}
                       {repCat === "renew" ? "renew" : ""}
                       {repStatus === 0 ? "processing" : ""}
@@ -419,7 +419,7 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                         Report of {repType === 1 ? "Solo Parents" : ""}
                         {repType === 2 ? "Persons with Disabilities" : ""}
                         {repType === 3 ? "Senior Citizen" : ""} (
-                        {repCat === "new" ? "New" : ""}
+                        {repCat === "new" ? "Approved" : ""}
                         {repCat === "loss" ? "Loss" : ""}
                         {repCat === "renew" ? "Renew" : ""}
                         {repStatus === 0 ? "Processing" : ""}
@@ -462,7 +462,7 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                 <tfoot>
                   <tr>
                     <th>
-                      Total No. of {repCat === "new" ? "new" : ""}
+                      Total No. of {repCat === "new" ? "Approved" : ""}
                       {repCat === "loss" ? "loss" : ""}
                       {repCat === "renew" ? "renew" : ""}
                       {repStatus === 0 ? "processing" : ""}

@@ -74,7 +74,7 @@ const AdminReports = () => {
                 type="radio"
                 id="report-cat"
                 name="report-cat"
-                label="New"
+                label="Approved"
                 onClick={updateCat.bind(this, "new")}
               />
               <Form.Check
