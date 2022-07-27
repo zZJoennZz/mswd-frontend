@@ -20,6 +20,7 @@ const IdAppliSoloParent = ({ submitApplication }) => {
   let [sig, setSig] = useState(false);
   let [docs, setDocs] = useState(false);
   let [dCert, setDCert] = useState(false);
+  let [affidavit, setAffidavit] = useState(false);
   let [birthCert, setBirthCert] = useState(false);
   let [agreeCheck, setAgreeCheck] = useState(true);
   let [fcHolder, setFcHolder] = useState({
@@ -63,11 +64,15 @@ const IdAppliSoloParent = ({ submitApplication }) => {
       //   }
       // }
 
-      for (let i = 0; i < birthCert.length + 2; i++) {
+      for (let i = 0; i < birthCert.length + 3; i++) {
         if (birthCert.length === i) {
           formData.append(`docs[${i}]`, docs[0]);
         } else if (birthCert.length + 1 === i) {
           formData.append(`docs[${i}]`, dCert[0]);
+        } else if (birthCert.length + 2 === i) {
+          if (affidavit !== false) {
+            formData.append(`docs[${i}]`, affidavit[0]);
+          }
         } else if (i < birthCert.length + 2) {
           formData.append(`docs[${i}]`, birthCert[i]);
         }
@@ -1084,7 +1089,34 @@ const IdAppliSoloParent = ({ submitApplication }) => {
               />
             </Form.Group>
           </Col>
-          <Col md={6}></Col>
+          <Col md={6}>
+            <Form.Group className="mb-3">
+              <Form.Label
+                style={{
+                  display:
+                    frmData.appli_type !== "loss" ||
+                    frmData.appli_type === undefined ||
+                    frmData.appli_type === ""
+                      ? "none"
+                      : "",
+                }}
+              >
+                Affidavit of loss (if lost ID) (Affidavit of loss (Kung nawala
+                and ID))
+              </Form.Label>
+              <Form.Control
+                type="file"
+                name="aff"
+                id="aff"
+                accept="application/pdf"
+                style={{
+                  display: frmData.appli_type !== "loss" ? "none" : "",
+                }}
+                onChange={(e) => setAffidavit(e.target.files)}
+                multiple
+              />
+            </Form.Group>
+          </Col>
         </Row>
         <Row>
           <Col md={12}>
