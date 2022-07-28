@@ -84,7 +84,7 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
               dAge <= ageTo &&
               appType === parseInt(repType) &&
               brgy === "all" &&
-              repStatus === appProcess
+              repStatus === parseInt(appProcess)
             ) {
               toReturn = true;
             }
@@ -94,7 +94,7 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
               ageTo === "all" &&
               appType === parseInt(repType) &&
               brgy === "all" &&
-              repStatus === appProcess
+              repStatus === parseInt(appProcess)
             ) {
               toReturn = true;
             }

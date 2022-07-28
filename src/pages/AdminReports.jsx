@@ -27,7 +27,7 @@ const AdminReports = () => {
       setRepStatus(2);
     } else if (catVal === 1) {
       setRepCat("");
-      setRepStatus(1);
+      setRepStatus(3);
     }
 
     return 0;
