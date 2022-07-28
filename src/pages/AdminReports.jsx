@@ -25,6 +25,9 @@ const AdminReports = () => {
     } else if (catVal === 2) {
       setRepCat("");
       setRepStatus(2);
+    } else if (catVal === 1) {
+      setRepCat("");
+      setRepStatus(1);
     }
 
     return 0;
@@ -74,7 +77,7 @@ const AdminReports = () => {
                 type="radio"
                 id="report-cat"
                 name="report-cat"
-                label="Approved"
+                label="New"
                 onClick={updateCat.bind(this, "new")}
               />
               <Form.Check
@@ -101,6 +104,13 @@ const AdminReports = () => {
                 name="report-cat"
                 label="Processing"
                 onClick={updateCat.bind(this, 0)}
+              />
+              <Form.Check
+                type="radio"
+                id="report-cat"
+                name="report-cat"
+                label="Approved"
+                onClick={updateCat.bind(this, 1)}
               />
               <Form.Check
                 type="radio"

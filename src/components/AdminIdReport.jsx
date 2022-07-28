@@ -69,6 +69,36 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
           let dBrgy = parseInt(JSON.parse(app.application_data).barangay);
           let appProcess = parseInt(app.status);
 
+          if (repStatus !== false) {
+            if (
+              dAge >= ageFrom &&
+              dAge <= ageTo &&
+              appType === parseInt(repType) &&
+              parseInt(brgy) === dBrgy &&
+              repStatus === parseInt(appProcess)
+            ) {
+              toReturn = true;
+            }
+            if (
+              dAge >= ageFrom &&
+              dAge <= ageTo &&
+              appType === parseInt(repType) &&
+              brgy === "all" &&
+              repStatus === appProcess
+            ) {
+              toReturn = true;
+            }
+
+            if (
+              ageFrom === "all" &&
+              ageTo === "all" &&
+              appType === parseInt(repType) &&
+              brgy === "all" &&
+              repStatus === appProcess
+            ) {
+              toReturn = true;
+            }
+          }
           if (
             dAge >= ageFrom &&
             dAge <= ageTo &&
@@ -102,40 +132,6 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
             toReturn = true;
           }
 
-          if (repStatus !== false) {
-            if (
-              dAge >= ageFrom &&
-              dAge <= ageTo &&
-              appType === parseInt(repType) &&
-              appliType === repCat &&
-              parseInt(brgy) === dBrgy &&
-              repStatus === appProcess
-            ) {
-              toReturn = true;
-            }
-            if (
-              dAge >= ageFrom &&
-              dAge <= ageTo &&
-              appType === parseInt(repType) &&
-              appliType === repCat &&
-              brgy === "all" &&
-              repStatus === appProcess
-            ) {
-              toReturn = true;
-            }
-
-            if (
-              ageFrom === "all" &&
-              ageTo === "all" &&
-              appType === parseInt(repType) &&
-              appliType === repCat &&
-              brgy === "all" &&
-              repStatus === appProcess
-            ) {
-              toReturn = true;
-            }
-          }
-
           return toReturn;
         });
 
@@ -157,6 +153,35 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
           let appliType = JSON.parse(app.application_data).appli_type;
           let dBrgy = parseInt(JSON.parse(app.application_data).barangay);
           let appProcess = parseInt(app.status);
+
+          if (repStatus !== false) {
+            if (
+              parseInt(dSex) === parseInt(gender) &&
+              appType === parseInt(repType) &&
+              parseInt(brgy) === parseInt(dBrgy) &&
+              repStatus === appProcess
+            ) {
+              toReturn = true;
+            }
+
+            if (
+              parseInt(dSex) === parseInt(gender) &&
+              appType === parseInt(repType) &&
+              brgy === "all" &&
+              repStatus === appProcess
+            ) {
+              toReturn = true;
+            }
+
+            if (
+              gender === "all" &&
+              appType === parseInt(repType) &&
+              brgy === "all" &&
+              repStatus === appProcess
+            ) {
+              toReturn = true;
+            }
+          }
 
           if (
             parseInt(dSex) === parseInt(gender) &&
@@ -186,38 +211,6 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
             repStatus === false
           ) {
             toReturn = true;
-          }
-
-          if (repStatus !== false) {
-            if (
-              parseInt(dSex) === parseInt(gender) &&
-              appType === parseInt(repType) &&
-              appliType === "" &&
-              parseInt(brgy) === parseInt(dBrgy) &&
-              repStatus === appProcess
-            ) {
-              toReturn = true;
-            }
-
-            if (
-              parseInt(dSex) === parseInt(gender) &&
-              appType === parseInt(repType) &&
-              appliType === "" &&
-              brgy === "all" &&
-              repStatus === appProcess
-            ) {
-              toReturn = true;
-            }
-
-            if (
-              gender === "all" &&
-              appType === parseInt(repType) &&
-              appliType === "" &&
-              brgy === "all" &&
-              repStatus === appProcess
-            ) {
-              toReturn = true;
-            }
           }
 
           return toReturn;
@@ -278,10 +271,11 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                         Report of {repType === 1 ? "Solo Parents" : ""}
                         {repType === 2 ? "Persons with Disabilities" : ""}
                         {repType === 3 ? "Senior Citizen" : ""} (
-                        {repCat === "new" ? "Approved" : ""}
+                        {repCat === "new" ? "New" : ""}
                         {repCat === "loss" ? "Loss" : ""}
                         {repCat === "renew" ? "Renew" : ""}
                         {repStatus === 0 ? "Processing" : ""}
+                        {repStatus === 1 ? "Approved" : ""}
                         {repStatus === 2 ? "Denied" : ""} Applicants)
                       </div>
                       <div>
@@ -357,11 +351,12 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                 <tfoot>
                   <tr>
                     <th>
-                      Total No. of {repCat === "new" ? "Approved" : ""}
+                      Total No. of {repCat === "new" ? "New" : ""}
                       {repCat === "loss" ? "loss" : ""}
                       {repCat === "renew" ? "renew" : ""}
-                      {repStatus === 0 ? "processing" : ""}
-                      {repStatus === 2 ? "denied" : ""} applicant for{" "}
+                      {repStatus === 0 ? "Processing" : ""}
+                      {repStatus === 1 ? "Approved" : ""}
+                      {repStatus === 2 ? "Denied" : ""} applicant for{" "}
                       {repType === 1 ? "Solo Parents" : ""}
                       {repType === 2 ? "Persons with Disabilities" : ""}
                       {repType === 3 ? "Senior Citizen" : ""} (by age bracket)
@@ -419,10 +414,11 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                         Report of {repType === 1 ? "Solo Parents" : ""}
                         {repType === 2 ? "Persons with Disabilities" : ""}
                         {repType === 3 ? "Senior Citizen" : ""} (
-                        {repCat === "new" ? "Approved" : ""}
+                        {repCat === "new" ? "New" : ""}
                         {repCat === "loss" ? "Loss" : ""}
                         {repCat === "renew" ? "Renew" : ""}
                         {repStatus === 0 ? "Processing" : ""}
+                        {repStatus === 1 ? "Approved" : ""}
                         {repStatus === 2 ? "Denied" : ""} Applicants)
                       </div>
                       <div>
@@ -462,10 +458,11 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                 <tfoot>
                   <tr>
                     <th>
-                      Total No. of {repCat === "new" ? "Approved" : ""}
+                      Total No. of {repCat === "new" ? "New" : ""}
                       {repCat === "loss" ? "loss" : ""}
                       {repCat === "renew" ? "renew" : ""}
-                      {repStatus === 0 ? "processing" : ""}
+                      {repStatus === 0 ? "Processing" : ""}
+                      {repStatus === 1 ? "Approved" : ""}
                       {repStatus === 2 ? "denied" : ""} applicant for{" "}
                       {repType === 1 ? "Solo Parents" : ""}
                       {repType === 2 ? "Persons with Disabilities" : ""}
