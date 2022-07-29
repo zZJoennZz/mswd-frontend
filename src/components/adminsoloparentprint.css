@@ -98,6 +98,9 @@
     left: 0;
     padding: 0;
   }
+  .paper-size2 .table3 {
+    margin-top: 5in;
+  }
 
   @page {
     size: 8.5in 14in;

@@ -763,15 +763,8 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                   </tr>
                 </tfoot>
               </Table>
-            </Col>
-            <Col md={12}>
-              <Table
-                size="sm"
-                style={{ display: repType === 2 ? "block" : "none" }}
-                striped
-                responsive
-                bordered
-              >
+
+              <Table className="table3" size="sm" striped bordered>
                 <thead>
                   <tr>
                     <th rowSpan={3} width="20%">
@@ -795,7 +788,7 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                     </th>
                   </tr>
                   <tr className="text-center">
-                    <th colSpan={2}>Type of Disability</th>
+                    <th colSpan={10}>Type of Disability</th>
                   </tr>
                   <tr className="text-center">
                     <th>Deaf or Hard of Hearing</th>
