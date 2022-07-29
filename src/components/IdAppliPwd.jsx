@@ -55,6 +55,8 @@ const IdAppliPwd = ({ submitApplication }) => {
   let [pic, setPic] = useState(false);
   let [sig, setSig] = useState(false);
   let [docs, setDocs] = useState(false);
+  let [bloodType, setBloodType] = useState(false);
+  let [affidavit, setAffidavit] = useState(false);
   let [agreeCheck, setAgreeCheck] = useState(true);
   let [isSubmit, setIsSubmit] = useState(false);
   let [brgyList, setBrgyList] = useState(false);
@@ -203,8 +205,10 @@ const IdAppliPwd = ({ submitApplication }) => {
       formData.append("application_data", JSON.stringify(frmData));
       formData.append("application_pic", pic[0]);
       formData.append("application_sig", sig[0]);
-      for (let i = 0; i < docs.length; i++) {
-        formData.append(`docs[${i}]`, docs[i]);
+      formData.append("docs[0]", docs[0]);
+      formData.append("docs[1]", bloodType[0]);
+      if (affidavit !== false) {
+        formData.append("docs[2]", affidavit[0]);
       }
 
       await apifrm
@@ -1432,23 +1436,11 @@ const IdAppliPwd = ({ submitApplication }) => {
         </Row>
         <Row className="mb-3">
           <Col md={6}>
-            <Form.Label>Documents</Form.Label>
-            <div className="mb-1">
-              <small>
-                Valid ID with birthday and address in San Rafael (Voter's,
-                SSS/UMID, LTO, Passport), affidavit of loss (if lost ID), or if
-                no valid ID available: Birth certificate or certificate of
-                residency (
-                <a
-                  href="https://i.ibb.co/wyhLcD5/drag-and-select.gif"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  You can multiple select files.
-                </a>
-                ) PDF Only
-              </small>
-            </div>
+            <Form.Label>
+              Medical Certificate Indicating Disability (Medical Certificate na
+              nagpapahayag ng Disabilidad)
+            </Form.Label>
+
             <Form.Control
               required
               type="file"
@@ -1458,6 +1450,49 @@ const IdAppliPwd = ({ submitApplication }) => {
               onChange={docsOnChange}
               multiple
             />
+          </Col>
+          <Col md={6}>
+            <Form.Label>Blood type (Uri ng Dugo)</Form.Label>
+            <Form.Control
+              required
+              type="file"
+              name="docs"
+              id="docs"
+              accept="application/pdf"
+              onChange={(e) => setBloodType(e.target.files)}
+              multiple
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6}>
+            {" "}
+            <Form.Group className="mb-3">
+              <Form.Label
+                style={{
+                  display:
+                    frmData.appli_type !== "loss" ||
+                    frmData.appli_type === undefined ||
+                    frmData.appli_type === ""
+                      ? "none"
+                      : "",
+                }}
+              >
+                Affidavit of loss (if lost ID) (Affidavit of loss (Kung nawala
+                and ID))
+              </Form.Label>
+              <Form.Control
+                type="file"
+                name="aff"
+                id="aff"
+                accept="application/pdf"
+                style={{
+                  display: frmData.appli_type !== "loss" ? "none" : "",
+                }}
+                onChange={(e) => setAffidavit(e.target.files)}
+                multiple
+              />
+            </Form.Group>
           </Col>
           <Col md={6}></Col>
         </Row>
