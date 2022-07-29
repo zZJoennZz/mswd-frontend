@@ -764,7 +764,13 @@ const AdminIdReport = ({ repType, repCat, repStatus = false }) => {
                 </tfoot>
               </Table>
 
-              <Table className="table3" size="sm" striped bordered>
+              <Table
+                style={{ display: repType !== 2 ? "none" : "" }}
+                className="table3"
+                size="sm"
+                striped
+                bordered
+              >
                 <thead>
                   <tr>
                     <th rowSpan={3} width="20%">
