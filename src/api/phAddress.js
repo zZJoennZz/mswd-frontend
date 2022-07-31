@@ -9,7 +9,7 @@ export const barangays = async (code = "0314") => {
         const brgy = fetch();
         return brgy.filter(barangay => barangay.city_code === code).map((filtered) => {
             return {
-                id: filtered.brgy_code,
+                brgy_code: filtered.brgy_code,
                 brgy_name: filtered.brgy_name,
                 city_code: filtered.city_code,
                 province_code: filtered.province_code,
