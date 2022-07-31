@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { Container, Row, Col, Table, Button } from "react-bootstrap";
 
-import { barangays } from "select-philippines-address";
+import { barangays } from "../api/phAddress";
 
 import "./adminsoloparentprint.css";
 

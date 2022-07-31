@@ -10,7 +10,7 @@ import {
   Modal,
 } from "react-bootstrap";
 
-import { barangays } from "select-philippines-address";
+import { barangays } from "../api/phAddress";
 
 import apifrm from "../api/apifrm";
 

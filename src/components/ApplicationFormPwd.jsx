@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 
-import { barangays } from "select-philippines-address";
+import { barangays } from "../api/phAddress";
 
 import dohLogo from "../img/dohlogo.png";
 

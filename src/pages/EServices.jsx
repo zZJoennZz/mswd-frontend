@@ -15,7 +15,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
-import { barangays } from "select-philippines-address";
+import { barangays } from "../api/phAddress";
 
 //images
 import spImg from "../img/solo-parent-icon.jpg";

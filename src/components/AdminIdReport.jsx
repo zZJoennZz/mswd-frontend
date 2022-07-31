@@ -1,5 +1,5 @@
 import React from "react";
-import { barangays } from "select-philippines-address";
+import { barangays } from "../api/phAddress";
 
 import { Row, Col, Table, Form, Button } from "react-bootstrap";
 

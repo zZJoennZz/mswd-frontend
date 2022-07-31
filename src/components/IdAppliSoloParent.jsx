@@ -12,7 +12,7 @@ import {
 
 import apifrm from "../api/apifrm";
 
-import { barangays } from "select-philippines-address";
+import { barangays } from "../api/phAddress";
 
 const IdAppliSoloParent = ({ submitApplication }) => {
   let [frmData, setFrmData] = useState({ appliType: 1 });

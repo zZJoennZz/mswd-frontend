@@ -2,7 +2,7 @@ import React from "react";
 
 import { Container, Row, Col, Table, Form, Button } from "react-bootstrap";
 
-import { barangays } from "select-philippines-address";
+import { barangays } from "../api/phAddress";
 
 import srbLogo from "../img/sanrafaellogo.png";
 
